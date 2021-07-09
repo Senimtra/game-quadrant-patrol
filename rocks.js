@@ -3,16 +3,16 @@
 ## JS Canvas Game - Quadrant Patrol ##
 ###################################### */
 
-class Player {
+class Rock {
    constructor(game, x, y) {
       this.game = game;
-      this.width = 60;
-      this.height = 30;
-      // ### center player x-position ###
-      this.x = x - (this.width / 2);
+      this.x = x;
       this.y = y;
+      this.width = 50;
+      this.height = 50;
    }
-   drawPlayer() {
+
+   drawRock() {
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
    }
 }

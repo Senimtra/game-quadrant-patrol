@@ -13,6 +13,9 @@ class Game {
    start() {
       // ### create new player instance ###
       this.player = new Player(this, this.canvas.width / 2, this.canvas.height - 50);
+      this.rocks = [];
+      this.lastRockSpawn = Date.now();
+      this.rockSpawnInterval = 2000;
       this.enableControls();
       this.displayRefresh();
    }
@@ -20,6 +23,23 @@ class Game {
    drawEverything() {
       // ### draw everything to canvas ###
       this.player.drawPlayer();
+      for (const rock of this.rocks) {
+         rock.drawRock();
+      }
+   }
+
+   runLogic() {
+      // ### Check rock spawn interval ###
+      if (Date.now() - this.lastRockSpawn > this.rockSpawnInterval) {
+         this.lastRockSpawn = Date.now();
+         this.spawnRock();
+      }
+   }
+
+   spawnRock() {
+      // ### Push new rocks to array ###
+      const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 0);
+      this.rocks.push(rock);
    }
 
    enableControls() {
@@ -53,6 +73,7 @@ class Game {
    displayRefresh() {
       // ### refresh canvas on every frame ###
       this.clearScreen();
+      this.runLogic();
       this.drawEverything();
       window.requestAnimationFrame(() => {
          this.displayRefresh();
