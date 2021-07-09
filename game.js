@@ -6,22 +6,26 @@
 class Game {
    constructor(canvas) {
       this.canvas = canvas;
-      // ### access the drawing context ###
+      // ### Access the drawing context ###
       this.context = canvas.getContext('2d');
    }
 
    start() {
-      // ### create new player instance ###
+      // ### Create new player instance ###
       this.player = new Player(this, this.canvas.width / 2, this.canvas.height - 50);
+      this.frame = 0;
+      this.fps = 0;
       this.rocks = [];
       this.lastRockSpawn = Date.now();
       this.rockSpawnInterval = 2000;
+      this.clock();
       this.enableControls();
       this.displayRefresh();
+      this.drawFps();
    }
 
    drawEverything() {
-      // ### draw everything to canvas ###
+      // ### Draw everything to canvas ###
       this.player.drawPlayer();
       for (const rock of this.rocks) {
          rock.drawRock();
@@ -34,6 +38,10 @@ class Game {
          this.lastRockSpawn = Date.now();
          this.spawnRock();
       }
+      for (const rock of this.rocks) {
+         rock.runLogic();
+      }
+      this.collectGarbage();
    }
 
    spawnRock() {
@@ -42,8 +50,17 @@ class Game {
       this.rocks.push(rock);
    }
 
+   collectGarbage() {
+      // ### Remove objects that moved out of the canvas ###
+      this.rocks.forEach((rock, index) => {
+         if (rock.y > this.canvas.height) {
+            this.rocks.splice(index, 1);
+         }
+      });
+   }
+
    enableControls() {
-      // ### enable player controls ###
+      // ### Enable player controls ###
       window.addEventListener('keydown', (event) => {
          switch (event.code) {
             case 'ArrowLeft':
@@ -57,12 +74,12 @@ class Game {
       });
    }
    clearScreen() {
-      // ### clear whole canvas ###
+      // ### Clear whole canvas ###
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
    }
 
    checkBoundaries() {
-      // ### prevent player from moving out of the canvas ###
+      // ### Prevent player from moving out of the canvas ###
       if ((this.player.x + this.player.width) >= this.canvas.width) {
          this.player.x = this.canvas.width - this.player.width;
       } else if (this.player.x <= 0) {
@@ -70,13 +87,30 @@ class Game {
       }
    }
 
+   clock() {
+      /* ### Avoids different speeds on ###
+         ### different display refresh rates ### */
+      setInterval(() => {
+         this.runLogic();
+      }, 15);
+   }
+
    displayRefresh() {
-      // ### refresh canvas on every frame ###
+      // ### Refresh canvas on every frame ###
       this.clearScreen();
-      this.runLogic();
       this.drawEverything();
       window.requestAnimationFrame(() => {
          this.displayRefresh();
       })
+      this.frame++;
+      this.context.fillText(this.fps, 20, 20);
+   }
+
+   drawFps() {
+      // ### Calculate the actual fps ###
+      setInterval(() => {
+         this.fps = this.frame;
+         this.frame = 0;
+      }, 1000);
    }
 }

@@ -15,4 +15,8 @@ class Rock {
    drawRock() {
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
    }
+
+   runLogic() {
+      this.y += 1;
+   }
 }
