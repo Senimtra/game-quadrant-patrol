@@ -7,7 +7,7 @@ class Rock {
    constructor(game, x, y) {
       this.game = game;
       this.x = x;
-      this.y = y - 20;
+      this.y = y;
       this.width = 50;
       this.height = 50;
    }

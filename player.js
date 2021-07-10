@@ -11,6 +11,7 @@ class Player {
       // ### center player x-position ###
       this.x = x - (this.width / 2);
       this.y = y;
+      this.health = 100;
    }
    drawPlayer() {
       this.game.context.save();

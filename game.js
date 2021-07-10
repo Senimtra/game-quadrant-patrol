@@ -47,14 +47,14 @@ class Game {
 
    spawnRock() {
       // ### Push new rocks to array ###
-      const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 0);
+      const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 10);
       this.rocks.push(rock);
    }
 
    collectGarbage() {
       // ### Remove objects that moved out of the canvas ###
       this.rocks.forEach((rock, index) => {
-         if (rock.y > this.canvas.height) {
+         if (rock.y > this.canvas.height - 60) {
             this.rocks.splice(index, 1);
          }
       });
@@ -74,6 +74,7 @@ class Game {
          this.checkBoundaries();
       });
    }
+
    clearScreen() {
       // ### Clear whole canvas ###
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -93,16 +94,25 @@ class Game {
       this.rocks.forEach((rock, index) => {
          if (rock.checkIntersection(this.player)) {
             this.rocks.splice(index, 1);
-            // this.score -= 10;
+            this.player.health -= 10;
+            this.lose();
          }
       });
    }
 
    clock() {
       // ### Cope different display refresh rates ###
-      setInterval(() => {
+      window.clockTimer = setInterval(() => {
          this.runLogic();
       }, 16.67); // 60 fps
+   }
+
+   lose() {
+      // ### Check if player is dead ###
+      if (this.player.health <= 0) {
+         console.log('YOU LOST');
+         clearInterval(window.clockTimer);
+      }
    }
 
    displayRefresh() {
@@ -128,9 +138,19 @@ class Game {
       // ### draw UI elements ###
       this.context.save();
       this.context.fillStyle = '#6C3483';
-      this.context.fillRect(0, 0, this.canvas.width, 30);
+      this.context.fillRect(0, 0, this.canvas.width, 60);
       this.context.fillRect(0, this.canvas.height - 60, this.canvas.width, 60);
       this.context.restore();
-      this.context.fillText(`FPS: ${this.fps}`, 20, 19);
+      // draw the current fps
+      this.context.fillText(`FPS: ${this.fps}`, this.canvas.width - 60, 19);
+      this.context.save();
+      this.context.font = '45px Arial';
+      // draw the game logo
+      this.context.strokeText('Quadrant Patrol', 8, 44);
+      this.context.restore();
+      this.context.save();
+      this.context.font = '28px Arial';
+      this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 20);
+      this.context.restore();
    }
 }
