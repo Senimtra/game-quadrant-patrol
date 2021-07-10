@@ -20,6 +20,17 @@ class Rock {
    }
 
    runLogic() {
-      this.y += 0.75;
+      this.y += 1.5;
+   }
+
+   checkIntersection(player) {
+      return (
+         // turns true if right side of player is beyond left side of rock
+         player.x + player.width >= this.x &&
+         // turns true if left side of player is beyond right side of rock
+         player.x <= this.x + this.width &&
+         // turns true if top edge of player is above bottom edge of rock
+         player.y <= this.y + this.height
+      );
    }
 }

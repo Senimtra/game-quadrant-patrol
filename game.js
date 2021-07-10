@@ -41,6 +41,7 @@ class Game {
       for (const rock of this.rocks) {
          rock.runLogic();
       }
+      this.checkCollisions();
       this.collectGarbage();
    }
 
@@ -48,7 +49,6 @@ class Game {
       // ### Push new rocks to array ###
       const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 0);
       this.rocks.push(rock);
-      console.log(this.rocks);
    }
 
    collectGarbage() {
@@ -86,6 +86,16 @@ class Game {
       } else if (this.player.x <= 0) {
          this.player.x = 0;
       }
+   }
+
+   checkCollisions() {
+      // ### Check for collisions with rocks ###
+      this.rocks.forEach((rock, index) => {
+         if (rock.checkIntersection(this.player)) {
+            this.rocks.splice(index, 1);
+            // this.score -= 10;
+         }
+      });
    }
 
    clock() {
