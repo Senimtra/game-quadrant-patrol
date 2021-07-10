@@ -118,6 +118,21 @@ class Game {
             this.player.health -= 10;
             this.lose();
          }
+         // ### Check for player projectiles ###
+         this.playerProjectiles.forEach((shot, shotIndex) => {
+            if (rock.checkIntersection(shot)) {
+               // check if any shot hit the rock
+               this.playerProjectiles.splice(shotIndex, 1);
+               this.playerProjectiles.forEach((shot2, shotIndex2) => {
+                  // check if the second shot also hit
+                  if (shot2.checkDoubleShot(rock.x, rock.y, rock.width, rock.height)) {
+                     this.playerProjectiles.splice(shotIndex2, 1);
+                  }
+               });
+               // remove rock from array
+               this.rocks.splice(index, 1);
+            }
+         });
       });
    }
 

@@ -16,6 +16,14 @@ class Projectile {
       this.y--;
    }
 
+   checkDoubleShot(rockX, rockY, rockW, rockH) {
+      // ### Check for players second shot ###
+      return (
+         this.x + this.width >= rockX &&
+         this.x <= rockX + rockW &&
+         this.y <= rockY + rockH)
+   }
+
    drawProjectile() {
       this.game.context.save();
       this.game.context.fillStyle = 'yellow';
