@@ -16,6 +16,7 @@ class Game {
       this.frame = 0;
       this.fps = 0;
       this.rocks = [];
+      this.playerProjectiles = [];
       this.lastRockSpawn = Date.now();
       this.rockSpawnInterval = 3000;
       this.clock();
@@ -30,6 +31,9 @@ class Game {
       for (const rock of this.rocks) {
          rock.drawRock();
       }
+      for (const playerShot of this.playerProjectiles) {
+         playerShot.drawProjectile();
+      }
    }
 
    runLogic() {
@@ -40,6 +44,9 @@ class Game {
       }
       for (const rock of this.rocks) {
          rock.runLogic();
+      }
+      for (const playerShot of this.playerProjectiles) {
+         playerShot.runLogic();
       }
       this.checkCollisions();
       this.collectGarbage();
@@ -70,6 +77,8 @@ class Game {
             case 'ArrowRight':
                this.player.x += 10;
                break;
+            case 'Space':
+               this.fireProjectile();
          }
          this.checkBoundaries();
       });
@@ -87,6 +96,14 @@ class Game {
       } else if (this.player.x <= 0) {
          this.player.x = 0;
       }
+   }
+
+   fireProjectile() {
+      // ### Fire double projectiles ###
+      const projectile1 = new Projectile(this, this.player.x + this.player.width / 3 - 3, this.player.y);
+      const projectile2 = new Projectile(this, this.player.x + (this.player.width / 3) * 2 - 3, this.player.y);
+      this.playerProjectiles.push(projectile1, projectile2);
+      console.log(this.playerProjectiles);
    }
 
    checkCollisions() {
@@ -149,6 +166,7 @@ class Game {
       this.context.strokeText('Quadrant Patrol', 8, 44);
       this.context.restore();
       this.context.save();
+      // draw player health
       this.context.font = '28px Arial';
       this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 20);
       this.context.restore();
