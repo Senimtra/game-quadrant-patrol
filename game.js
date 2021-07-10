@@ -65,6 +65,11 @@ class Game {
             this.rocks.splice(index, 1);
          }
       });
+      this.playerProjectiles.forEach((playerShot, index) => {
+         if (playerShot.y < 42) {
+            this.playerProjectiles.splice(index, 1);
+         }
+      });
    }
 
    enableControls() {
@@ -103,7 +108,6 @@ class Game {
       const projectile1 = new Projectile(this, this.player.x + this.player.width / 3 - 3, this.player.y);
       const projectile2 = new Projectile(this, this.player.x + (this.player.width / 3) * 2 - 3, this.player.y);
       this.playerProjectiles.push(projectile1, projectile2);
-      console.log(this.playerProjectiles);
    }
 
    checkCollisions() {
