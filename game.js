@@ -12,12 +12,12 @@ class Game {
 
    start() {
       // ### Create new player instance ###
-      this.player = new Player(this, this.canvas.width / 2, this.canvas.height - 50);
+      this.player = new Player(this, this.canvas.width / 2, this.canvas.height - 100);
       this.frame = 0;
       this.fps = 0;
       this.rocks = [];
       this.lastRockSpawn = Date.now();
-      this.rockSpawnInterval = 2000;
+      this.rockSpawnInterval = 3000;
       this.clock();
       this.enableControls();
       this.displayRefresh();
@@ -48,6 +48,7 @@ class Game {
       // ### Push new rocks to array ###
       const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 0);
       this.rocks.push(rock);
+      console.log(this.rocks);
    }
 
    collectGarbage() {
@@ -88,22 +89,21 @@ class Game {
    }
 
    clock() {
-      /* ### Avoids different speeds on ###
-         ### different display refresh rates ### */
+      // ### Cope different display refresh rates ###
       setInterval(() => {
          this.runLogic();
-      }, 15);
+      }, 16.67); // 60 fps
    }
 
    displayRefresh() {
       // ### Refresh canvas on every frame ###
       this.clearScreen();
       this.drawEverything();
+      this.drawUI();
       window.requestAnimationFrame(() => {
          this.displayRefresh();
       })
       this.frame++;
-      this.context.fillText(this.fps, 20, 20);
    }
 
    drawFps() {
@@ -112,5 +112,15 @@ class Game {
          this.fps = this.frame;
          this.frame = 0;
       }, 1000);
+   }
+
+   drawUI() {
+      // ### draw UI elements ###
+      this.context.save();
+      this.context.fillStyle = '#6C3483';
+      this.context.fillRect(0, 0, this.canvas.width, 30);
+      this.context.fillRect(0, this.canvas.height - 60, this.canvas.width, 60);
+      this.context.restore();
+      this.context.fillText(`FPS: ${this.fps}`, 20, 19);
    }
 }

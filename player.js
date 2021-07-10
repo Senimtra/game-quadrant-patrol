@@ -13,6 +13,9 @@ class Player {
       this.y = y;
    }
    drawPlayer() {
+      this.game.context.save();
+      this.game.context.fillStyle = '#148F77';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.restore();
    }
 }
