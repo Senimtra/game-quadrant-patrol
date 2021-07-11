@@ -112,6 +112,12 @@ class Game {
             this.enemies.splice(index, 1);
          }
       });
+      // ### Remove enemy projectiles that moved oob ###
+      this.enemyProjectiles.forEach((enemyShot, index) => {
+         if (enemyShot.y > this.canvas.height - 42) {
+            this.enemyProjectiles.splice(index, 1);
+         }
+      });
    }
 
    enableControls() {
@@ -152,7 +158,6 @@ class Game {
       const enemyProjectile = new EnemyProjectile(this, 200, 200);
       this.playerProjectiles.push(projectile1, projectile2);
       this.enemyProjectiles.push(enemyProjectile);
-      console.log(this.enemyProjectiles);
    }
 
    checkCollisions() {
