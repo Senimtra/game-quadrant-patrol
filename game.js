@@ -18,6 +18,7 @@ class Game {
       this.rocks = [];
       this.enemies = [];
       this.playerProjectiles = [];
+      this.enemyProjectiles = [];
       this.lastRockSpawn = Date.now();
       this.lastEnemySpawn = Date.now();
       this.rockSpawnInterval = 3000;
@@ -43,6 +44,10 @@ class Game {
       for (const enemy of this.enemies) {
          enemy.drawEnemy();
       }
+      // ### Draw enemy projectiles ###
+      for (const enemyShot of this.enemyProjectiles) {
+         enemyShot.drawProjectile();
+      }
    }
 
    runLogic() {
@@ -52,7 +57,6 @@ class Game {
          this.spawnRock();
       }
       // ### Check enemy spawn interval ###
-      console.log(this.enemies);
       if (Date.now() - this.lastEnemySpawn > this.enemySpawnInterval) {
          this.lastEnemySpawn = Date.now();
          this.spawnEnemy();
@@ -68,6 +72,10 @@ class Game {
       // ### Run enemy logic ###
       for (const enemy of this.enemies) {
          enemy.runLogic();
+      }
+      // ### Run enemy projectiles logic ###
+      for (const enemyShot of this.enemyProjectiles) {
+         enemyShot.runLogic();
       }
       this.checkCollisions();
       this.collectGarbage();
@@ -141,7 +149,10 @@ class Game {
       // ### Fire double projectiles ###
       const projectile1 = new Projectile(this, this.player.x + this.player.width / 3 - 3, this.player.y);
       const projectile2 = new Projectile(this, this.player.x + (this.player.width / 3) * 2 - 3, this.player.y);
+      const enemyProjectile = new EnemyProjectile(this, 200, 200);
       this.playerProjectiles.push(projectile1, projectile2);
+      this.enemyProjectiles.push(enemyProjectile);
+      console.log(this.enemyProjectiles);
    }
 
    checkCollisions() {

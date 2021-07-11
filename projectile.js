@@ -34,4 +34,14 @@ class Projectile {
    }
 }
 
+class EnemyProjectile extends Projectile {
+   constructor(game, x, y) {
+      super(game, x, y);
+   }
+
+   runLogic() {
+      this.y++;
+   }
+}
+
 
