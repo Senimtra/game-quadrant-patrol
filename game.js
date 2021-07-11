@@ -205,6 +205,14 @@ class Game {
             }
          });
       });
+      // ### Check player for enemy projectile hits ###
+      this.enemyProjectiles.forEach((shot, index) => {
+         if (shot.checkIntersection(this.player)) {
+            this.enemyProjectiles.splice(index, 1);
+            this.player.health -= 10;
+            this.lose();
+         }
+      })
    }
 
    clock() {

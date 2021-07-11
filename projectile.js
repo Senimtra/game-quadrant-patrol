@@ -43,6 +43,17 @@ class EnemyProjectile extends Projectile {
       this.y++;
    }
 
+   checkIntersection(element) {
+      return (
+         // turns true if right side of element is beyond left side of rock
+         element.x + element.width >= this.x &&
+         // turns true if left side of element is beyond right side of rock
+         element.x <= this.x + this.width &&
+         // turns true if top edge of element is above bottom edge of rock
+         element.y <= this.y + this.height
+      );
+   }
+
    drawEnemyProjectile() {
       this.game.context.save();
       this.game.context.fillStyle = '#85C1E9';
