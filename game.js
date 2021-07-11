@@ -21,7 +21,7 @@ class Game {
       this.lastRockSpawn = Date.now();
       this.lastEnemySpawn = Date.now();
       this.rockSpawnInterval = 3000;
-      this.enemySpawnInterval = 2000;
+      this.enemySpawnInterval = 5000;
       this.clock();
       this.enableControls();
       this.displayRefresh();
@@ -86,7 +86,7 @@ class Game {
    }
 
    collectGarbage() {
-      // ### Remove objects that moved out of the canvas ###
+      // ### Remove rocks that moved out of the canvas ###
       this.rocks.forEach((rock, index) => {
          if (rock.y > this.canvas.height - 60) {
             this.rocks.splice(index, 1);
@@ -96,6 +96,12 @@ class Game {
       this.playerProjectiles.forEach((playerShot, index) => {
          if (playerShot.y < 42) {
             this.playerProjectiles.splice(index, 1);
+         }
+      });
+      // ### Remove enemies that moved oob ###
+      this.enemies.forEach((enemy, index) => {
+         if (enemy.y > this.canvas.height - 60) {
+            this.enemies.splice(index, 1);
          }
       });
    }

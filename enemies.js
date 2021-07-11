@@ -16,6 +16,8 @@ class Enemy {
    runLogic() {
       this.y += 1;
       this.x += 2 * this.moveDir;
+      if (this.x <= 0) this.moveDir *= -1;
+      if (this.x >= this.game.canvas.width - this.width) this.moveDir *= -1;
    }
 
    drawEnemy() {
