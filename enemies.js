@@ -28,21 +28,20 @@ class Enemy {
    }
 
    shoot() {
-      console.log('enemey shot');
       const enemyShot = new EnemyProjectile(this.game, this.x + this.width / 2 + 3, this.y + 32);
-      // (this, this.player.x + this.player.width / 3 - 3, this.player.y)
       this.game.enemyProjectiles.push(enemyShot);
-      console.log(this.game.enemyProjectiles);
    }
 
-   checkIntersection(player) {
+   checkIntersection(element) {
       return (
-         // turns true if right side of player is beyond left side of enemy
-         player.x + player.width >= this.x &&
-         // turns true if left side of player is beyond right side of enemy
-         player.x <= this.x + this.width &&
-         // turns true if top edge of player is above bottom edge of enemy
-         player.y <= this.y + this.height
+         // turns true if right side of element is beyond left side of enemy
+         element.x + element.width >= this.x &&
+         // turns true if left side of element is beyond right side of enemy
+         element.x <= this.x + this.width &&
+         // turns true if bottom side of element is beyond top side of enemy
+         element.y + element.height >= this.y &&
+         // turns true if top side of element is above bottom edge of enemy
+         element.y <= this.y + this.height
       );
    }
 

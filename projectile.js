@@ -16,12 +16,12 @@ class Projectile {
       this.y--;
    }
 
-   checkDoubleShot(rockX, rockY, rockW, rockH) {
+   checkDoubleShot(elementX, elementY, elementW, elementH) {
       // ### Check for players second shot ###
       return (
-         this.x + this.width >= rockX &&
-         this.x <= rockX + rockW &&
-         this.y <= rockY + rockH)
+         this.x + this.width >= elementX &&
+         this.x <= elementX + elementW &&
+         this.y <= elementY + elementH)
    }
 
    drawProjectile() {

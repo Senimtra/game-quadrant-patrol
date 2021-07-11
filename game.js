@@ -189,6 +189,21 @@ class Game {
             this.player.health -= 10;
             this.lose();
          }
+         // ### Check for player projectiles ###
+         this.playerProjectiles.forEach((shot, shotIndex) => {
+            if (enemy.checkIntersection(shot)) {
+               // check if any shot hit the enemy
+               this.playerProjectiles.splice(shotIndex, 1);
+               this.playerProjectiles.forEach((shot2, shotIndex2) => {
+                  // check if the second shot also hit
+                  if (shot2.checkDoubleShot(enemy.x, enemy.y, enemy.width, enemy.height)) {
+                     this.playerProjectiles.splice(shotIndex2, 1);
+                  }
+               });
+               // remove enemy from array
+               this.enemies.splice(index, 1);
+            }
+         });
       });
    }
 

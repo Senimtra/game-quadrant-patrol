@@ -23,14 +23,14 @@ class Rock {
       this.y += 1.5;
    }
 
-   checkIntersection(player) {
+   checkIntersection(element) {
       return (
-         // turns true if right side of player is beyond left side of rock
-         player.x + player.width >= this.x &&
-         // turns true if left side of player is beyond right side of rock
-         player.x <= this.x + this.width &&
-         // turns true if top edge of player is above bottom edge of rock
-         player.y <= this.y + this.height
+         // turns true if right side of element is beyond left side of rock
+         element.x + element.width >= this.x &&
+         // turns true if left side of element is beyond right side of rock
+         element.x <= this.x + this.width &&
+         // turns true if top edge of element is above bottom edge of rock
+         element.y <= this.y + this.height
       );
    }
 }
