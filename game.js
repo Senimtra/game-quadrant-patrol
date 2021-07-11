@@ -145,7 +145,7 @@ class Game {
    }
 
    checkCollisions() {
-      // ### Check for collisions with rocks ###
+      // ### Check for player collisions with rocks ###
       this.rocks.forEach((rock, index) => {
          if (rock.checkIntersection(this.player)) {
             this.rocks.splice(index, 1);
@@ -167,6 +167,14 @@ class Game {
                this.rocks.splice(index, 1);
             }
          });
+      });
+      // ### Check for player collisions with enemies ###
+      this.enemies.forEach((enemy, index) => {
+         if (enemy.checkIntersection(this.player)) {
+            this.enemies.splice(index, 1);
+            this.player.health -= 10;
+            this.lose();
+         }
       });
    }
 
