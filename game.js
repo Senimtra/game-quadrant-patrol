@@ -272,5 +272,7 @@ class Game {
       this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 20);
       // draw player score
       this.context.fillText(`SCORE: ${this.score}`, 335, this.canvas.height - 20);
+      // draw player power
+      this.context.fillText(`POWER: ${this.player.power}`, 180, this.canvas.height - 20);
    }
 }

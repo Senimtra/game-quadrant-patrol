@@ -12,6 +12,7 @@ class Player {
       this.x = x - (this.width / 2);
       this.y = y;
       this.health = 200;
+      this.power = 500;
    }
    drawPlayer() {
       this.game.context.save();
