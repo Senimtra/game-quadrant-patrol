@@ -42,6 +42,15 @@ class EnemyProjectile extends Projectile {
    runLogic() {
       this.y++;
    }
+
+   drawEnemyProjectile() {
+      this.game.context.save();
+      this.game.context.fillStyle = '#85C1E9';
+      // let projectiles start beneath enemy
+      this.game.context.globalCompositeOperation = 'destination-over';
+      this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.restore();
+   }
 }
 
 
