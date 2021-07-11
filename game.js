@@ -16,9 +16,12 @@ class Game {
       this.frame = 0;
       this.fps = 0;
       this.rocks = [];
+      this.enemies = [];
       this.playerProjectiles = [];
       this.lastRockSpawn = Date.now();
+      this.lastEnemySpawn = Date.now();
       this.rockSpawnInterval = 3000;
+      this.enemySpawnInterval = 2000;
       this.clock();
       this.enableControls();
       this.displayRefresh();
@@ -26,13 +29,19 @@ class Game {
    }
 
    drawEverything() {
-      // ### Draw everything to canvas ###
+      // ### Draw player ###
       this.player.drawPlayer();
+      // ### Draw rocks ###
       for (const rock of this.rocks) {
          rock.drawRock();
       }
+      // ### Draw player projectiles ###
       for (const playerShot of this.playerProjectiles) {
          playerShot.drawProjectile();
+      }
+      // ### Draw enemies ###
+      for (const enemy of this.enemies) {
+         enemy.drawEnemy();
       }
    }
 
@@ -42,11 +51,23 @@ class Game {
          this.lastRockSpawn = Date.now();
          this.spawnRock();
       }
+      // ### Check enemy spawn interval ###
+      console.log(this.enemies);
+      if (Date.now() - this.lastEnemySpawn > this.enemySpawnInterval) {
+         this.lastEnemySpawn = Date.now();
+         this.spawnEnemy();
+      }
+      // ### Run rock logic ###
       for (const rock of this.rocks) {
          rock.runLogic();
       }
+      // ### Run player projectiles logic ###
       for (const playerShot of this.playerProjectiles) {
          playerShot.runLogic();
+      }
+      // ### Run enemy logic ###
+      for (const enemy of this.enemies) {
+         enemy.runLogic();
       }
       this.checkCollisions();
       this.collectGarbage();
@@ -58,6 +79,12 @@ class Game {
       this.rocks.push(rock);
    }
 
+   spawnEnemy() {
+      // ### Push new enemy to array ###
+      const enemy = new Enemy(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 10);
+      this.enemies.push(enemy);
+   }
+
    collectGarbage() {
       // ### Remove objects that moved out of the canvas ###
       this.rocks.forEach((rock, index) => {
@@ -65,6 +92,7 @@ class Game {
             this.rocks.splice(index, 1);
          }
       });
+      // ### Remove player projectiles that moved oob ###
       this.playerProjectiles.forEach((playerShot, index) => {
          if (playerShot.y < 42) {
             this.playerProjectiles.splice(index, 1);
