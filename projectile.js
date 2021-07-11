@@ -45,12 +45,14 @@ class EnemyProjectile extends Projectile {
 
    checkIntersection(element) {
       return (
-         // turns true if right side of element is beyond left side of rock
+         // turns true if right side of element is beyond left side of projectile
          element.x + element.width >= this.x &&
-         // turns true if left side of element is beyond right side of rock
+         // turns true if left side of element is beyond right side of projectile
          element.x <= this.x + this.width &&
-         // turns true if top edge of element is above bottom edge of rock
-         element.y <= this.y + this.height
+         // turns true if top edge of element is above bottom edge of projectile
+         element.y <= this.y + this.height &&
+         // turns true if bottom side of element is beyond top side of projectile
+         element.y + element.height >= this.y
       );
    }
 

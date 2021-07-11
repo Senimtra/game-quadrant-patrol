@@ -30,7 +30,15 @@ class Rock {
          // turns true if left side of element is beyond right side of rock
          element.x <= this.x + this.width &&
          // turns true if top edge of element is above bottom edge of rock
-         element.y <= this.y + this.height
+         element.y <= this.y + this.height &&
+         // turns true if bottom side of element is beyond top side of rock
+         element.y + element.height >= this.y
       );
    }
+
+
+
+
+
+
 }
