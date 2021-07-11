@@ -15,6 +15,7 @@ class Game {
       this.player = new Player(this, this.canvas.width / 2, this.canvas.height - 100);
       this.frame = 0;
       this.fps = 0;
+      this.score = 0;
       this.rocks = [];
       this.enemies = [];
       this.playerProjectiles = [];
@@ -164,6 +165,7 @@ class Game {
          if (rock.checkIntersection(this.player)) {
             this.rocks.splice(index, 1);
             this.player.health -= 10;
+            this.score += 50;
             this.lose();
          }
          // ### Check for player projectiles ###
@@ -179,6 +181,7 @@ class Game {
                });
                // remove rock from array
                this.rocks.splice(index, 1);
+               this.score += 50;
             }
          });
       });
@@ -187,6 +190,7 @@ class Game {
          if (enemy.checkIntersection(this.player)) {
             this.enemies.splice(index, 1);
             this.player.health -= 10;
+            this.score += 100;
             this.lose();
          }
          // ### Check for player projectiles ###
@@ -202,6 +206,7 @@ class Game {
                });
                // remove enemy from array
                this.enemies.splice(index, 1);
+               this.score += 100;
             }
          });
       });
@@ -257,16 +262,15 @@ class Game {
       this.context.fillRect(0, this.canvas.height - 60, this.canvas.width, 60);
       this.context.restore();
       // draw the current fps
+      this.context.font = '12px Arial';
       this.context.fillText(`FPS: ${this.fps}`, this.canvas.width - 60, 19);
-      this.context.save();
       this.context.font = '45px Arial';
       // draw the game logo
       this.context.strokeText('Quadrant Patrol', 8, 44);
-      this.context.restore();
-      this.context.save();
       // draw player health
-      this.context.font = '28px Arial';
+      this.context.font = '18px Arial';
       this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 20);
-      this.context.restore();
+      // draw player score
+      this.context.fillText(`SCORE: ${this.score}`, 335, this.canvas.height - 20);
    }
 }
