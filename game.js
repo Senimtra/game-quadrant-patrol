@@ -228,10 +228,20 @@ class Game {
    }
 
    lose() {
-      // ### Check if player is dead ###
+      // ### Check for player's health and lives ###
       if (this.player.health <= 0) {
-         console.log('YOU LOST');
-         clearInterval(window.clockTimer);
+         this.player.lives--;
+         // player is dead
+         if (this.player.lives === 0) {
+            console.log('YOU LOST THE GAME!');
+            clearInterval(window.clockTimer);
+         } else {
+            // player starts a new life
+            console.log(`You lost a live - ${this.player.lives} lives remaining!`);
+            clearInterval(window.clockTimer);
+            setTimeout(() => this.clock(), 3000);
+            this.player.health = 200;
+         }
       }
    }
 
@@ -262,8 +272,11 @@ class Game {
       this.context.fillRect(0, this.canvas.height - 60, this.canvas.width, 60);
       this.context.restore();
       // draw the current fps
+      this.context.save();
+      this.context.textAlign = 'right';
       this.context.font = '12px Arial';
-      this.context.fillText(`FPS: ${this.fps}`, this.canvas.width - 60, 19);
+      this.context.fillText(`FPS: ${this.fps}`, this.canvas.width - 20, 19);
+      this.context.restore();
       this.context.font = '45px Arial';
       // draw the game logo
       this.context.strokeText('Quadrant Patrol', 8, 44);
@@ -274,5 +287,10 @@ class Game {
       this.context.fillText(`SCORE: ${this.score}`, 335, this.canvas.height - 20);
       // draw player power
       this.context.fillText(`POWER: ${this.player.power}`, 180, this.canvas.height - 20);
+      // draw player lives
+      this.context.save();
+      this.context.textAlign = 'right';
+      this.context.fillText(this.player.drawLives(), this.canvas.width - 20, 45);
+      this.context.restore();
    }
 }

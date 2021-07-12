@@ -13,11 +13,21 @@ class Player {
       this.y = y;
       this.health = 200;
       this.power = 500;
+      this.lives = 4;
    }
+
    drawPlayer() {
       this.game.context.save();
       this.game.context.fillStyle = '#148F77';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
       this.game.context.restore();
+   }
+
+   drawLives() {
+      let livesUi = '';
+      for (let i = 0; i < this.lives; i++) {
+         livesUi += ' #';
+      }
+      return livesUi;
    }
 }
