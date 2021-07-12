@@ -135,6 +135,7 @@ class Game {
 
    enableControls() {
       // ### Enable player controls ###
+      let pressedD = false;
       window.addEventListener('keydown', (event) => {
          switch (event.code) {
             case 'ArrowLeft':
@@ -147,21 +148,28 @@ class Game {
                this.fireProjectile();
                break;
             case 'KeyD':
-               if (!this.player.shieldsUp) {
+               // put player shield up
+               if (pressedD === false) {
                   this.player.x -= 25;
                   this.player.width += 50;
                   this.player.y -= 25;
                   this.player.height += 25;
                   this.player.shieldsUp = true;
-               } else {
-                  this.player.x += 25;
-                  this.player.width -= 50;
-                  this.player.y += 25;
-                  this.player.height -= 25;
-                  this.player.shieldsUp = false;
+                  pressedD = true;
                }
          }
          this.checkBoundaries();
+      });
+      window.addEventListener('keyup', (event) => {
+         // lower player shield
+         if ((event.code === 'KeyD') && (pressedD === true)) {
+            this.player.x += 25;
+            this.player.width -= 50;
+            this.player.y += 25;
+            this.player.height -= 25;
+            this.player.shieldsUp = false;
+            pressedD = false;
+         }
       });
    }
 
