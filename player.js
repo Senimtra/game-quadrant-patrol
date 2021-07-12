@@ -13,6 +13,7 @@ class Player {
       this.y = y;
       this.health = 200;
       this.power = 500;
+      this.shieldsUp = false;
       this.lives = 4;
    }
 
@@ -34,6 +35,23 @@ class Player {
       this.game.context.fillStyle = '#148F77';
       this.game.context.fillRect(this.x + 25, this.y + 25, this.width - 50, this.height - 25);
       this.game.context.restore();
+   }
+
+   runLogic() {
+      // ### Drain power by shields ###
+      if (this.shieldsUp && this.power > 0) {
+         setTimeout(() => {
+            this.power -= 1;
+         }, 10);
+      }
+      // ### Remove shields at no power ###
+      if ((this.power <= 0) && (this.shieldsUp)) {
+         this.x += 25;
+         this.width -= 50;
+         this.y += 25;
+         this.height -= 25;
+         this.shieldsUp = false; d
+      }
    }
 
    drawLives() {

@@ -16,7 +16,6 @@ class Game {
       this.frame = 0;
       this.fps = 0;
       this.score = 0;
-      this.shieldsUp = false;
       this.rocks = [];
       this.enemies = [];
       this.playerProjectiles = [];
@@ -58,6 +57,8 @@ class Game {
    }
 
    runLogic() {
+      // ### Run player logic ###
+      this.player.runLogic();
       // ### Check rock spawn interval ###
       if (Date.now() - this.lastRockSpawn > this.rockSpawnInterval) {
          this.lastRockSpawn = Date.now();
@@ -98,12 +99,6 @@ class Game {
       // ### Push new enemy to array ###
       const enemy = new Enemy(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 10);
       this.enemies.push(enemy);
-   }
-
-   spawnShields() {
-      // ### Activate player's shields ###
-      this.shield = new Shields(this, this.player);
-      console.log(this.shield);
    }
 
    collectGarbage() {
@@ -149,7 +144,7 @@ class Game {
                break;
             case 'KeyD':
                // put player shield up
-               if (pressedD === false) {
+               if ((pressedD === false) && (this.player.power > 0)) {
                   this.player.x -= 25;
                   this.player.width += 50;
                   this.player.y -= 25;
@@ -162,7 +157,7 @@ class Game {
       });
       window.addEventListener('keyup', (event) => {
          // lower player shield
-         if ((event.code === 'KeyD') && (pressedD === true)) {
+         if ((event.code === 'KeyD') && (pressedD === true) && (this.player.shieldsUp)) {
             this.player.x += 25;
             this.player.width -= 50;
             this.player.y += 25;
@@ -318,7 +313,7 @@ class Game {
    }
 
    drawUI() {
-      // ### draw UI elements ###
+      // ### Draw UI elements ###
       this.context.save();
       this.context.fillStyle = '#6C3483';
       this.context.fillRect(0, 0, this.canvas.width, 60);
