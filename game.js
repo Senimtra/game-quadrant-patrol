@@ -16,6 +16,7 @@ class Game {
       this.frame = 0;
       this.fps = 0;
       this.score = 0;
+      this.shieldsUp = false;
       this.rocks = [];
       this.enemies = [];
       this.playerProjectiles = [];
@@ -32,7 +33,12 @@ class Game {
 
    drawEverything() {
       // ### Draw player ###
-      this.player.drawPlayer();
+      if (!this.player.shieldsUp) {
+         this.player.drawPlayer();
+      } else {
+         // draw shielded player
+         this.player.drawShields();
+      }
       // ### Draw rocks ###
       for (const rock of this.rocks) {
          rock.drawRock();
@@ -94,6 +100,12 @@ class Game {
       this.enemies.push(enemy);
    }
 
+   spawnShields() {
+      // ### Activate player's shields ###
+      this.shield = new Shields(this, this.player);
+      console.log(this.shield);
+   }
+
    collectGarbage() {
       // ### Remove rocks that moved out of the canvas ###
       this.rocks.forEach((rock, index) => {
@@ -133,6 +145,21 @@ class Game {
                break;
             case 'Space':
                this.fireProjectile();
+               break;
+            case 'KeyD':
+               if (!this.player.shieldsUp) {
+                  this.player.x -= 25;
+                  this.player.width += 50;
+                  this.player.y -= 25;
+                  this.player.height += 25;
+                  this.player.shieldsUp = true;
+               } else {
+                  this.player.x += 25;
+                  this.player.width -= 50;
+                  this.player.y += 25;
+                  this.player.height -= 25;
+                  this.player.shieldsUp = false;
+               }
          }
          this.checkBoundaries();
       });
@@ -145,10 +172,19 @@ class Game {
 
    checkBoundaries() {
       // ### Prevent player from moving out of the canvas ###
-      if ((this.player.x + this.player.width) >= this.canvas.width) {
-         this.player.x = this.canvas.width - this.player.width;
-      } else if (this.player.x <= 0) {
-         this.player.x = 0;
+      if (!this.player.shieldsUp) {
+         if ((this.player.x + this.player.width) >= this.canvas.width) {
+            this.player.x = this.canvas.width - this.player.width;
+         } else if (this.player.x <= 0) {
+            this.player.x = 0;
+         }
+      } else {
+         // ### Prevent shielded player from moving out of the canvas ###
+         if ((this.player.x + this.player.width - 25) >= this.canvas.width) {
+            this.player.x = this.canvas.width - this.player.width + 25;
+         } else if (this.player.x <= -25) {
+            this.player.x = -25;
+         }
       }
    }
 
@@ -164,9 +200,12 @@ class Game {
       this.rocks.forEach((rock, index) => {
          if (rock.checkIntersection(this.player)) {
             this.rocks.splice(index, 1);
-            this.player.health -= 10;
+            // check if shields are up
+            if (!this.player.shieldsUp) {
+               this.player.health -= 10;
+               this.lose();
+            }
             this.score += 50;
-            this.lose();
          }
          // ### Check for player projectiles ###
          this.playerProjectiles.forEach((shot, shotIndex) => {
@@ -189,9 +228,12 @@ class Game {
       this.enemies.forEach((enemy, index) => {
          if (enemy.checkIntersection(this.player)) {
             this.enemies.splice(index, 1);
-            this.player.health -= 10;
+            // check if shields are up
+            if (!this.player.shieldsUp) {
+               this.player.health -= 10;
+               this.lose();
+            }
             this.score += 100;
-            this.lose();
          }
          // ### Check for player projectiles ###
          this.playerProjectiles.forEach((shot, shotIndex) => {
@@ -214,8 +256,11 @@ class Game {
       this.enemyProjectiles.forEach((shot, index) => {
          if (shot.checkIntersection(this.player)) {
             this.enemyProjectiles.splice(index, 1);
-            this.player.health -= 10;
-            this.lose();
+            // check if shields are up
+            if (!this.player.shieldsUp) {
+               this.player.health -= 10;
+               this.lose();
+            }
          }
       })
    }
