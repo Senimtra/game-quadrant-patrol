@@ -245,10 +245,16 @@ class Game {
                   // check if the second shot also hit
                   if (shot2.checkDoubleShot(rock.x, rock.y, rock.width, rock.height)) {
                      this.playerProjectiles.splice(shotIndex2, 1);
+                     this.rocks[index].health -= 50;
                   }
                });
                // remove rock from array
-               this.rocks.splice(index, 1);
+               console.log(this.rocks[index].health);
+               this.rocks[index].health -= 50;
+               console.log(this.rocks[index].health);
+               if (this.rocks[index].health <= 0) {
+                  this.rocks.splice(index, 1);
+               }
                this.score += 50;
             }
          });
