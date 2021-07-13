@@ -24,7 +24,8 @@ class Projectile {
          this.y <= elementY + elementH)
    }
 
-   drawProjectile() {
+   drawProjectile(game) {
+      this.game = game;
       this.game.context.save();
       this.game.context.fillStyle = 'yellow';
       // let projectiles start beneath player

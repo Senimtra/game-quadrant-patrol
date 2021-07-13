@@ -47,7 +47,7 @@ class Game {
       }
       // ### Draw player projectiles ###
       for (const playerShot of this.playerProjectiles) {
-         playerShot.drawProjectile();
+         playerShot.drawProjectile(this);
       }
       // ### Draw enemies ###
       for (const enemy of this.enemies) {
@@ -137,6 +137,7 @@ class Game {
       this.controls = {
          ArrowLeft: { pressed: false },
          ArrowRight: { pressed: false },
+         Space: { pressed: false }
       }
       // ### Enable player controls ###
       let pressedD = false;
@@ -148,7 +149,7 @@ class Game {
          }
          switch (event.code) {
             case 'Space':
-               this.fireProjectile();
+               this.player.fireProjectile();
                break;
             case 'KeyD':
                // put player shield up
@@ -200,6 +201,7 @@ class Game {
       // ### Execute key functions by keystate ###
       if (this.controls['ArrowLeft'].pressed === true) this.player.moveLeft();
       if (this.controls['ArrowRight'].pressed === true) this.player.moveRight();
+      // if (this.controls['Space'].pressed === true) this.player.fireProjectile();
       this.player.checkBoundaries();
    }
 
@@ -208,18 +210,18 @@ class Game {
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
    }
 
-   fireProjectile() {
-      // ### Fire double projectiles ###
-      const projectile1 = new Projectile(this, this.player.x + this.player.width / 2 - 15 - 3, this.player.y);
-      const projectile2 = new Projectile(this, this.player.x + (this.player.width / 2) + 15 - 3, this.player.y);
-      this.playerProjectiles.push(projectile1, projectile2);
-      // ### Fire powershots ###
-      if (this.player.powerShots) {
-         const projectile3 = new Projectile(this, this.player.x + this.player.width / 2 - 44 - 3, this.player.y);
-         const projectile4 = new Projectile(this, this.player.x + (this.player.width / 2) + 44 - 3, this.player.y);
-         this.playerProjectiles.push(projectile3, projectile4);
-      }
-   }
+   // fireProjectile() {
+   //    // ### Fire double projectiles ###
+   //    const projectile1 = new Projectile(this, this.player.x + this.player.width / 2 - 15 - 3, this.player.y);
+   //    const projectile2 = new Projectile(this, this.player.x + (this.player.width / 2) + 15 - 3, this.player.y);
+   //    this.playerProjectiles.push(projectile1, projectile2);
+   //    // ### Fire powershots ###
+   //    if (this.player.powerShots) {
+   //       const projectile3 = new Projectile(this, this.player.x + this.player.width / 2 - 44 - 3, this.player.y);
+   //       const projectile4 = new Projectile(this, this.player.x + (this.player.width / 2) + 44 - 3, this.player.y);
+   //       this.playerProjectiles.push(projectile3, projectile4);
+   //    }
+   // }
 
    checkCollisions() {
       // ### Check for player collisions with rocks ###
