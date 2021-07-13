@@ -12,7 +12,7 @@ class Player {
       this.x = x - (this.width / 2);
       this.y = y;
       this.health = 200;
-      this.power = 5000;
+      this.power = 500;
       this.shieldsUp = false;
       this.powerShots = false;
       this.lives = 4;
@@ -62,6 +62,18 @@ class Player {
          this.y += 25;
          this.height -= 25;
          this.shieldsUp = false;
+      }
+      // ### Drain power by powershots ###
+      if (this.powerShots && this.power > 0) {
+         setTimeout(() => {
+            this.power -= 1;
+         }, 10);
+      }
+      // ### Remove powershots at no power ###
+      if ((this.power <= 0) && (this.powerShots)) {
+         this.x += 25;
+         this.width -= 50;
+         this.powerShots = false;
       }
    }
 
