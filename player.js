@@ -18,6 +18,14 @@ class Player {
       this.lives = 4;
    }
 
+   moveLeft() {
+      this.x -= 2;
+   }
+
+   moveRight() {
+      this.x += 2;
+   }
+
    drawPlayer() {
       this.game.context.save();
       this.game.context.fillStyle = '#148F77';

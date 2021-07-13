@@ -57,6 +57,7 @@ class Game {
       for (const enemyShot of this.enemyProjectiles) {
          enemyShot.drawEnemyProjectile(this);
       }
+      this.executeControls();
    }
 
    runLogic() {
@@ -132,17 +133,20 @@ class Game {
    }
 
    enableControls() {
+      // ### Cope with JS keydown-handler delay ###
+      this.controls = {
+         ArrowLeft: { pressed: false },
+         ArrowRight: { pressed: false },
+      }
       // ### Enable player controls ###
       let pressedD = false;
       let pressedF = false;
       window.addEventListener('keydown', (event) => {
+         // activate keys in controller object
+         if (this.controls[event.code]) {
+            this.controls[event.code].pressed = true
+         }
          switch (event.code) {
-            case 'ArrowLeft':
-               this.player.x -= 10;
-               break;
-            case 'ArrowRight':
-               this.player.x += 10;
-               break;
             case 'Space':
                this.fireProjectile();
                break;
@@ -169,6 +173,10 @@ class Game {
          this.player.checkBoundaries();
       });
       window.addEventListener('keyup', (event) => {
+         // deactivate keys in controller object
+         if (this.controls[event.code]) {
+            this.controls[event.code].pressed = false;
+         }
          // lower player shield
          if ((event.code === 'KeyD') && (pressedD) && (this.player.shieldsUp)) {
             this.player.x += 25;
@@ -186,6 +194,13 @@ class Game {
             pressedF = false;
          }
       });
+   }
+
+   executeControls() {
+      // ### Execute key functions by keystate ###
+      if (this.controls['ArrowLeft'].pressed === true) this.player.moveLeft();
+      if (this.controls['ArrowRight'].pressed === true) this.player.moveRight();
+      this.player.checkBoundaries();
    }
 
    clearScreen() {
@@ -287,7 +302,7 @@ class Game {
    }
 
    clock() {
-      // ### Cope different display refresh rates ###
+      // ### Cope with different display refresh rates ###
       window.clockTimer = setInterval(() => {
          this.runLogic();
       }, 16.67); // 60 fps
