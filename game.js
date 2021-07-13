@@ -210,8 +210,8 @@ class Game {
 
    fireProjectile() {
       // ### Fire double projectiles ###
-      const projectile1 = new Projectile(this, this.player.x + this.player.width / 3 - 3, this.player.y);
-      const projectile2 = new Projectile(this, this.player.x + (this.player.width / 3) * 2 - 3, this.player.y);
+      const projectile1 = new Projectile(this, this.player.x + this.player.width / 2 - 15 - 3, this.player.y);
+      const projectile2 = new Projectile(this, this.player.x + (this.player.width / 2) + 15 - 3, this.player.y);
       this.playerProjectiles.push(projectile1, projectile2);
    }
 
