@@ -12,8 +12,9 @@ class Player {
       this.x = x - (this.width / 2);
       this.y = y;
       this.health = 200;
-      this.power = 500;
+      this.power = 5000;
       this.shieldsUp = false;
+      this.powerShots = false;
       this.lives = 4;
    }
 
@@ -50,7 +51,7 @@ class Player {
          this.width -= 50;
          this.y += 25;
          this.height -= 25;
-         this.shieldsUp = false; d
+         this.shieldsUp = false;
       }
    }
 
@@ -62,3 +63,4 @@ class Player {
       return livesUi;
    }
 }
+

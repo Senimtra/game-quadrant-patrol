@@ -131,6 +131,7 @@ class Game {
    enableControls() {
       // ### Enable player controls ###
       let pressedD = false;
+      let pressedF = false;
       window.addEventListener('keydown', (event) => {
          switch (event.code) {
             case 'ArrowLeft':
@@ -144,7 +145,7 @@ class Game {
                break;
             case 'KeyD':
                // put player shield up
-               if ((pressedD === false) && (this.player.power > 0)) {
+               if ((!pressedD) && (this.player.power > 0) && (!pressedF)) {
                   this.player.x -= 25;
                   this.player.width += 50;
                   this.player.y -= 25;
@@ -152,18 +153,34 @@ class Game {
                   this.player.shieldsUp = true;
                   pressedD = true;
                }
+               break;
+            case 'KeyF':
+               // activate powershots
+               if ((!pressedF) && (this.player.power > 0) && (!pressedD)) {
+                  this.player.x -= 25;
+                  this.player.width += 50;
+                  this.player.powerShots = true;
+                  pressedF = true;
+               }
          }
          this.checkBoundaries();
       });
       window.addEventListener('keyup', (event) => {
          // lower player shield
-         if ((event.code === 'KeyD') && (pressedD === true) && (this.player.shieldsUp)) {
+         if ((event.code === 'KeyD') && (pressedD) && (this.player.shieldsUp)) {
             this.player.x += 25;
             this.player.width -= 50;
             this.player.y += 25;
             this.player.height -= 25;
             this.player.shieldsUp = false;
             pressedD = false;
+         }
+         // disable player powershots
+         if ((event.code === 'KeyF') && (pressedF) && (this.player.powerShots)) {
+            this.player.x += 25;
+            this.player.width -= 50;
+            this.player.powerShots = false;
+            pressedF = false;
          }
       });
    }
