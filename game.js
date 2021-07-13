@@ -166,7 +166,7 @@ class Game {
                   pressedF = true;
                }
          }
-         this.checkBoundaries();
+         this.player.checkBoundaries();
       });
       window.addEventListener('keyup', (event) => {
          // lower player shield
@@ -191,24 +191,6 @@ class Game {
    clearScreen() {
       // ### Clear whole canvas ###
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-   }
-
-   checkBoundaries() {
-      // ### Prevent player from moving out of the canvas ###
-      if (!this.player.shieldsUp) {
-         if ((this.player.x + this.player.width) >= this.canvas.width) {
-            this.player.x = this.canvas.width - this.player.width;
-         } else if (this.player.x <= 0) {
-            this.player.x = 0;
-         }
-      } else {
-         // ### Prevent shielded player from moving out of the canvas ###
-         if ((this.player.x + this.player.width - 25) >= this.canvas.width) {
-            this.player.x = this.canvas.width - this.player.width + 25;
-         } else if (this.player.x <= -25) {
-            this.player.x = -25;
-         }
-      }
    }
 
    fireProjectile() {
@@ -249,9 +231,7 @@ class Game {
                   }
                });
                // ### Check rock health ###
-               console.log(this.rocks[index].health);
                this.rocks[index].health -= 50;
-               console.log(this.rocks[index].health);
                if (this.rocks[index].health <= 0) {
                   // remove rock from array
                   this.rocks.splice(index, 1);
@@ -284,9 +264,7 @@ class Game {
                   }
                });
                // ### Check enemy health ###
-               console.log(this.enemies[index].health);
                this.enemies[index].health -= 50;
-               console.log(this.enemies[index].health);
                if (this.enemies[index].health <= 0) {
                   // remove enemy from array
                   this.enemies.splice(index, 1);

@@ -48,6 +48,24 @@ class Player {
       this.game.context.restore();
    }
 
+   checkBoundaries() {
+      // ### Prevent player from moving out of the canvas ###
+      if (!this.shieldsUp) {
+         if ((this.x + this.width) >= this.game.canvas.width) {
+            this.x = this.game.canvas.width - this.width;
+         } else if (this.x <= 0) {
+            this.x = 0;
+         }
+      } else {
+         // ### Let shields go out of canvas ###
+         if ((this.x + this.width - 25) >= this.game.canvas.width) {
+            this.x = this.game.canvas.width - this.width + 25;
+         } else if (this.x <= -25) {
+            this.x = -25;
+         }
+      }
+   }
+
    runLogic() {
       // ### Drain power by shields ###
       if (this.shieldsUp && this.power > 0) {
