@@ -348,15 +348,18 @@ class Game {
       this.context.strokeText('Quadrant Patrol', 8, 44);
       // draw player health
       this.context.font = '18px Arial';
-      this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 20);
+      this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 12);
       // draw player score
-      this.context.fillText(`SCORE: ${this.score}`, 335, this.canvas.height - 20);
+      this.context.fillText(`SCORE: ${this.score}`, 335, this.canvas.height - 12);
       // draw player power
-      this.context.fillText(`POWER: ${this.player.power}`, 180, this.canvas.height - 20);
+      this.context.fillText(`POWER: ${this.player.power}`, 180, this.canvas.height - 12);
       // draw player lives
       this.context.save();
       this.context.textAlign = 'right';
-      this.context.fillText(this.player.drawLives(), this.canvas.width - 20, 45);
+      this.context.fillText(`Lives ${this.player.drawLives()}`, this.canvas.width - 20, 45);
       this.context.restore();
+      // draw instruction
+      this.context.font = '9px Arial';
+      this.context.fillText('MOVE => LEFT/RIGHT  |  FIRE => SPACE  |  SHIELD => D  |  WINGMEN => F  |  RED: ENEMY  |  DARK : ROCK', 20, this.canvas.height - 40);
    }
 }

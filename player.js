@@ -12,7 +12,7 @@ class Player {
       this.x = x - (this.width / 2);
       this.y = y;
       this.health = 200;
-      this.power = 500;
+      this.power = 2000;
       this.shieldsUp = false;
       this.powerShots = false;
       this.lives = 4;
