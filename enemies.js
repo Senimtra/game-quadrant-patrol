@@ -11,6 +11,8 @@ class Enemy {
       this.moveDir = Math.random() < 0.5 ? -1 : 1;
       this.width = 50;
       this.height = 50;
+      this.color = '#7B241C'
+      this.health = 100;
       this.lastEnemyShotTimestamp = Date.now();
       this.enemyShotInterval = 2000;
    }
@@ -25,6 +27,8 @@ class Enemy {
          this.lastEnemyShotTimestamp = Date.now();
          this.shoot();
       }
+      // ### Switch color by health status ###
+      if (this.health === 50) this.color = '#A93226'
    }
 
    shoot() {
@@ -47,7 +51,7 @@ class Enemy {
 
    drawEnemy() {
       this.game.context.save();
-      this.game.context.fillStyle = '#B03A2E';
+      this.game.context.fillStyle = `${this.color}`;
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
       this.game.context.restore();
    }

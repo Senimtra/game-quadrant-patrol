@@ -248,11 +248,12 @@ class Game {
                      this.rocks[index].health -= 50;
                   }
                });
-               // remove rock from array
+               // ### Check rock health ###
                console.log(this.rocks[index].health);
                this.rocks[index].health -= 50;
                console.log(this.rocks[index].health);
                if (this.rocks[index].health <= 0) {
+                  // remove rock from array
                   this.rocks.splice(index, 1);
                }
                this.score += 50;
@@ -279,10 +280,17 @@ class Game {
                   // check if the second shot also hit
                   if (shot2.checkDoubleShot(enemy.x, enemy.y, enemy.width, enemy.height)) {
                      this.playerProjectiles.splice(shotIndex2, 1);
+                     this.enemies[index].health -= 50;
                   }
                });
-               // remove enemy from array
-               this.enemies.splice(index, 1);
+               // ### Check enemy health ###
+               console.log(this.enemies[index].health);
+               this.enemies[index].health -= 50;
+               console.log(this.enemies[index].health);
+               if (this.enemies[index].health <= 0) {
+                  // remove enemy from array
+                  this.enemies.splice(index, 1);
+               }
                this.score += 100;
             }
          });
