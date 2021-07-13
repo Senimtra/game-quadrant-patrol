@@ -38,6 +38,16 @@ class Player {
       this.game.context.restore();
    }
 
+   drawPowerShots() {
+      this.game.context.save();
+      this.game.context.fillStyle = '#AF601A';
+      this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.globalCompositeOperation = 'destination-out';
+      this.game.context.fillRect(this.x + 21, this.y, 4, this.height);
+      this.game.context.fillRect(this.x + this.width - 25, this.y, 4, this.height);
+      this.game.context.restore();
+   }
+
    runLogic() {
       // ### Drain power by shields ###
       if (this.shieldsUp && this.power > 0) {

@@ -31,12 +31,15 @@ class Game {
    }
 
    drawEverything() {
-      // ### Draw player ###
-      if (!this.player.shieldsUp) {
-         this.player.drawPlayer();
-      } else {
-         // draw shielded player
+      // ### Draw shielded player ###
+      if (this.player.shieldsUp) {
          this.player.drawShields();
+         // draw player powershots
+      } else if (this.player.powerShots) {
+         this.player.drawPowerShots();
+      } else {
+         // normal player
+         this.player.drawPlayer();
       }
       // ### Draw rocks ###
       for (const rock of this.rocks) {
