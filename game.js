@@ -216,6 +216,12 @@ class Game {
       const projectile1 = new Projectile(this, this.player.x + this.player.width / 2 - 15 - 3, this.player.y);
       const projectile2 = new Projectile(this, this.player.x + (this.player.width / 2) + 15 - 3, this.player.y);
       this.playerProjectiles.push(projectile1, projectile2);
+      // ### Fire powershots ###
+      if (this.player.powerShots) {
+         const projectile3 = new Projectile(this, this.player.x + this.player.width / 2 - 44 - 3, this.player.y);
+         const projectile4 = new Projectile(this, this.player.x + (this.player.width / 2) + 44 - 3, this.player.y);
+         this.playerProjectiles.push(projectile3, projectile4);
+      }
    }
 
    checkCollisions() {
