@@ -3,11 +3,28 @@
 ## JS Canvas Game - Quadrant Patrol ##
 ###################################### */
 
-// ### retrieve the canvas node ###
+// ### Retrieve element nodes ###
 const canvasElement = document.querySelector('canvas');
+const startButtonElement = document.querySelector('#start-game');
+const resumeButtonElement = document.querySelector('#resume-game');
+const introScreenElement = document.querySelector('#intro');
 
-// ### create new game instance ###
+// ### Create new game instance ###
 const game = new Game(canvasElement);
 
-// ### start the game ###
-game.start();
+// ### Start button ###
+startButtonElement.addEventListener('click', () => {
+   introScreenElement.style.display = 'none';
+   canvasElement.style.display = 'block';
+   game.start();
+});
+
+// ### Resume button ###
+resumeButtonElement.addEventListener('click', () => {
+   if (game.player) {
+      introScreenElement.style.display = 'none';
+      canvasElement.style.display = 'block';
+      game.paused = false;
+      game.clock();
+   }
+})

@@ -9,10 +9,23 @@ body {
 
 canvas {
    border: 1px solid black;
+   display: none;
 }
 
 #container {
    display: flex;
    justify-content: center;
+   height: 98vh;
+   margin: 0;
+   padding: 0;
+}
+
+#intro {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   border: 1px solid black;
+   width: calc(500 * 98vh / 800);
    height: 98vh;
 }

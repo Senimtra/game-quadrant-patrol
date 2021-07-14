@@ -18,6 +18,7 @@ class Game {
       this.score = 0;
       this.rocks = [];
       this.enemies = [];
+      this.paused = false;
       this.powerUpSpawned = false;
       this.playerProjectiles = [];
       this.enemyProjectiles = [];
@@ -152,7 +153,8 @@ class Game {
          ArrowRight: { pressed: false },
          Space: { pressed: false },
          KeyD: { pressed: false },
-         KeyF: { pressed: false }
+         KeyF: { pressed: false },
+         Escape: { pressed: false }
       }
       window.addEventListener('keydown', (event) => {
          // ### Activate keys in controller object ###
@@ -177,6 +179,7 @@ class Game {
 
    executeControls() {
       // ### Execute key functions by keystate ###
+      if (this.controls['Escape'].pressed === true) this.quitGame();
       if (this.controls['ArrowLeft'].pressed === true) this.player.moveLeft();
       if (this.controls['ArrowRight'].pressed === true) this.player.moveRight();
       // if (this.controls['Space'].pressed === true) this.player.fireProjectile();
@@ -339,6 +342,15 @@ class Game {
          this.fps = this.frame;
          this.frame = 0;
       }, 1000);
+   }
+
+   quitGame() {
+      if (this.paused === false) {
+         clearInterval(window.clockTimer);
+         this.paused = true;
+         introScreenElement.style.display = 'flex';
+         canvasElement.style.display = 'none';
+      }
    }
 
    drawUI() {
