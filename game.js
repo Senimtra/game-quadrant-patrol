@@ -138,13 +138,11 @@ class Game {
          ArrowLeft: { pressed: false },
          ArrowRight: { pressed: false },
          Space: { pressed: false },
-         KeyD: { pressed: false }
+         KeyD: { pressed: false },
+         KeyF: { pressed: false }
       }
-      // ### Enable player controls ###
-      let pressedD = false;
-      let pressedF = false;
       window.addEventListener('keydown', (event) => {
-         // activate keys in controller object
+         // ### Activate keys in controller object ###
          if (this.controls[event.code]) {
             this.controls[event.code].pressed = true
          }
@@ -152,28 +150,14 @@ class Game {
             case 'Space':
                this.player.fireProjectile();
                break;
-            case 'KeyF':
-               // activate powershots
-               if ((!pressedF) && (this.player.power > 0) && (!pressedD)) {
-                  this.player.x -= 25;
-                  this.player.width += 50;
-                  this.player.powerShots = true;
-                  pressedF = true;
-               }
+
          }
          this.player.checkBoundaries();
       });
       window.addEventListener('keyup', (event) => {
-         // deactivate keys in controller object
+         // ### Deactivate keys in controller object ###
          if (this.controls[event.code]) {
             this.controls[event.code].pressed = false;
-         }
-         // disable player powershots
-         if ((event.code === 'KeyF') && (pressedF) && (this.player.powerShots)) {
-            this.player.x += 25;
-            this.player.width -= 50;
-            this.player.powerShots = false;
-            pressedF = false;
          }
       });
    }
@@ -185,6 +169,8 @@ class Game {
       // if (this.controls['Space'].pressed === true) this.player.fireProjectile();
       if (this.controls['KeyD'].pressed === true) this.player.activateShield();
       if ((this.controls['KeyD'].pressed === false) && (this.player.shieldsUp === true)) this.player.lowerShield();
+      if (this.controls['KeyF'].pressed === true) this.player.powerShotsOn();
+      if ((this.controls['KeyF'].pressed === false) && (this.player.powerShots === true)) this.player.powerShotsOff();
       this.player.checkBoundaries();
    }
 
@@ -347,6 +333,6 @@ class Game {
       this.context.restore();
       // draw instruction
       this.context.font = '9px Arial';
-      this.context.fillText('MOVE => LEFT/RIGHT  |  FIRE => SPACE  |  SHIELD => D  |  WINGMEN => F  |  RED: ENEMY  |  DARK : ROCK', 20, this.canvas.height - 40);
+      this.context.fillText('MOVE => LEFT/RIGHT | FIRE => SPACE | SHIELD => D | POWERSHOTS => F  |  RED: ENEMY | DARK : ROCK', 20, this.canvas.height - 40);
    }
 }

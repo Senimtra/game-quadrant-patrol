@@ -40,7 +40,7 @@ class Player {
    }
 
    activateShield() {
-      // ### Put player shield up ###
+      // ### Put shield up ###
       if ((this.power > 0) && (this.shieldsUp === false)) {
          this.x -= 25;
          this.width += 50;
@@ -51,12 +51,28 @@ class Player {
    }
 
    lowerShield() {
-      // ### Lower player shield ###
+      // ### Lower shield ###
       this.x += 25;
       this.width -= 50;
       this.y += 25;
       this.height -= 25;
       this.shieldsUp = false;
+   }
+
+   powerShotsOn() {
+      // ### Activate powershots ###
+      if ((this.power > 0) && (this.powerShots === false)) {
+         this.x -= 25;
+         this.width += 50;
+         this.powerShots = true;
+      }
+   }
+
+   powerShotsOff() {
+      // ### Disable powershots ###
+      this.x += 25;
+      this.width -= 50;
+      this.powerShots = false;
    }
 
    drawPlayer() {
