@@ -141,7 +141,6 @@ class Game {
       });
       // ### Check if powerup moved oob ###
       if ((this.powerUpSpawned === true) && (this.powerUp.y > this.canvas.height)) {
-         // delete window.powerUp;
          this.powerUpSpawned = false;
       }
    }
@@ -279,7 +278,14 @@ class Game {
             // remove shot if hit unprotected
             this.enemyProjectiles.splice(index, 1);
          }
-      })
+      });
+      // ### Check player for powerup hits ###
+      if ((this.powerUpSpawned === true) && (this.powerUp.checkIntersection(this.player))) {
+         console.log('powered up');
+         // delete window.powerUp;
+         this.powerUpSpawned = false;
+         this.player.power += 500;
+      }
    }
 
    clock() {

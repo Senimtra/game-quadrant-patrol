@@ -103,4 +103,17 @@ class PowerUp {
       this.x += 1.5;
       this.y += this.vy;
    }
+
+   checkIntersection(element) {
+      return (
+         // turns true if right side of element is beyond left side of powerup
+         element.x + element.width >= this.x &&
+         // turns true if left side of element is beyond right side of powerup
+         element.x <= this.x + this.width &&
+         // turns true if bottom side of element is beyond top side of powerup
+         element.y + element.height >= this.y &&
+         // turns true if top side of element is above bottom edge of powerup
+         element.y <= this.y + this.height
+      );
+   }
 }
