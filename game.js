@@ -22,6 +22,7 @@ class Game {
       this.enemyProjectiles = [];
       this.lastRockSpawn = Date.now();
       this.lastEnemySpawn = Date.now();
+      this.powerUpProbability = Math.random() < 1;
       this.rockSpawnInterval = 3000;
       this.enemySpawnInterval = 5000;
       this.clock();
@@ -57,6 +58,9 @@ class Game {
       for (const enemyShot of this.enemyProjectiles) {
          enemyShot.drawEnemyProjectile(this);
       }
+      if (this.powerUp) {
+         this.powerUp.drawPowerUp();
+      }
       this.executeControls();
    }
 
@@ -88,6 +92,10 @@ class Game {
       // ### Run enemy projectiles logic ###
       for (const enemyShot of this.enemyProjectiles) {
          enemyShot.runLogic();
+      }
+      // ### Run PowerUp logic ###
+      if (this.powerUp) {
+         this.powerUp.runLogic();
       }
       this.checkCollisions();
       this.collectGarbage();
@@ -239,6 +247,11 @@ class Game {
                // ### Check enemy health ###
                this.enemies[index].health -= 50;
                if (this.enemies[index].health <= 0) {
+                  // spawn one powerup at a time occasionally
+                  if ((this.powerUpProbability) && (!this.powerUp)) {
+                     this.powerUp = new PowerUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10);
+                     console.log(this.powerUp);
+                  }
                   // remove enemy from array
                   this.enemies.splice(index, 1);
                }

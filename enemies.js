@@ -79,3 +79,29 @@ class Rock extends Enemy {
       if (this.health === 50) this.color = '#2C3E50'
    }
 }
+
+class PowerUp {
+   constructor(game, x, y) {
+      this.game = game;
+      this.x = x;
+      this.y = y;
+      this.vx = 3
+      this.vy = -2;
+      this.width = 30;
+      this.height = 30;
+      this.gravity = 0.1;
+   }
+
+   drawPowerUp() {
+      this.game.context.save();
+      this.game.context.fillStyle = 'blue';
+      this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.restore();
+   }
+
+   runLogic() {
+      this.vy += this.gravity;
+      this.x += 1.5;
+      this.y += this.vy;
+   }
+}
