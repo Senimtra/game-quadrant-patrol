@@ -16,13 +16,22 @@
    </head>
    <body>
       <div id="container">
+         <!-- ### Start screen begins here ### -->
          <div id="intro">
             <button id="start-game">Start Game!</button>
             <button id="resume-game">Resume Game!</button>
          </div>
+
+         <!-- ### Game over screen begins here ### -->
+         <div id="game-over">
+            <h1>GAME OVER!</h1>
+            <button id="try-again">Try again!</button>
+         </div>
+
          <!-- ### Set game canvas ### -->
          <canvas width="500" height="800"></canvas>
       </div>
+
       <!-- ### Load JavaScript files ### -->
       <script src="enemies.js"></script>
       <script src="projectile.js"></script>

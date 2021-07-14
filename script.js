@@ -7,7 +7,9 @@
 const canvasElement = document.querySelector('canvas');
 const startButtonElement = document.querySelector('#start-game');
 const resumeButtonElement = document.querySelector('#resume-game');
+const tryAgainButtonElement = document.querySelector('#try-again');
 const introScreenElement = document.querySelector('#intro');
+const gameOverScreenElement = document.querySelector('#game-over');
 
 // ### Create new game instance ###
 const game = new Game(canvasElement);
@@ -27,4 +29,11 @@ resumeButtonElement.addEventListener('click', () => {
       game.paused = false;
       game.clock();
    }
+})
+
+// ### Try again button ###
+tryAgainButtonElement.addEventListener('click', () => {
+   gameOverScreenElement.style.display = 'none';
+   canvasElement.style.display = 'block';
+   game.start();
 })

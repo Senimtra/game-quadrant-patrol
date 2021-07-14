@@ -28,4 +28,16 @@ canvas {
    border: 1px solid black;
    width: calc(500 * 98vh / 800);
    height: 98vh;
+   box-sizing: border-box;
+}
+
+#game-over {
+   display: none;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   border: 1px solid black;
+   width: calc(500 * 98vh / 800);
+   height: 98vh;
+   box-sizing: border-box;
 }

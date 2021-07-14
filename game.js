@@ -313,7 +313,8 @@ class Game {
          this.player.lives--;
          // player is dead
          if (this.player.lives === 0) {
-            console.log('YOU LOST THE GAME!');
+            canvasElement.style.display = 'none';
+            gameOverScreenElement.style.display = 'flex';
             clearInterval(window.clockTimer);
          } else {
             // player starts a new life
