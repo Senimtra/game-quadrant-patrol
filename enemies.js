@@ -64,6 +64,14 @@ class Rock extends Enemy {
       this.width = 50;
       this.height = 50;
       this.health = 100;
+      // random y velocity between 0.5 and 2
+      this.vy = Math.floor((Math.random() + 1) * 100) / 100;
+      // random destination (bottom) x between 0 and canvas.width
+      this.destination = Math.floor(Math.random() * (this.game.canvas.width - this.width));
+      // calculate amount of updates to reach bottom regarding random vy
+      this.travelUpdatesY = Math.floor(this.game.canvas.height / this.vy);
+      // calculate amount of needed x/update to reach destination
+      this.vx = Math.floor(((this.destination - this.x) / this.travelUpdatesY) * 100) / 100;
    }
 
    drawRock() {
@@ -74,7 +82,8 @@ class Rock extends Enemy {
    }
 
    runLogic() {
-      this.y += 1.5;
+      this.x += this.vx;
+      this.y += this.vy;
       // ### Switch color by health status ###
       if (this.health === 50) this.color = '#2C3E50'
    }
