@@ -90,11 +90,12 @@ class PowerUp {
       this.width = 30;
       this.height = 30;
       this.gravity = 0.15;
+      this.color = 'blue'
    }
 
    drawPowerUp() {
       this.game.context.save();
-      this.game.context.fillStyle = 'blue';
+      this.game.context.fillStyle = `${this.color}`;
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
       this.game.context.restore();
    }
@@ -116,5 +117,12 @@ class PowerUp {
          // turns true if top side of element is above bottom edge of powerup
          element.y <= this.y + this.height
       );
+   }
+}
+
+class HealthUp extends PowerUp {
+   constructor(game, x, y, direction) {
+      super(game, x, y, direction)
+      this.color = 'green';
    }
 }

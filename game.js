@@ -257,7 +257,11 @@ class Game {
                      let direction;
                      // set arc direction depending on x
                      (this.enemies[index].x + 10 > this.canvas.width / 2) ? direction = -1 : direction = 1;
-                     this.powerUp = new PowerUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction);
+                     if (Math.random() < 0.5) {
+                        this.powerUp = new PowerUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction);
+                     } else {
+                        this.powerUp = new HealthUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction);
+                     }
                      this.powerUpSpawned = true;
                   }
                   // remove enemy from array
@@ -284,7 +288,6 @@ class Game {
       });
       // ### Check player for powerup hits ###
       if ((this.powerUpSpawned === true) && (this.powerUp.checkIntersection(this.player))) {
-         console.log('powered up');
          // delete window.powerUp;
          this.powerUpSpawned = false;
          this.player.power += 500;
@@ -355,16 +358,29 @@ class Game {
       this.context.font = '18px Arial';
       this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 12);
       // draw player score
-      this.context.fillText(`SCORE: ${this.score}`, 335, this.canvas.height - 12);
+      this.context.fillText(`SCORE: ${this.score}`, 300, this.canvas.height - 12);
       // draw player power
-      this.context.fillText(`POWER: ${this.player.power}`, 180, this.canvas.height - 12);
+      this.context.fillText(`POWER: ${this.player.power}`, 155, this.canvas.height - 12);
       // draw player lives
       this.context.save();
       this.context.textAlign = 'right';
       this.context.fillText(`Lives ${this.player.drawLives()}`, this.canvas.width - 20, 45);
       this.context.restore();
       // draw instruction
+      this.context.save();
       this.context.font = '9px Arial';
       this.context.fillText('MOVE => LEFT/RIGHT | FIRE => SPACE | SHIELD => D | POWERSHOTS => F  |  RED: ENEMY | DARK : ROCK', 20, this.canvas.height - 40);
+      this.context.restore();
+      // draw powerups
+      this.context.save();
+      this.context.font = '9px Arial';
+      this.context.textAlign = 'left';
+      this.context.fillText('Power', 455, this.canvas.height - 20);
+      this.context.fillText('Health', 455, this.canvas.height - 10);
+      this.context.fillStyle = 'blue';
+      this.context.fillRect(445, this.canvas.height - 27, 7, 7)
+      this.context.fillStyle = 'green';
+      this.context.fillRect(445, this.canvas.height - 17, 7, 7)
+      this.context.restore();
    }
 }
