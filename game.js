@@ -254,7 +254,10 @@ class Game {
                if (this.enemies[index].health <= 0) {
                   // spawn one powerup at a time occasionally
                   if ((this.powerUpProbability) && (this.powerUpSpawned === false)) {
-                     this.powerUp = new PowerUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10);
+                     let direction;
+                     // set arc direction depending on x
+                     (this.enemies[index].x + 10 > this.canvas.width / 2) ? direction = -1 : direction = 1;
+                     this.powerUp = new PowerUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction);
                      this.powerUpSpawned = true;
                   }
                   // remove enemy from array

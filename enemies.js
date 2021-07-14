@@ -81,14 +81,15 @@ class Rock extends Enemy {
 }
 
 class PowerUp {
-   constructor(game, x, y) {
+   constructor(game, x, y, direction) {
       this.game = game;
+      this.direction = direction;
       this.x = x;
       this.y = y;
-      this.vy = -2;
+      this.vy = -3;
       this.width = 30;
       this.height = 30;
-      this.gravity = 0.1;
+      this.gravity = 0.15;
    }
 
    drawPowerUp() {
@@ -99,8 +100,8 @@ class PowerUp {
    }
 
    runLogic() {
+      this.x += (2.25 * this.direction);
       this.vy += this.gravity;
-      this.x += 1.5;
       this.y += this.vy;
    }
 
