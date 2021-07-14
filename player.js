@@ -39,6 +39,26 @@ class Player {
       }
    }
 
+   activateShield() {
+      // ### Put player shield up ###
+      if ((this.power > 0) && (this.shieldsUp === false)) {
+         this.x -= 25;
+         this.width += 50;
+         this.y -= 25;
+         this.height += 25;
+         this.shieldsUp = true;
+      }
+   }
+
+   lowerShield() {
+      // ### Lower player shield ###
+      this.x += 25;
+      this.width -= 50;
+      this.y += 25;
+      this.height -= 25;
+      this.shieldsUp = false;
+   }
+
    drawPlayer() {
       this.game.context.save();
       this.game.context.fillStyle = '#148F77';

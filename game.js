@@ -137,7 +137,8 @@ class Game {
       this.controls = {
          ArrowLeft: { pressed: false },
          ArrowRight: { pressed: false },
-         Space: { pressed: false }
+         Space: { pressed: false },
+         KeyD: { pressed: false }
       }
       // ### Enable player controls ###
       let pressedD = false;
@@ -150,17 +151,6 @@ class Game {
          switch (event.code) {
             case 'Space':
                this.player.fireProjectile();
-               break;
-            case 'KeyD':
-               // put player shield up
-               if ((!pressedD) && (this.player.power > 0) && (!pressedF)) {
-                  this.player.x -= 25;
-                  this.player.width += 50;
-                  this.player.y -= 25;
-                  this.player.height += 25;
-                  this.player.shieldsUp = true;
-                  pressedD = true;
-               }
                break;
             case 'KeyF':
                // activate powershots
@@ -178,15 +168,6 @@ class Game {
          if (this.controls[event.code]) {
             this.controls[event.code].pressed = false;
          }
-         // lower player shield
-         if ((event.code === 'KeyD') && (pressedD) && (this.player.shieldsUp)) {
-            this.player.x += 25;
-            this.player.width -= 50;
-            this.player.y += 25;
-            this.player.height -= 25;
-            this.player.shieldsUp = false;
-            pressedD = false;
-         }
          // disable player powershots
          if ((event.code === 'KeyF') && (pressedF) && (this.player.powerShots)) {
             this.player.x += 25;
@@ -202,6 +183,8 @@ class Game {
       if (this.controls['ArrowLeft'].pressed === true) this.player.moveLeft();
       if (this.controls['ArrowRight'].pressed === true) this.player.moveRight();
       // if (this.controls['Space'].pressed === true) this.player.fireProjectile();
+      if (this.controls['KeyD'].pressed === true) this.player.activateShield();
+      if ((this.controls['KeyD'].pressed === false) && (this.player.shieldsUp === true)) this.player.lowerShield();
       this.player.checkBoundaries();
    }
 
@@ -209,19 +192,6 @@ class Game {
       // ### Clear whole canvas ###
       this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
    }
-
-   // fireProjectile() {
-   //    // ### Fire double projectiles ###
-   //    const projectile1 = new Projectile(this, this.player.x + this.player.width / 2 - 15 - 3, this.player.y);
-   //    const projectile2 = new Projectile(this, this.player.x + (this.player.width / 2) + 15 - 3, this.player.y);
-   //    this.playerProjectiles.push(projectile1, projectile2);
-   //    // ### Fire powershots ###
-   //    if (this.player.powerShots) {
-   //       const projectile3 = new Projectile(this, this.player.x + this.player.width / 2 - 44 - 3, this.player.y);
-   //       const projectile4 = new Projectile(this, this.player.x + (this.player.width / 2) + 44 - 3, this.player.y);
-   //       this.playerProjectiles.push(projectile3, projectile4);
-   //    }
-   // }
 
    checkCollisions() {
       // ### Check for player collisions with rocks ###
