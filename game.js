@@ -167,9 +167,9 @@ class Game {
       if (this.controls['ArrowLeft'].pressed === true) this.player.moveLeft();
       if (this.controls['ArrowRight'].pressed === true) this.player.moveRight();
       // if (this.controls['Space'].pressed === true) this.player.fireProjectile();
-      if (this.controls['KeyD'].pressed === true) this.player.activateShield();
+      if ((this.controls['KeyD'].pressed === true) && (this.player.powerShots === false)) this.player.activateShield();
       if ((this.controls['KeyD'].pressed === false) && (this.player.shieldsUp === true)) this.player.lowerShield();
-      if (this.controls['KeyF'].pressed === true) this.player.powerShotsOn();
+      if ((this.controls['KeyF'].pressed === true) && (this.player.shieldsUp === false)) this.player.powerShotsOn();
       if ((this.controls['KeyF'].pressed === false) && (this.player.powerShots === true)) this.player.powerShotsOff();
       this.player.checkBoundaries();
    }
@@ -249,12 +249,16 @@ class Game {
       // ### Check player for enemy projectile hits ###
       this.enemyProjectiles.forEach((shot, index) => {
          if (shot.checkIntersection(this.player)) {
-            this.enemyProjectiles.splice(index, 1);
-            // check if shields are up
-            if (!this.player.shieldsUp) {
+            if (this.player.shieldsUp) {
+               // push reflected shots from player to enemy array
+               this.enemyProjectiles[index].reflect = true;
+               this.playerProjectiles.push(this.enemyProjectiles[index]);
+            } else {
                this.player.health -= 10;
                this.lose();
             }
+            // remove shot if hit unprotected
+            this.enemyProjectiles.splice(index, 1);
          }
       })
    }

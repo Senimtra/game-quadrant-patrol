@@ -27,7 +27,12 @@ class Projectile {
    drawProjectile(game) {
       this.game = game;
       this.game.context.save();
-      this.game.context.fillStyle = 'yellow';
+      // keep enemy color for reflected shots
+      if (this.reflect === true) {
+         this.game.context.fillStyle = '#85C1E9';
+      } else {
+         this.game.context.fillStyle = 'yellow';
+      }
       // let projectiles start beneath player
       this.game.context.globalCompositeOperation = 'destination-over';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
@@ -38,10 +43,16 @@ class Projectile {
 class EnemyProjectile extends Projectile {
    constructor(game, x, y) {
       super(game, x, y);
+      this.reflect = false;
    }
 
    runLogic() {
-      this.y++;
+      // change direction if reflected
+      if (this.reflect === true) {
+         this.y--;
+      } else {
+         this.y++;
+      }
    }
 
    checkIntersection(element) {
