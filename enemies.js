@@ -81,9 +81,10 @@ class Rock extends Enemy {
 }
 
 class PowerUp {
-   constructor(game, x, y, direction) {
+   constructor(game, x, y, direction, bonus) {
       this.game = game;
       this.direction = direction;
+      this.bonus = bonus;
       this.x = x;
       this.y = y;
       this.vy = -3;
@@ -121,8 +122,8 @@ class PowerUp {
 }
 
 class HealthUp extends PowerUp {
-   constructor(game, x, y, direction) {
-      super(game, x, y, direction)
+   constructor(game, x, y, direction, bonus) {
+      super(game, x, y, direction, bonus)
       this.color = 'green';
    }
 }

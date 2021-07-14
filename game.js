@@ -258,9 +258,9 @@ class Game {
                      // set arc direction depending on x
                      (this.enemies[index].x + 10 > this.canvas.width / 2) ? direction = -1 : direction = 1;
                      if (Math.random() < 0.5) {
-                        this.powerUp = new PowerUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction);
+                        this.powerUp = new PowerUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'power');
                      } else {
-                        this.powerUp = new HealthUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction);
+                        this.powerUp = new HealthUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'health');
                      }
                      this.powerUpSpawned = true;
                   }
@@ -288,9 +288,12 @@ class Game {
       });
       // ### Check player for powerup hits ###
       if ((this.powerUpSpawned === true) && (this.powerUp.checkIntersection(this.player))) {
-         // delete window.powerUp;
          this.powerUpSpawned = false;
-         this.player.power += 500;
+         if (this.powerUp.bonus === 'power') {
+            this.player.power += 500;
+         } else {
+            this.player.health += 50;
+         }
       }
    }
 
