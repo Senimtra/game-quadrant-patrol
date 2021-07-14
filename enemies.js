@@ -56,3 +56,26 @@ class Enemy {
       this.game.context.restore();
    }
 }
+
+class Rock extends Enemy {
+   constructor(game, x, y) {
+      super(game, x, y);
+      this.color = '#1C2833'
+      this.width = 50;
+      this.height = 50;
+      this.health = 100;
+   }
+
+   drawRock() {
+      this.game.context.save();
+      this.game.context.fillStyle = `${this.color}`;
+      this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.restore();
+   }
+
+   runLogic() {
+      this.y += 1.5;
+      // ### Switch color by health status ###
+      if (this.health === 50) this.color = '#2C3E50'
+   }
+}
