@@ -85,7 +85,6 @@ class PowerUp {
       this.game = game;
       this.x = x;
       this.y = y;
-      this.vx = 3
       this.vy = -2;
       this.width = 30;
       this.height = 30;

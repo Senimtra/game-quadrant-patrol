@@ -18,6 +18,7 @@ class Game {
       this.score = 0;
       this.rocks = [];
       this.enemies = [];
+      this.powerUpSpawned = false;
       this.playerProjectiles = [];
       this.enemyProjectiles = [];
       this.lastRockSpawn = Date.now();
@@ -58,7 +59,7 @@ class Game {
       for (const enemyShot of this.enemyProjectiles) {
          enemyShot.drawEnemyProjectile(this);
       }
-      if (this.powerUp) {
+      if (this.powerUpSpawned === true) {
          this.powerUp.drawPowerUp();
       }
       this.executeControls();
@@ -94,7 +95,7 @@ class Game {
          enemyShot.runLogic();
       }
       // ### Run PowerUp logic ###
-      if (this.powerUp) {
+      if (this.powerUpSpawned === true) {
          this.powerUp.runLogic();
       }
       this.checkCollisions();
@@ -138,6 +139,11 @@ class Game {
             this.enemyProjectiles.splice(index, 1);
          }
       });
+      // ### Check if powerup moved oob ###
+      if ((this.powerUpSpawned === true) && (this.powerUp.y > this.canvas.height)) {
+         // delete window.powerUp;
+         this.powerUpSpawned = false;
+      }
    }
 
    enableControls() {
@@ -248,9 +254,9 @@ class Game {
                this.enemies[index].health -= 50;
                if (this.enemies[index].health <= 0) {
                   // spawn one powerup at a time occasionally
-                  if ((this.powerUpProbability) && (!this.powerUp)) {
+                  if ((this.powerUpProbability) && (this.powerUpSpawned === false)) {
                      this.powerUp = new PowerUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10);
-                     console.log(this.powerUp);
+                     this.powerUpSpawned = true;
                   }
                   // remove enemy from array
                   this.enemies.splice(index, 1);
