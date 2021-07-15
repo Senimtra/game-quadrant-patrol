@@ -14,7 +14,7 @@ class Enemy {
       this.color = '#7B241C'
       this.health = 100;
       this.lastEnemyShotTimestamp = Date.now();
-      this.enemyShotInterval = 2000;
+      this.enemyShotInterval = 500;
    }
 
    runLogic() {

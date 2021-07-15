@@ -10,6 +10,8 @@ class Game {
       // ### Access the drawing context ###
       this.context = canvas.getContext('2d');
       this.contextBg = canvasBg.getContext('2d');
+
+      this.running = false;
    }
 
    start() {
@@ -27,12 +29,15 @@ class Game {
       this.lastRockSpawn = Date.now();
       this.lastEnemySpawn = Date.now();
       this.powerUpProbability = Math.random() < 1;
-      this.rockSpawnInterval = 1000;
-      this.enemySpawnInterval = 5000;
+      this.rockSpawnInterval = 750;
+      this.enemySpawnInterval = 2000;
       this.clock();
       this.enableControls();
-      this.displayRefresh();
-      this.drawFps();
+      if (this.running === false) {
+         this.displayRefresh();
+         this.drawFps();
+         this.running = true;
+      }
    }
 
    drawEverything() {
@@ -314,7 +319,7 @@ class Game {
       // ### Cope with different display refresh rates ###
       window.clockTimer = setInterval(() => {
          this.runLogic();
-      }, 16.67); // 60 fps
+      }, 10); // 100 ups
    }
 
    lose() {
@@ -329,7 +334,6 @@ class Game {
             clearInterval(window.clockTimer);
          } else {
             // player starts a new life
-            console.log(`You lost a live - ${this.player.lives} lives remaining!`);
             clearInterval(window.clockTimer);
             setTimeout(() => this.clock(), 3000);
             this.player.health = 200;

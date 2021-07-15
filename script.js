@@ -25,7 +25,7 @@ const backgroundImage = {
    img: img,
    x: 0,
    y: 0,
-   speed: 1,
+   speed: 0.75,
    move: function () {
       this.y += this.speed;
       this.y %= backgroundCanvasElement.height;
@@ -44,7 +44,6 @@ startButtonElement.addEventListener('click', () => {
    introScreenElement.style.display = 'none';
    gameCanvasElement.style.display = 'block';
    backgroundCanvasElement.style.display = 'block';
-   const game = new Game(gameCanvasElement, backgroundCanvasElement, backgroundImage);
    game.start();
 });
 
@@ -52,7 +51,8 @@ startButtonElement.addEventListener('click', () => {
 resumeButtonElement.addEventListener('click', () => {
    if (game.player) {
       introScreenElement.style.display = 'none';
-      canvasElement.style.display = 'block';
+      gameCanvasElement.style.display = 'block';
+      backgroundCanvasElement.style.display = 'block';
       game.clock();
    }
 })
@@ -61,6 +61,6 @@ resumeButtonElement.addEventListener('click', () => {
 tryAgainButtonElement.addEventListener('click', () => {
    gameOverScreenElement.style.display = 'none';
    gameCanvasElement.style.display = 'block';
-   const game = new Game(gameCanvasElement, backgroundCanvasElement, backgroundImage);
+   backgroundCanvasElement.style.display = 'block';
    game.start();
 })

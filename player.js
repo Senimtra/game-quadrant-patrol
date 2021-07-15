@@ -11,20 +11,20 @@ class Player {
       // ### center player x-position ###
       this.x = x - (this.width / 2);
       this.y = y;
-      this.health = 1;
+      this.health = 100;
       this.shieldPower = 0;
       this.wingsPower = 0;
       this.shieldsUp = false;
       this.wingsUp = false;
-      this.lives = 1;
+      this.lives = 3;
    }
 
    moveLeft() {
-      this.x -= 2;
+      this.x -= 3.5;
    }
 
    moveRight() {
-      this.x += 2;
+      this.x += 3.5;
    }
 
    fireProjectile() {

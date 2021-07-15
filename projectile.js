@@ -8,12 +8,13 @@ class Projectile {
       this.game = game;
       this.x = x;
       this.y = y;
+      this.vy = 3;
       this.height = 18;
       this.width = 6;
    }
 
    runLogic() {
-      this.y--;
+      this.y -= this.vy;
    }
 
    checkDoubleShot(elementX, elementY, elementW, elementH) {
@@ -49,9 +50,9 @@ class EnemyProjectile extends Projectile {
    runLogic() {
       // change direction if reflected
       if (this.reflect === true) {
-         this.y--;
+         this.y -= this.vy;
       } else {
-         this.y++;
+         this.y += this.vy;
       }
    }
 
