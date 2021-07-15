@@ -281,6 +281,9 @@ class Game {
                            break;
                         case 4:
                            this.powerUp = new BounceUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'bounce');
+                           break;
+                        case 5:
+                           this.powerUp = new ScoreUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'score')
                      }
                      this.powerUpSpawned = true;
                   }
@@ -309,14 +312,20 @@ class Game {
       // ### Check player for powerup hits ###
       if ((this.powerUpSpawned === true) && (this.powerUp.checkIntersection(this.player))) {
          this.powerUpSpawned = false;
-         if (this.powerUp.bonus === 'shield') {
-            this.player.shieldPower += 1000;
-            this.player.activateShield();
-         } else if (this.powerUp.bonus === 'health') {
-            this.player.health += 50;
-         } else {
-            this.player.wingsPower += 1000;
-            this.player.wingsOn();
+         switch (this.powerUp.bonus) {
+            case 'shield':
+               this.player.shieldPower += 1000;
+               this.player.activateShield();
+               break;
+            case 'health':
+               this.player.health += 50;
+               break;
+            case 'wings':
+               this.player.wingsPower += 1000;
+               this.player.wingsOn();
+               break;
+            case 'score':
+               this.score += 10000;
          }
       }
    }
@@ -412,15 +421,21 @@ class Game {
       this.context.save();
       this.context.font = '9px Arial';
       this.context.textAlign = 'left';
-      this.context.fillText('Wings', 455, this.canvas.height - 30);
-      this.context.fillText('Shield', 455, this.canvas.height - 20);
-      this.context.fillText('Health', 455, this.canvas.height - 10);
+      this.context.fillText('Score', 455, this.canvas.height - 45);
+      this.context.fillText('Bounce', 455, this.canvas.height - 35);
+      this.context.fillText('Wings', 455, this.canvas.height - 25);
+      this.context.fillText('Shield', 455, this.canvas.height - 15);
+      this.context.fillText('Health', 455, this.canvas.height - 5);
+      this.context.fillStyle = 'yellow';
+      this.context.fillRect(445, this.canvas.height - 52, 7, 7)
+      this.context.fillStyle = 'red';
+      this.context.fillRect(445, this.canvas.height - 42, 7, 7)
       this.context.fillStyle = 'orange';
-      this.context.fillRect(445, this.canvas.height - 37, 7, 7)
+      this.context.fillRect(445, this.canvas.height - 32, 7, 7)
       this.context.fillStyle = 'blue';
-      this.context.fillRect(445, this.canvas.height - 27, 7, 7)
+      this.context.fillRect(445, this.canvas.height - 22, 7, 7)
       this.context.fillStyle = 'green';
-      this.context.fillRect(445, this.canvas.height - 17, 7, 7)
+      this.context.fillRect(445, this.canvas.height - 12, 7, 7)
       this.context.restore();
    }
 }

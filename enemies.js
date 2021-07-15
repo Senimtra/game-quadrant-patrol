@@ -152,6 +152,13 @@ class WingsUp extends PowerUp {
 class BounceUp extends PowerUp {
    constructor(game, x, y, direction, bonus) {
       super(game, x, y, direction, bonus)
-      this.color = 'red';
+      this.color = 'darkred';
+   }
+}
+
+class ScoreUp extends PowerUp {
+   constructor(game, x, y, direction, bonus) {
+      super(game, x, y, direction, bonus)
+      this.color = 'yellow'
    }
 }
