@@ -32,7 +32,7 @@ const backgroundImage = {
    },
    draw: function () {
       game.contextBg.drawImage(this.img, 0, this.y);
-      game.contextBg.drawImage(this.img, 0, this.y - backgroundCanvasElement.height);
+      game.contextBg.drawImage(this.img, 0, this.y - backgroundCanvasElement.height + 1);
    },
 };
 

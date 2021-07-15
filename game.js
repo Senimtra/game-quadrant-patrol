@@ -269,12 +269,18 @@ class Game {
                      let direction;
                      // set arc direction depending on x
                      (this.enemies[index].x + 10 > this.canvas.width / 2) ? direction = -1 : direction = 1;
-                     if (Math.random() < 0.33) {
-                        this.powerUp = new ShieldUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'shield');
-                     } else if (Math.random() < 0.5) {
-                        this.powerUp = new HealthUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'health');
-                     } else {
-                        this.powerUp = new WingsUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'wings');
+                     switch (Math.floor(Math.random() * 5) + 1) {
+                        case 1:
+                           this.powerUp = new ShieldUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'shield');
+                           break;
+                        case 2:
+                           this.powerUp = new HealthUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'health');
+                           break;
+                        case 3:
+                           this.powerUp = new WingsUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'wings');
+                           break;
+                        case 4:
+                           this.powerUp = new BounceUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'bounce');
                      }
                      this.powerUpSpawned = true;
                   }
