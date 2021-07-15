@@ -12,9 +12,10 @@ class Player {
       this.x = x - (this.width / 2);
       this.y = y;
       this.health = 1;
-      this.power = 0;
+      this.shieldPower = 0;
+      this.wingsPower = 0;
       this.shieldsUp = false;
-      this.powerShots = false;
+      this.wingsUp = false;
       this.lives = 1;
    }
 
@@ -32,7 +33,7 @@ class Player {
       const projectile2 = new Projectile(this, this.x + (this.width / 2) + 15 - 3, this.y);
       this.game.playerProjectiles.push(projectile1, projectile2);
       // ### Fire powershots ###
-      if (this.powerShots) {
+      if (this.wingsUp) {
          const projectile3 = new Projectile(this, this.x + this.width / 2 - 44 - 3, this.y);
          const projectile4 = new Projectile(this, this.x + (this.width / 2) + 44 - 3, this.y);
          this.game.playerProjectiles.push(projectile3, projectile4);
@@ -41,13 +42,12 @@ class Player {
 
    activateShield() {
       // ### Put shield up ###
-      if ((this.power > 0) && (this.shieldsUp === false)) {
+      if ((this.shieldPower > 0) && (this.shieldsUp === false)) {
          this.x -= 25;
          this.width += 50;
          this.y -= 25;
          this.height += 25;
          this.shieldsUp = true;
-         console.log('shields activated');
       }
    }
 
@@ -60,20 +60,20 @@ class Player {
       this.shieldsUp = false;
    }
 
-   powerShotsOn() {
-      // ### Activate powershots ###
-      if ((this.power > 0) && (this.powerShots === false)) {
+   wingsOn() {
+      // ### Activate wings ###
+      if ((this.wingsPower > 0) && (this.wingsUp === false)) {
          this.x -= 25;
          this.width += 50;
-         this.powerShots = true;
+         this.wingsUp = true;
       }
    }
 
-   powerShotsOff() {
-      // ### Disable powershots ###
+   wingsOff() {
+      // ### Disable wings ###
       this.x += 25;
       this.width -= 50;
-      this.powerShots = false;
+      this.wingsUp = false;
    }
 
    drawPlayer() {
@@ -96,7 +96,7 @@ class Player {
       this.game.context.restore();
    }
 
-   drawPowerShots() {
+   drawWings() {
       this.game.context.save();
       this.game.context.fillStyle = '#AF601A';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
@@ -125,31 +125,31 @@ class Player {
    }
 
    runLogic() {
-      // ### Drain power by shields ###
-      if (this.shieldsUp && this.power > 0) {
+      // ### Drain shieldPower ###
+      if (this.shieldsUp && this.shieldPower > 0) {
          setTimeout(() => {
-            this.power -= 1;
+            this.shieldPower -= 1;
          }, 10);
       }
-      // ### Remove shields at no power ###
-      if ((this.power <= 0) && (this.shieldsUp)) {
+      // ### Remove shield at no power ###
+      if ((this.shieldPower <= 0) && (this.shieldsUp)) {
          this.x += 25;
          this.width -= 50;
          this.y += 25;
          this.height -= 25;
          this.shieldsUp = false;
       }
-      // ### Drain power by powershots ###
-      if (this.powerShots && this.power > 0) {
+      // ### Drain wingsPower ###
+      if (this.wingsUp && this.wingsPower > 0) {
          setTimeout(() => {
-            this.power -= 1;
+            this.wingsPower -= 1;
          }, 10);
       }
-      // ### Remove powershots at no power ###
-      if ((this.power <= 0) && (this.powerShots)) {
+      // ### Remove wings at no power ###
+      if ((this.wingsPower <= 0) && (this.wingsUp)) {
          this.x += 25;
          this.width -= 50;
-         this.powerShots = false;
+         this.wingsUp = false;
       }
    }
 

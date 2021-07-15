@@ -38,8 +38,8 @@ class Game {
       if (this.player.shieldsUp) {
          this.player.drawShields();
          // draw player powershots
-      } else if (this.player.powerShots) {
-         this.player.drawPowerShots();
+      } else if (this.player.wingsUp) {
+         this.player.drawWings();
       } else {
          // normal player
          this.player.drawPlayer();
@@ -183,8 +183,6 @@ class Game {
       if (this.controls['ArrowLeft'].pressed === true) this.player.moveLeft();
       if (this.controls['ArrowRight'].pressed === true) this.player.moveRight();
       // if (this.controls['Space'].pressed === true) this.player.fireProjectile();
-      if ((this.controls['KeyF'].pressed === true) && (this.player.shieldsUp === false)) this.player.powerShotsOn();
-      if ((this.controls['KeyF'].pressed === false) && (this.player.powerShots === true)) this.player.powerShotsOff();
       this.player.checkBoundaries();
    }
 
@@ -258,10 +256,12 @@ class Game {
                      let direction;
                      // set arc direction depending on x
                      (this.enemies[index].x + 10 > this.canvas.width / 2) ? direction = -1 : direction = 1;
-                     if (Math.random() < 0.5) {
+                     if (Math.random() < 0.33) {
                         this.powerUp = new ShieldUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'shield');
-                     } else {
+                     } else if (Math.random() < 0.5) {
                         this.powerUp = new HealthUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'health');
+                     } else {
+                        this.powerUp = new WingsUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'wings');
                      }
                      this.powerUpSpawned = true;
                   }
@@ -291,10 +291,13 @@ class Game {
       if ((this.powerUpSpawned === true) && (this.powerUp.checkIntersection(this.player))) {
          this.powerUpSpawned = false;
          if (this.powerUp.bonus === 'shield') {
-            this.player.power += 2000;
+            this.player.shieldPower += 1000;
             this.player.activateShield();
-         } else {
+         } else if (this.powerUp.bonus === 'health') {
             this.player.health += 50;
+         } else {
+            this.player.wingsPower += 1000;
+            this.player.wingsOn();
          }
       }
    }
@@ -372,9 +375,9 @@ class Game {
       this.context.font = '18px Arial';
       this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 12);
       // draw player score
+      this.context.fillText(`S: ${Math.round(this.player.shieldPower / 60)} W: ${Math.round(this.player.wingsPower / 60)} `, 150, this.canvas.height - 12);
+      // draw player score
       this.context.fillText(`SCORE: ${this.score}`, 300, this.canvas.height - 12);
-      // draw player power
-      this.context.fillText(`POWER: ${this.player.power}`, 155, this.canvas.height - 12);
       // draw player lives
       this.context.save();
       this.context.textAlign = 'right';
@@ -383,14 +386,17 @@ class Game {
       // draw instruction
       this.context.save();
       this.context.font = '9px Arial';
-      this.context.fillText('MOVE => LEFT/RIGHT | FIRE => SPACE | POWERSHOTS => F  |  RED: ENEMY | DARK : ROCK', 20, this.canvas.height - 40);
+      this.context.fillText('MOVE => LEFT/RIGHT | FIRE => SPACE  |  RED: ENEMY | DARK : ROCK', 20, this.canvas.height - 40);
       this.context.restore();
       // draw powerups
       this.context.save();
       this.context.font = '9px Arial';
       this.context.textAlign = 'left';
+      this.context.fillText('Wings', 455, this.canvas.height - 30);
       this.context.fillText('Shield', 455, this.canvas.height - 20);
       this.context.fillText('Health', 455, this.canvas.height - 10);
+      this.context.fillStyle = 'orange';
+      this.context.fillRect(445, this.canvas.height - 37, 7, 7)
       this.context.fillStyle = 'blue';
       this.context.fillRect(445, this.canvas.height - 27, 7, 7)
       this.context.fillStyle = 'green';
