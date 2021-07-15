@@ -4,10 +4,12 @@
 ###################################### */
 
 class Game {
-   constructor(canvas) {
+   constructor(canvas, canvasBg) {
       this.canvas = canvas;
+      this.canvasBg = canvasBg;
       // ### Access the drawing context ###
       this.context = canvas.getContext('2d');
+      this.contextBg = canvasBg.getContext('2d');
    }
 
    start() {
@@ -64,6 +66,12 @@ class Game {
          this.powerUp.drawPowerUp();
       }
       this.executeControls();
+   }
+
+   updateBackgroundCanvas() {
+      backgroundImage.move();
+      this.contextBg.clearRect(0, 0, this.canvasBg.width, this.canvasBg.height);
+      backgroundImage.draw();
    }
 
    runLogic() {
@@ -315,7 +323,8 @@ class Game {
          this.player.lives--;
          // player is dead
          if (this.player.lives === 0) {
-            canvasElement.style.display = 'none';
+            gameCanvasElement.style.display = 'none';
+            backgroundCanvasElement.style.display = 'none';
             gameOverScreenElement.style.display = 'flex';
             clearInterval(window.clockTimer);
          } else {
@@ -332,6 +341,7 @@ class Game {
       // ### Refresh canvas on every frame ###
       this.clearScreen();
       this.drawEverything();
+      this.updateBackgroundCanvas();
       this.drawUI();
       window.requestAnimationFrame(() => {
          this.displayRefresh();
@@ -351,8 +361,8 @@ class Game {
       clearInterval(window.clockTimer);
       introScreenElement.style.display = 'flex';
       gameOverScreenElement.style.display = 'none';
-      canvasElement.style.display = 'none';
-
+      gameCanvasElement.style.display = 'none';
+      backgroundCanvasElement.style.display = 'none';
    }
 
    drawUI() {
