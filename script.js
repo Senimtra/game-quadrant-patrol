@@ -18,6 +18,7 @@ const game = new Game(canvasElement);
 startButtonElement.addEventListener('click', () => {
    introScreenElement.style.display = 'none';
    canvasElement.style.display = 'block';
+   const game = new Game(canvasElement);
    game.start();
 });
 
@@ -26,7 +27,6 @@ resumeButtonElement.addEventListener('click', () => {
    if (game.player) {
       introScreenElement.style.display = 'none';
       canvasElement.style.display = 'block';
-      game.paused = false;
       game.clock();
    }
 })
@@ -35,5 +35,6 @@ resumeButtonElement.addEventListener('click', () => {
 tryAgainButtonElement.addEventListener('click', () => {
    gameOverScreenElement.style.display = 'none';
    canvasElement.style.display = 'block';
+   const game = new Game(canvasElement);
    game.start();
 })

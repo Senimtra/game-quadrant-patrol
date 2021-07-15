@@ -11,11 +11,11 @@ class Player {
       // ### center player x-position ###
       this.x = x - (this.width / 2);
       this.y = y;
-      this.health = 200;
-      this.power = 2000;
+      this.health = 1;
+      this.power = 0;
       this.shieldsUp = false;
       this.powerShots = false;
-      this.lives = 4;
+      this.lives = 1;
    }
 
    moveLeft() {
@@ -47,6 +47,7 @@ class Player {
          this.y -= 25;
          this.height += 25;
          this.shieldsUp = true;
+         console.log('shields activated');
       }
    }
 

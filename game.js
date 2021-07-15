@@ -18,7 +18,7 @@ class Game {
       this.score = 0;
       this.rocks = [];
       this.enemies = [];
-      this.paused = false;
+      // this.paused = false;
       this.powerUpSpawned = false;
       this.playerProjectiles = [];
       this.enemyProjectiles = [];
@@ -183,8 +183,6 @@ class Game {
       if (this.controls['ArrowLeft'].pressed === true) this.player.moveLeft();
       if (this.controls['ArrowRight'].pressed === true) this.player.moveRight();
       // if (this.controls['Space'].pressed === true) this.player.fireProjectile();
-      if ((this.controls['KeyD'].pressed === true) && (this.player.powerShots === false)) this.player.activateShield();
-      if ((this.controls['KeyD'].pressed === false) && (this.player.shieldsUp === true)) this.player.lowerShield();
       if ((this.controls['KeyF'].pressed === true) && (this.player.shieldsUp === false)) this.player.powerShotsOn();
       if ((this.controls['KeyF'].pressed === false) && (this.player.powerShots === true)) this.player.powerShotsOff();
       this.player.checkBoundaries();
@@ -261,7 +259,7 @@ class Game {
                      // set arc direction depending on x
                      (this.enemies[index].x + 10 > this.canvas.width / 2) ? direction = -1 : direction = 1;
                      if (Math.random() < 0.5) {
-                        this.powerUp = new PowerUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'power');
+                        this.powerUp = new ShieldUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'shield');
                      } else {
                         this.powerUp = new HealthUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'health');
                      }
@@ -292,8 +290,9 @@ class Game {
       // ### Check player for powerup hits ###
       if ((this.powerUpSpawned === true) && (this.powerUp.checkIntersection(this.player))) {
          this.powerUpSpawned = false;
-         if (this.powerUp.bonus === 'power') {
-            this.player.power += 500;
+         if (this.powerUp.bonus === 'shield') {
+            this.player.power += 2000;
+            this.player.activateShield();
          } else {
             this.player.health += 50;
          }
@@ -346,12 +345,11 @@ class Game {
    }
 
    quitGame() {
-      if (this.paused === false) {
-         clearInterval(window.clockTimer);
-         this.paused = true;
-         introScreenElement.style.display = 'flex';
-         canvasElement.style.display = 'none';
-      }
+      clearInterval(window.clockTimer);
+      introScreenElement.style.display = 'flex';
+      gameOverScreenElement.style.display = 'none';
+      canvasElement.style.display = 'none';
+
    }
 
    drawUI() {
@@ -385,13 +383,13 @@ class Game {
       // draw instruction
       this.context.save();
       this.context.font = '9px Arial';
-      this.context.fillText('MOVE => LEFT/RIGHT | FIRE => SPACE | SHIELD => D | POWERSHOTS => F  |  RED: ENEMY | DARK : ROCK', 20, this.canvas.height - 40);
+      this.context.fillText('MOVE => LEFT/RIGHT | FIRE => SPACE | POWERSHOTS => F  |  RED: ENEMY | DARK : ROCK', 20, this.canvas.height - 40);
       this.context.restore();
       // draw powerups
       this.context.save();
       this.context.font = '9px Arial';
       this.context.textAlign = 'left';
-      this.context.fillText('Power', 455, this.canvas.height - 20);
+      this.context.fillText('Shield', 455, this.canvas.height - 20);
       this.context.fillText('Health', 455, this.canvas.height - 10);
       this.context.fillStyle = 'blue';
       this.context.fillRect(445, this.canvas.height - 27, 7, 7)

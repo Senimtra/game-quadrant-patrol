@@ -100,7 +100,6 @@ class PowerUp {
       this.width = 30;
       this.height = 30;
       this.gravity = 0.15;
-      this.color = 'blue'
    }
 
    drawPowerUp() {
@@ -129,10 +128,16 @@ class PowerUp {
       );
    }
 }
-
 class HealthUp extends PowerUp {
    constructor(game, x, y, direction, bonus) {
       super(game, x, y, direction, bonus)
       this.color = 'green';
+   }
+}
+
+class ShieldUp extends PowerUp {
+   constructor(game, x, y, direction, bonus) {
+      super(game, x, y, direction, bonus)
+      this.color = 'blue';
    }
 }
