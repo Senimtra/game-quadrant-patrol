@@ -70,6 +70,8 @@ class Rock extends Enemy {
       this.frame = 0;
       this.animations = 31;
       this.animationFrame = 1;
+      // random rotation left/right (clip different images)
+      this.rotationDirection = Math.floor(Math.random() * 2);
       // random rotation speed (between 1.5 and 3.5)
       this.animationFrameSteps = Number(((Math.random() * 2) + 1.5).toPrecision(3));
       // random y velocity between 0.5 and 2
@@ -84,8 +86,6 @@ class Rock extends Enemy {
 
    drawRock() {
       this.game.context.save();
-      // this.game.context.fillStyle = `${this.color}`;
-      // this.game.context.fillRect(this.x, this.y, this.width, this.height);
       // ### Rock animation logic
       if ((this.frame > this.animationFrameSteps)) {
          this.animationFrame++;
@@ -94,10 +94,7 @@ class Rock extends Enemy {
       if (this.animationFrame > this.animations) {
          this.animationFrame = 1;
       }
-      this.game.context.drawImage(rockImage, (128 * this.animationFrame - 128) - ((Math.ceil(this.animationFrame / 8)) * 1024 - 1024), 0 + Math.floor((this.animationFrame - 1) / 8) * 128, 128, 128, this.x - 15, this.y - 15, 80, 80);
-      // console.log(this.animationFrame, 128 * this.animationFrame - 128, 'x: ', (Math.ceil(this.animationFrame / 8)) * 1024, Math.floor((this.animationFrame - 1) / 8));
-      // this.game.context.fillStyle = 'white';
-      // this.game.context.fillText(`${this.animationFrame}`, this.x, this.y);
+      this.game.context.drawImage(rockImage, (128 * this.animationFrame - 128) - ((Math.ceil(this.animationFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.animationFrame - 1) / 8) * 128) + this.rotationDirection * 512, 128, 128, this.x - 15, this.y - 15, 80, 80);
       this.game.context.restore();
    }
 
