@@ -57,6 +57,7 @@ class Enemy {
    }
 }
 
+const rockImage = new Image();
 class Rock extends Enemy {
    constructor(game, x, y) {
       super(game, x, y);
@@ -64,6 +65,10 @@ class Rock extends Enemy {
       this.width = 50;
       this.height = 50;
       this.health = 100;
+      this.frame = 0;
+      this.animations = 3;
+      this.animationFrame = 1;
+      this.animationFrameSteps = 20;
       // random y velocity between 0.5 and 2
       this.vy = Math.floor((Math.random() + 1) * 100) / 100;
       // random destination (bottom) x between 0 and canvas.width
@@ -78,7 +83,19 @@ class Rock extends Enemy {
       this.game.context.save();
       this.game.context.fillStyle = `${this.color}`;
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      // ### Rock animation logic
+      rockImage.src = `./images/rocks_large/rock_${this.animationFrame}.png`;
+      if ((this.frame > this.animationFrameSteps)) {
+         this.animationFrame++;
+         this.frame = 0;
+      }
+      if (this.animationFrame > this.animations) {
+         this.animationFrame = 1;
+      }
+      this.game.context.drawImage(rockImage, this.x - 7, this.y - 7, this.width + 14, this.height + 14)
       this.game.context.restore();
+
+      console.log('frame ', this.frame, 'animationFrame ', this.animationFrame);
    }
 
    runLogic() {
