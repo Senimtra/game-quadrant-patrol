@@ -57,8 +57,11 @@ class Enemy {
    }
 }
 
-const rockImage = new Image();
-rockImage.src = './images/asteroids.png';
+const rockImage_light = new Image();
+const rockImage_dark = new Image();
+
+rockImage_light.src = './images/rocks_light.png';
+rockImage_dark.src = './images/rocks_dark.png';
 
 class Rock extends Enemy {
    constructor(game, x, y) {
@@ -70,6 +73,8 @@ class Rock extends Enemy {
       this.frame = 0;
       this.animations = 31;
       this.animationFrame = 1;
+      // spawn lighter or darker rocks
+      this.rockBrightness = Math.random() < 0.5;
       // random rotation left/right (clip different images)
       this.rotationDirection = Math.floor(Math.random() * 2);
       // random rotation speed (between 1.5 and 3.5)
@@ -86,15 +91,29 @@ class Rock extends Enemy {
 
    drawRock() {
       this.game.context.save();
-      // ### Rock animation logic
-      if ((this.frame > this.animationFrameSteps)) {
-         this.animationFrame++;
-         this.frame = 0;
+      // ### Clip light image left/right // dark image top/bottom ###
+      if (this.rockBrightness === true) {
+         // ### Light rock animation logic
+         if ((this.frame > this.animationFrameSteps)) {
+            this.animationFrame++;
+            this.frame = 0;
+         }
+         if (this.animationFrame > this.animations) {
+            this.animationFrame = 1;
+         }
+         this.game.context.drawImage(rockImage_light, (128 * this.animationFrame - 128) - ((Math.ceil(this.animationFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.animationFrame - 1) / 8) * 128) + this.rotationDirection * 512, 128, 128, this.x - 15, this.y - 15, 80, 80);
       }
-      if (this.animationFrame > this.animations) {
-         this.animationFrame = 1;
+      else {
+         // ### Dark rock animation logic
+         if ((this.frame > this.animationFrameSteps)) {
+            this.animationFrame++;
+            this.frame = 0;
+         }
+         if (this.animationFrame > this.animations) {
+            this.animationFrame = 1;
+         }
+         this.game.context.drawImage(rockImage_dark, (384 - Math.floor((this.animationFrame - 1) / 8) * 128) + this.rotationDirection * 512, (this.animationFrame * 128 - 128) - ((Math.ceil(this.animationFrame / 8)) * 1024 - 1024), 128, 128, this.x - 15, this.y - 15, 80, 80);
       }
-      this.game.context.drawImage(rockImage, (128 * this.animationFrame - 128) - ((Math.ceil(this.animationFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.animationFrame - 1) / 8) * 128) + this.rotationDirection * 512, 128, 128, this.x - 15, this.y - 15, 80, 80);
       this.game.context.restore();
    }
 

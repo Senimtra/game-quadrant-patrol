@@ -10,7 +10,6 @@ class Game {
       // ### Access the drawing context ###
       this.context = canvas.getContext('2d');
       this.contextBg = canvasBg.getContext('2d');
-
       this.running = false;
    }
 
