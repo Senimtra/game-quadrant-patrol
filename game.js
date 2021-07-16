@@ -315,6 +315,7 @@ class Game {
          switch (this.powerUp.bonus) {
             case 'shield':
                this.player.shieldPower += 1000;
+               this.player.wingsPower = 0;
                this.player.activateShield();
                break;
             case 'health':
@@ -322,6 +323,7 @@ class Game {
                break;
             case 'wings':
                this.player.wingsPower += 1000;
+               this.player.shieldPower = 0;
                this.player.wingsOn();
                break;
             case 'score':
