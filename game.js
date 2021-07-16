@@ -326,6 +326,10 @@ class Game {
                break;
             case 'score':
                this.score += 10000;
+               break;
+            case 'bounce':
+               this.powerUpSpawned = true;
+               this.powerUp.bounced = true;
          }
       }
    }

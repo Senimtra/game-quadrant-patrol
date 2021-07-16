@@ -96,6 +96,7 @@ class PowerUp {
       this.bonus = bonus;
       this.x = x;
       this.y = y;
+      this.vx = 2.25 * this.direction;
       this.vy = -3;
       this.width = 30;
       this.height = 30;
@@ -106,11 +107,17 @@ class PowerUp {
       this.game.context.save();
       this.game.context.fillStyle = `${this.color}`;
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      if (this.bounced === true && (Date.now() - this.timeSpawned < 9000)) {
+         this.game.context.globalCompositeOperation = 'source-over'
+         this.game.context.fillStyle = 'white';
+         this.game.context.font = '24px Arial';
+         this.game.context.fillText(`${10 - ((Date.now() - this.timeSpawned) / 1000).toFixed()}`, this.x + 8, this.y + this.height - 7);
+      }
       this.game.context.restore();
    }
 
    runLogic() {
-      this.x += (2.25 * this.direction);
+      this.x += this.vx;
       this.vy += this.gravity;
       this.y += this.vy;
    }
@@ -153,6 +160,43 @@ class BounceUp extends PowerUp {
    constructor(game, x, y, direction, bonus) {
       super(game, x, y, direction, bonus)
       this.color = 'darkred';
+      this.bounced = false;
+      this.timeSpawned = Date.now();
+   }
+
+   runLogic() {
+      if (this.bounced === false) {
+         this.x += (2.25 * this.direction);
+         this.vy += this.gravity;
+         this.y += this.vy;
+      }
+      if (this.bounced === true) {
+
+         this.x += this.vx * 1;
+         this.y -= this.vy * 0.4;
+         if (this.y < 60 && Date.now() - this.timeSpawned < 10000) {
+            this.vy *= -1;
+         }
+         if ((this.x < 0 || this.x + this.width > this.game.canvas.width) && (Date.now() - this.timeSpawned < 10000)) {
+            this.vx *= -1;
+         }
+         if (this.checkIntersection(game.player) && Date.now() - this.timeSpawned < 10000) {
+            this.vy *= -1;
+         }
+         this.game.enemies.forEach((enemy, index) => {
+            if (this.checkIntersection(enemy)) {
+               this.game.enemies.splice(index, 1);
+            }
+         });
+         this.game.rocks.forEach((rock, index) => {
+            if (this.checkIntersection(rock)) {
+               this.game.rocks.splice(index, 1);
+            }
+         });
+         if (this.x + this.width < 0 || this.x > this.game.canvas.width || this.y + this.height < 60) {
+            this.game.powerUpSpawned = false;
+         }
+      }
    }
 }
 
