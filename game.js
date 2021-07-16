@@ -15,7 +15,7 @@ class Game {
 
    start() {
       // ### Create new player instance ###
-      this.player = new Player(this, this.canvas.width / 2, this.canvas.height - 100);
+      this.player = new Player(this, this.canvas.width / 2, this.canvas.height - 120);
       this.frame = 0;
       this.fps = 0;
       this.score = 0;

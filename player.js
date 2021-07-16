@@ -3,6 +3,9 @@
 ## JS Canvas Game - Quadrant Patrol ##
 ###################################### */
 
+const playerImage = new Image();
+playerImage.src = './images/ship_player.png';
+
 class Player {
    constructor(game, x, y) {
       this.game = game;
@@ -80,6 +83,8 @@ class Player {
       this.game.context.save();
       this.game.context.fillStyle = '#148F77';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.drawImage(playerImage, 755, 0, 151, 151, this.x - 30, this.y - 45, 120, 80);
+      // this.game.context.drawImage(playerImage, 1029, 0, 343, 383, this.x - 1, this.y - 31, 64, 70);
       this.game.context.restore();
    }
 
