@@ -58,6 +58,8 @@ class Enemy {
 }
 
 const rockImage = new Image();
+rockImage.src = './images/asteroids.png';
+
 class Rock extends Enemy {
    constructor(game, x, y) {
       super(game, x, y);
@@ -66,9 +68,9 @@ class Rock extends Enemy {
       this.height = 50;
       this.health = 100;
       this.frame = 0;
-      this.animations = 3;
+      this.animations = 31;
       this.animationFrame = 1;
-      this.animationFrameSteps = 20;
+      this.animationFrameSteps = 2;
       // random y velocity between 0.5 and 2
       this.vy = Math.floor((Math.random() + 1) * 100) / 100;
       // random destination (bottom) x between 0 and canvas.width
@@ -81,10 +83,9 @@ class Rock extends Enemy {
 
    drawRock() {
       this.game.context.save();
-      this.game.context.fillStyle = `${this.color}`;
-      this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      // this.game.context.fillStyle = `${this.color}`;
+      // this.game.context.fillRect(this.x, this.y, this.width, this.height);
       // ### Rock animation logic
-      rockImage.src = `./images/rocks_large/rock_${this.animationFrame}.png`;
       if ((this.frame > this.animationFrameSteps)) {
          this.animationFrame++;
          this.frame = 0;
@@ -92,17 +93,16 @@ class Rock extends Enemy {
       if (this.animationFrame > this.animations) {
          this.animationFrame = 1;
       }
-      this.game.context.drawImage(rockImage, this.x - 7, this.y - 7, this.width + 14, this.height + 14)
+      this.game.context.drawImage(rockImage, (128 * this.animationFrame - 128) - ((Math.ceil(this.animationFrame / 8)) * 1024 - 1024), 0 + Math.floor((this.animationFrame - 1) / 8) * 128, 128, 128, this.x - 15, this.y - 15, 80, 80);
+      // console.log(this.animationFrame, 128 * this.animationFrame - 128, 'x: ', (Math.ceil(this.animationFrame / 8)) * 1024, Math.floor((this.animationFrame - 1) / 8));
+      // this.game.context.fillStyle = 'white';
+      // this.game.context.fillText(`${this.animationFrame}`, this.x, this.y);
       this.game.context.restore();
-
-      console.log('frame ', this.frame, 'animationFrame ', this.animationFrame);
    }
 
    runLogic() {
       this.x += this.vx;
       this.y += this.vy;
-      // ### Switch color by health status ###
-      if (this.health === 50) this.color = '#2C3E50'
    }
 }
 

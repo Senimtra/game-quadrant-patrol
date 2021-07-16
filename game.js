@@ -94,6 +94,7 @@ class Game {
       }
       // ### Run rock logic ###
       for (const rock of this.rocks) {
+         rock.frame++;
          rock.runLogic();
       }
       // ### Run player projectiles logic ###
