@@ -70,9 +70,10 @@ class Rock extends Enemy {
       this.frame = 0;
       this.animations = 31;
       this.animationFrame = 1;
-      this.animationFrameSteps = 2;
+      // random rotation speed (between 1.5 and 3.5)
+      this.animationFrameSteps = Number(((Math.random() * 2) + 1.5).toPrecision(3));
       // random y velocity between 0.5 and 2
-      this.vy = Math.floor((Math.random() + 1) * 100) / 100;
+      this.vy = Math.floor((Math.random() + 2) * 100) / 100;
       // random destination (bottom) x between 0 and canvas.width
       this.destination = Math.floor(Math.random() * (this.game.canvas.width - this.width));
       // calculate amount of updates to reach bottom regarding random vy
