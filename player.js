@@ -6,6 +6,9 @@
 const playerImage = new Image();
 playerImage.src = './images/ship_player.png';
 
+const exhaustImage = new Image();
+exhaustImage.src = './images/ship_player_exhaust.png'
+
 class Player {
    constructor(game, x, y) {
       this.game = game;
@@ -15,6 +18,8 @@ class Player {
       this.widthXT = 22;
       this.heightXT = 36;
       this.animation = 6;
+      this.frame = 0;
+      this.exhaustFrame = 1;
       this.animationStart = 0;
       this.animationRunning = false;
       // center player x-position
@@ -129,6 +134,7 @@ class Player {
    }
 
    drawPlayer() {
+      // ### Draw player ship ###
       this.game.context.save();
       this.game.context.fillStyle = '#148F77';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
@@ -137,7 +143,22 @@ class Player {
       this.game.context.restore();
    }
 
+   drawExhaust() {
+      // ### Draw player ship exhaust ###
+      this.game.context.save();
+      this.game.context.fillStyle = 'white';
+      this.game.context.fillText(this.exhaustFrame, this.x, this.y + 50);
+      this.game.context.drawImage(exhaustImage, (128 * this.exhaustFrame - 128) - ((Math.ceil(this.exhaustFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.exhaustFrame - 1) / 8) * 128), 128, 128, this.x + 5, this.y + 25, 50, 50);
+      if (this.frame > 10) {
+         this.exhaustFrame++;
+         this.frame = 0;
+         if (this.exhaustFrame > 32) this.exhaustFrame = 1;
+      }
+      this.game.context.restore();
+   }
+
    drawShields() {
+      // ### Draw shield state ### //
       this.game.context.save();
       this.game.context.fillStyle = '#2E86C1';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
@@ -151,6 +172,7 @@ class Player {
    }
 
    drawWings() {
+      // ### Draw wingmen state ### //
       this.game.context.save();
       this.game.context.fillStyle = '#AF601A';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);

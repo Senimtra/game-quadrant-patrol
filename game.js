@@ -69,6 +69,7 @@ class Game {
       if (this.powerUpSpawned === true) {
          this.powerUp.drawPowerUp();
       }
+      this.player.drawExhaust();
       this.executeControls();
    }
 
@@ -81,6 +82,7 @@ class Game {
    runLogic() {
       // ### Run player logic ###
       this.player.runLogic();
+      this.player.frame++;
       // ### Check rock spawn interval ###
       if (Date.now() - this.lastRockSpawn > this.rockSpawnInterval) {
          this.lastRockSpawn = Date.now();
