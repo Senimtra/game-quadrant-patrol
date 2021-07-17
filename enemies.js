@@ -214,7 +214,7 @@ class BounceUp extends PowerUp {
          if ((this.x < 0 || this.x + this.width > this.game.canvas.width) && (Date.now() - this.timeSpawned < 10000)) {
             this.vx *= -1;
          }
-         if (this.checkIntersection(game.player) && Date.now() - this.timeSpawned < 10000) {
+         if (game.player.checkIntersection(this) && Date.now() - this.timeSpawned < 10000) {
             this.vy *= -1;
          }
          this.game.enemies.forEach((enemy, index) => {

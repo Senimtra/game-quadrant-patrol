@@ -207,7 +207,7 @@ class Game {
    checkCollisions() {
       // ### Check for player collisions with rocks ###
       this.rocks.forEach((rock, index) => {
-         if (rock.checkIntersection(this.player)) {
+         if (this.player.checkIntersection(rock)) {
             this.rocks.splice(index, 1);
             // check if shields are up
             if (!this.player.shieldsUp) {
@@ -240,7 +240,7 @@ class Game {
       });
       // ### Check for player collisions with enemies ###
       this.enemies.forEach((enemy, index) => {
-         if (enemy.checkIntersection(this.player)) {
+         if (this.player.checkIntersection(enemy)) {
             this.enemies.splice(index, 1);
             // check if shields are up
             if (!this.player.shieldsUp) {
@@ -296,7 +296,7 @@ class Game {
       });
       // ### Check player for enemy projectile hits ###
       this.enemyProjectiles.forEach((shot, index) => {
-         if (shot.checkIntersection(this.player)) {
+         if (this.player.checkIntersection(shot)) {
             if (this.player.shieldsUp) {
                // push reflected shots from player to enemy array
                this.enemyProjectiles[index].reflect = true;
@@ -310,7 +310,7 @@ class Game {
          }
       });
       // ### Check player for powerup hits ###
-      if ((this.powerUpSpawned === true) && (this.powerUp.checkIntersection(this.player))) {
+      if ((this.powerUpSpawned === true) && (this.player.checkIntersection(this.powerUp))) {
          this.powerUpSpawned = false;
          switch (this.powerUp.bonus) {
             case 'shield':

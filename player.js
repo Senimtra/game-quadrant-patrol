@@ -11,15 +11,40 @@ class Player {
       this.game = game;
       this.width = 60;
       this.height = 30;
-      // ### center player x-position ###
+      // top player shape
+      this.widthXT = 22;
+      this.heightXT = 36;
+      // center player x-position
       this.x = x - (this.width / 2);
       this.y = y;
-      this.health = 999;
+      this.health = 99999;
       this.shieldPower = 0;
       this.wingsPower = 0;
       this.shieldsUp = false;
       this.wingsUp = false;
       this.lives = 3;
+   }
+
+   checkIntersection(element) {
+      return (
+         // turns true if right side of element is beyond left side of player's base shape
+         element.x + element.width >= this.x &&
+         // turns true if left side of element is beyond right side of player's base shape
+         element.x <= this.x + this.width &&
+         // turns true if top edge of element is above bottom edge of player's base shape
+         element.y <= this.y + this.height &&
+         // turns true if bottom side of element is beyond top side of player's base shape
+         element.y + element.height >= this.y
+      ) || (
+            // turns true if right side of element is beyond left side of player's cockpit shape
+            element.x + element.width >= this.x + 19 &&
+            // turns true if left side of element is beyond right side of player's cockpit shape
+            element.x <= this.x + 19 + this.widthXT &&
+            // turns true if top edge of element is above bottom edge of player's cockpit shape
+            element.y <= this.y - 36 + this.heightXT &&
+            // turns true if bottom side of element is beyond top side of player's cockpit shape
+            element.y + element.height >= this.y - 36
+         );
    }
 
    moveLeft() {
@@ -83,8 +108,8 @@ class Player {
       this.game.context.save();
       this.game.context.fillStyle = '#148F77';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.fillRect(this.x + 19, this.y - 36, this.widthXT, this.heightXT);
       this.game.context.drawImage(playerImage, 755, 0, 151, 151, this.x - 30, this.y - 45, 120, 80);
-      // this.game.context.drawImage(playerImage, 1029, 0, 343, 383, this.x - 1, this.y - 31, 64, 70);
       this.game.context.restore();
    }
 
