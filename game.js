@@ -190,7 +190,7 @@ class Game {
          if ((event.code === 'ArrowLeft') || (event.code === 'ArrowRight')) {
             this.player.animationRunning = false;
             this.player.animationStart = 0;
-            this.player.animation = 6;
+            // this.player.animation = 6;
          }
       });
    }
@@ -204,7 +204,6 @@ class Game {
          if (this.player.animationRunning === false) {
             this.player.animationRunning = true;
             this.player.animationStart = Date.now();
-            console.log('Roll left: ' + this.player.animationRunning, this.player.animationStart);
          }
       }
       if (this.controls['ArrowRight'].pressed === true) {
@@ -213,7 +212,6 @@ class Game {
          if (this.player.animationRunning === false) {
             this.player.animationRunning = true;
             this.player.animationStart = Date.now();
-            console.log('Roll right: ' + this.player.animationRunning, this.player.animationStart);
          }
       }
       // if (this.controls['Space'].pressed === true) this.player.fireProjectile();
