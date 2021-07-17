@@ -53,7 +53,7 @@ class Player {
    moveLeft() {
       this.x -= 3.5;
       // ### player model rolls left ###
-      if (((Date.now() - this.animationStart) > 70) && this.animationStart !== 0) {
+      if (((Date.now() - this.animationStart) > 60) && this.animationStart !== 0) {
          if (this.animation > 1) this.animation--;
          this.animationStart = Date.now();
       }
@@ -61,6 +61,11 @@ class Player {
 
    moveRight() {
       this.x += 3.5;
+      // ### player model rolls right ###
+      if (((Date.now() - this.animationStart) > 60) && this.animationStart !== 0) {
+         if (this.animation < 11) this.animation++;
+         this.animationStart = Date.now();
+      }
    }
 
    fireProjectile() {
