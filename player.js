@@ -14,6 +14,9 @@ class Player {
       // top player shape
       this.widthXT = 22;
       this.heightXT = 36;
+      this.animation = 6;
+      this.animationStart = 0;
+      this.animationRunning = false;
       // center player x-position
       this.x = x - (this.width / 2);
       this.y = y;
@@ -49,6 +52,11 @@ class Player {
 
    moveLeft() {
       this.x -= 3.5;
+      // ### player model rolls left ###
+      if (((Date.now() - this.animationStart) > 70) && this.animationStart !== 0) {
+         if (this.animation > 1) this.animation--;
+         this.animationStart = Date.now();
+      }
    }
 
    moveRight() {
@@ -109,7 +117,7 @@ class Player {
       this.game.context.fillStyle = '#148F77';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
       this.game.context.fillRect(this.x + 19, this.y - 36, this.widthXT, this.heightXT);
-      this.game.context.drawImage(playerImage, 755, 0, 151, 151, this.x - 30, this.y - 45, 120, 80);
+      this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x - 30, this.y - 45, 120, 80);
       this.game.context.restore();
    }
 

@@ -178,7 +178,6 @@ class Game {
             case 'Space':
                this.player.fireProjectile();
                break;
-
          }
          this.player.checkBoundaries();
       });
@@ -187,14 +186,36 @@ class Game {
          if (this.controls[event.code]) {
             this.controls[event.code].pressed = false;
          }
+         // roll back to center position
+         if ((event.code === 'ArrowLeft') || (event.code === 'ArrowRight')) {
+            this.player.animationRunning = false;
+            this.player.animationStart = 0;
+            this.player.animation = 6;
+         }
       });
    }
 
    executeControls() {
       // ### Execute key functions by keystate ###
       if (this.controls['Escape'].pressed === true) this.quitGame();
-      if (this.controls['ArrowLeft'].pressed === true) this.player.moveLeft();
-      if (this.controls['ArrowRight'].pressed === true) this.player.moveRight();
+      if (this.controls['ArrowLeft'].pressed === true) {
+         this.player.moveLeft();
+         // initialize player roll animation left
+         if (this.player.animationRunning === false) {
+            this.player.animationRunning = true;
+            this.player.animationStart = Date.now();
+            console.log('Roll left: ' + this.player.animationRunning, this.player.animationStart);
+         }
+      }
+      if (this.controls['ArrowRight'].pressed === true) {
+         this.player.moveRight();
+         // initialize player roll animation right
+         if (this.player.animationRunning === false) {
+            this.player.animationRunning = true;
+            this.player.animationStart = Date.now();
+            console.log('Roll right: ' + this.player.animationRunning, this.player.animationStart);
+         }
+      }
       // if (this.controls['Space'].pressed === true) this.player.fireProjectile();
       this.player.checkBoundaries();
    }
