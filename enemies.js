@@ -14,8 +14,10 @@ class Enemy {
       this.x = x;
       this.y = y;
       this.moveDir = Math.random() < 0.5 ? -1 : 1;
-      this.width = 70;
-      this.height = 40;
+      this.width = 60;
+      this.height = 36;
+      this.widthXT = 16;
+      this.heightXT = 20;
       this.color = Math.floor(Math.random() * 5);
       this.health = 100;
       this.lastEnemyShotTimestamp = Date.now();
@@ -43,22 +45,32 @@ class Enemy {
 
    checkIntersection(element) {
       return (
-         // turns true if right side of element is beyond left side of enemy
+         // turns true if right side of element is beyond left side of enemy base shape
          element.x + element.width >= this.x &&
-         // turns true if left side of element is beyond right side of enemy
+         // turns true if left side of element is beyond right side of enemy base shape
          element.x <= this.x + this.width &&
-         // turns true if bottom side of element is beyond top side of enemy
+         // turns true if bottom side of element is beyond top side of enemy base shape
          element.y + element.height >= this.y &&
-         // turns true if top side of element is above bottom edge of enemy
+         // turns true if top side of element is above bottom edge of enemy base shape
          element.y <= this.y + this.height
-      );
+      ) || (
+            // turns true if right side of element is beyond left side of enemy cockpit
+            element.x + element.width >= this.x + 22 &&
+            // turns true if left side of element is beyond right side of enemy cockpit
+            element.x <= this.x + 22 + this.widthXT &&
+            // turns true if bottom side of element is beyond top side of enemy cockpit
+            element.y + element.height >= this.y + 36 &&
+            // turns true if top side of element is above bottom edge of enemy cockpit
+            element.y <= this.y + 36 + this.heightXT
+         );
    }
 
    drawEnemy() {
       this.game.context.save();
       this.game.context.fillStyle = 'beige';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
-      this.game.context.drawImage(enemyImage, 1372, this.color * 383, 343, 383, this.x - 4, this.y, 78, 74);
+      this.game.context.fillRect(this.x + 22, this.y + 36, this.widthXT, this.heightXT);
+      this.game.context.drawImage(enemyImage, 1372, this.color * 383, 343, 383, this.x - 2, this.y, 64, 64);
       this.game.context.restore();
    }
 }

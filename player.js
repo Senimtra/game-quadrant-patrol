@@ -52,6 +52,24 @@ class Player {
             element.y <= this.y - 36 + this.heightXT &&
             // turns true if bottom side of element is beyond top side of player's cockpit shape
             element.y + element.height >= this.y - 36
+         ) || (
+            // turns true if right side of enemy cockpit is beyond left side of player's base shape
+            element.x + 22 + element.widthXT >= this.x &&
+            // turns true if left side of enemy cockpit is beyond right side of player's base shape
+            element.x + 22 <= this.x + this.width &&
+            // turns true if top edge of enemy cockpit is above bottom edge of player's base shape
+            element.y + 36 <= this.y + this.height &&
+            // turns true if bottom side of enemy cockpit is beyond top side of player's base shape
+            element.y + 36 + element.heightXT >= this.y
+         ) || (
+            // turns true if right side of enemy cockpit is beyond left side of player's cockpit shape
+            element.x + 22 + element.widthXT >= this.x + 19 &&
+            // turns true if left side of enemy cockpit is beyond right side of player's cockpit shape
+            element.x + 22 <= this.x + 19 + this.widthXT &&
+            // turns true if top edge of enemy cockpit is above bottom edge of player's cockpit shape
+            element.y + 36 <= this.y - 36 + this.heightXT &&
+            // turns true if bottom side of enemy cockpit is beyond top side of player's cockpit shape
+            element.y + 36 + element.heightXT >= this.y - 36
          );
    }
 

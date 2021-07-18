@@ -126,7 +126,7 @@ class Game {
 
    spawnEnemy() {
       // ### Push new enemy to array ###
-      const enemy = new Enemy(this, (Math.floor(Math.random() * (this.canvas.width - 70)) + 1), 10);
+      const enemy = new Enemy(this, (Math.floor(Math.random() * (this.canvas.width - 60)) + 1), 10);
       this.enemies.push(enemy);
    }
 
