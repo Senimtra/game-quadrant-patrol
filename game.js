@@ -125,7 +125,7 @@ class Game {
 
    spawnEnemy() {
       // ### Push new enemy to array ###
-      const enemy = new Enemy(this, (Math.floor(Math.random() * (this.canvas.width - 60)) + 1), 10);
+      const enemy = new Enemy(this, (Math.floor(Math.random() * (this.canvas.width - 60)) + 1), 4);
       this.enemies.push(enemy);
    }
 
@@ -291,19 +291,19 @@ class Game {
                      (this.enemies[index].x + 10 > this.canvas.width / 2) ? direction = -1 : direction = 1;
                      switch (Math.floor(Math.random() * 5) + 1) {
                         case 1:
-                           this.powerUp = new ShieldUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'shield');
+                           this.powerUp = new ShieldUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'shield', 1);
                            break;
                         case 2:
-                           this.powerUp = new HealthUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'health');
+                           this.powerUp = new HealthUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'health', 2);
                            break;
                         case 3:
-                           this.powerUp = new WingsUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'wings');
+                           this.powerUp = new WingsUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'wings', 4);
                            break;
                         case 4:
-                           this.powerUp = new BounceUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'bounce');
+                           this.powerUp = new BounceUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'bounce', 5);
                            break;
                         case 5:
-                           this.powerUp = new ScoreUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'score')
+                           this.powerUp = new ScoreUp(this, this.enemies[index].x + 10, this.enemies[index].y + 10, direction, 'score', 3)
                      }
                      this.powerUpSpawned = true;
                   }
@@ -439,7 +439,7 @@ class Game {
       // draw instruction
       this.context.save();
       this.context.font = '9px Arial';
-      this.context.fillText('MOVE => LEFT/RIGHT | FIRE => SPACE  |  RED: ENEMY | DARK : ROCK', 20, this.canvas.height - 40);
+      this.context.fillText('MOVE => LEFT/RIGHT | FIRE => SPACE', 20, this.canvas.height - 40);
       this.context.restore();
       // draw powerups
       this.context.save();

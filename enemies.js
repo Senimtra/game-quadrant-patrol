@@ -8,6 +8,9 @@ const enemyColors = ['blue', 'green', 'orange', 'cyan', 'red'];
 const enemyImage = new Image();
 enemyImage.src = './images/ships_enemies.png';
 
+const powerUpsImage = new Image();
+powerUpsImage.src = './images/power_ups.png';
+
 class Enemy {
    constructor(game, x, y) {
       this.game = game;
@@ -19,7 +22,7 @@ class Enemy {
       this.widthXT = 16;
       this.heightXT = 20;
       this.frame = 0;
-      this.frameStep = 5;
+      this.frameStep = 7;
       this.animationFrame = this.moveDir < 0 ? 9 : 1;
       this.color = Math.floor(Math.random() * 5);
       this.health = 100;
@@ -50,10 +53,10 @@ class Enemy {
    animation() {
       // ### Enemy rolls left/right during direction change ###
       if (this.frame > this.frameStep) {
-         if (this.x > this.game.canvas.width - 115 && this.animationFrame < 9) {
+         if (this.x > this.game.canvas.width - 120 && this.animationFrame < 9) {
             this.animationFrame++;
             this.frame = 0;
-         } else if (this.x < 55 && this.animationFrame > 1) {
+         } else if (this.x < 60 && this.animationFrame > 1) {
             this.animationFrame--;
             this.frame = 0;
          }
@@ -172,21 +175,22 @@ class PowerUp {
       this.y = y;
       this.vx = 2.25 * this.direction;
       this.vy = -3;
-      this.width = 30;
-      this.height = 30;
+      this.width = 50;
+      this.height = 50;
       this.gravity = 0.15;
    }
 
    drawPowerUp() {
       this.game.context.save();
-      this.game.context.fillStyle = `${this.color}`;
-      this.game.context.fillRect(this.x, this.y, this.width, this.height);
-      if (this.bounced === true && (Date.now() - this.timeSpawned < 9000)) {
-         this.game.context.globalCompositeOperation = 'source-over'
-         this.game.context.fillStyle = 'white';
-         this.game.context.font = '24px Arial';
-         this.game.context.fillText(`${10 - ((Date.now() - this.timeSpawned) / 1000).toFixed()}`, this.x + 8, this.y + this.height - 7);
-      }
+      // this.game.context.fillStyle = `${this.color}`;
+      // this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.drawImage(powerUpsImage, 0, this.colorRow * 52 - 52, 52, 52, this.x, this.y, 50, 50);
+      // if (this.bounced === true && (Date.now() - this.timeSpawned < 9000)) {
+      //    this.game.context.globalCompositeOperation = 'source-over'
+      //    this.game.context.fillStyle = 'white';
+      //    this.game.context.font = '24px Arial';
+      //    this.game.context.fillText(`${10 - ((Date.now() - this.timeSpawned) / 1000).toFixed()}`, this.x + 8, this.y + this.height - 7);
+      // }
       this.game.context.restore();
    }
 
@@ -210,30 +214,30 @@ class PowerUp {
    }
 }
 class HealthUp extends PowerUp {
-   constructor(game, x, y, direction, bonus) {
-      super(game, x, y, direction, bonus)
-      this.color = 'green';
+   constructor(game, x, y, direction, bonus, colorRow) {
+      super(game, x, y, direction, bonus, colorRow)
+      this.colorRow = colorRow;
    }
 }
 
 class ShieldUp extends PowerUp {
-   constructor(game, x, y, direction, bonus) {
-      super(game, x, y, direction, bonus)
-      this.color = 'blue';
+   constructor(game, x, y, direction, bonus, colorRow) {
+      super(game, x, y, direction, bonus, colorRow)
+      this.colorRow = colorRow;
    }
 }
 
 class WingsUp extends PowerUp {
-   constructor(game, x, y, direction, bonus) {
-      super(game, x, y, direction, bonus)
-      this.color = 'cyan';
+   constructor(game, x, y, direction, bonus, colorRow) {
+      super(game, x, y, direction, bonus, colorRow)
+      this.colorRow = colorRow;
    }
 }
 
 class BounceUp extends PowerUp {
-   constructor(game, x, y, direction, bonus) {
-      super(game, x, y, direction, bonus)
-      this.color = 'darkred';
+   constructor(game, x, y, direction, bonus, colorRow) {
+      super(game, x, y, direction, bonus, colorRow)
+      this.colorRow = colorRow;
       this.bounced = false;
       this.timeSpawned = Date.now();
    }
@@ -275,8 +279,8 @@ class BounceUp extends PowerUp {
 }
 
 class ScoreUp extends PowerUp {
-   constructor(game, x, y, direction, bonus) {
-      super(game, x, y, direction, bonus)
-      this.color = 'orange'
+   constructor(game, x, y, direction, bonus, colorRow) {
+      super(game, x, y, direction, bonus, colorRow)
+      this.colorRow = colorRow;
    }
 }
