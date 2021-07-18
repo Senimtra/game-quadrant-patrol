@@ -18,6 +18,9 @@ class Enemy {
       this.height = 36;
       this.widthXT = 16;
       this.heightXT = 20;
+      this.frame = 0;
+      this.frameStep = 5;
+      this.animationFrame = this.moveDir < 0 ? 9 : 1;
       this.color = Math.floor(Math.random() * 5);
       this.health = 100;
       this.lastEnemyShotTimestamp = Date.now();
@@ -27,15 +30,34 @@ class Enemy {
    runLogic() {
       this.y += 0.5;
       this.x += 2 * this.moveDir;
-      if (this.x <= 0) this.moveDir *= -1;
-      if (this.x >= this.game.canvas.width - this.width) this.moveDir *= -1;
+      if (this.x <= 0) {
+         this.moveDir *= -1;
+         this.frame = 0;
+      }
+      if (this.x >= this.game.canvas.width - this.width) {
+         this.moveDir *= -1;
+         this.frame = 0;
+      }
       // ### Check shot interval on enemy ###
       if ((Date.now() - this.lastEnemyShotTimestamp) > this.enemyShotInterval) {
          this.lastEnemyShotTimestamp = Date.now();
          this.shoot();
       }
-      // ### Switch color by health status ###
-      if (this.health === 50) this.color = '#A93226'
+      this.frame++;
+      this.animation();
+   }
+
+   animation() {
+      // ### Enemy rolls left/right during direction change ###
+      if (this.frame > this.frameStep) {
+         if (this.x > this.game.canvas.width - 115 && this.animationFrame < 9) {
+            this.animationFrame++;
+            this.frame = 0;
+         } else if (this.x < 55 && this.animationFrame > 1) {
+            this.animationFrame--;
+            this.frame = 0;
+         }
+      }
    }
 
    shoot() {
@@ -70,7 +92,7 @@ class Enemy {
       this.game.context.fillStyle = 'beige';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
       this.game.context.fillRect(this.x + 22, this.y + 36, this.widthXT, this.heightXT);
-      this.game.context.drawImage(enemyImage, 1372, this.color * 383, 343, 383, this.x - 2, this.y, 64, 64);
+      this.game.context.drawImage(enemyImage, 343 * this.animationFrame - 343, this.color * 383, 343, 383, this.x - 2, this.y, 64, 64);
       this.game.context.restore();
    }
 }
