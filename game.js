@@ -227,13 +227,13 @@ class Game {
    checkCollisions() {
       // ### Check for player collisions with rocks ###
       this.rocks.forEach((rock, index) => {
-         if (this.player.checkIntersection(rock)) {
+         if (this.player.shieldsUp && this.player.checkIntersectionShield(rock)) {
             this.rocks.splice(index, 1);
-            // check if shields are up
-            if (!this.player.shieldsUp) {
-               this.player.health -= 10;
-               this.lose();
-            }
+            this.score += 50;
+         } else if (this.player.checkIntersection(rock)) {
+            this.rocks.splice(index, 1);
+            this.player.health -= 10;
+            this.lose();
             this.score += 50;
          }
          // ### Check for player projectiles ###
@@ -260,13 +260,12 @@ class Game {
       });
       // ### Check for player collisions with enemies ###
       this.enemies.forEach((enemy, index) => {
-         if (this.player.checkIntersection(enemy)) {
+         if (this.player.shieldsUp && this.player.checkIntersection(enemy)) {
             this.enemies.splice(index, 1);
-            // check if shields are up
-            if (!this.player.shieldsUp) {
-               this.player.health -= 10;
-               this.lose();
-            }
+            this.score += 100;
+         } else if (this.player.checkIntersection(enemy)) {
+            this.player.health -= 10;
+            this.lose();
             this.score += 100;
          }
          // ### Check for player projectiles ###
@@ -314,18 +313,17 @@ class Game {
             }
          });
       });
+
       // ### Check player for enemy projectile hits ###
       this.enemyProjectiles.forEach((shot, index) => {
-         if (this.player.checkIntersection(shot)) {
-            if (this.player.shieldsUp) {
-               // push reflected shots from player to enemy array
-               this.enemyProjectiles[index].reflect = true;
-               this.playerProjectiles.push(this.enemyProjectiles[index]);
-            } else {
-               this.player.health -= 10;
-               this.lose();
-            }
-            // remove shot if hit unprotected
+         if (this.player.shieldsUp && this.player.checkIntersectionShield(shot)) {
+            // push reflected shots from player to enemy array
+            this.enemyProjectiles[index].reflect = true;
+            this.playerProjectiles.push(this.enemyProjectiles[index]);
+            this.enemyProjectiles.splice(index, 1);
+         } else if (this.player.checkIntersection(shot)) {
+            this.player.health -= 10;
+            this.lose();
             this.enemyProjectiles.splice(index, 1);
          }
       });

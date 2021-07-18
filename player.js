@@ -37,6 +37,7 @@ class Player {
    }
 
    checkIntersection(element) {
+      // ### Checking up to two shapes (enemy) against two shapes (player) ###
       return (
          // turns true if right side of element is beyond left side of player's base shape
          element.x + element.width >= this.x &&
@@ -74,6 +75,19 @@ class Player {
             // turns true if bottom side of enemy cockpit is beyond top side of player's cockpit shape
             element.y + 36 + element.heightXT >= this.y - 36
          );
+   }
+
+   checkIntersectionShield(element) {
+      // ### Circle collision check player shield aura ###
+      var distX = Math.abs(this.x + 55 - element.x - element.width / 2);
+      var distY = Math.abs(this.y + 24 - element.y - element.height / 2);
+      if (distX > (element.width / 2 + 56)) { return false; }
+      if (distY > (element.height / 2 + 56)) { return false; }
+      if (distX <= (element.width / 2)) { return true; }
+      if (distY <= (element.height / 2)) { return true; }
+      var dx = distX - element.width / 2;
+      var dy = distY - element.height / 2;
+      return (dx * dx + dy * dy <= (56 * 56));
    }
 
    moveLeft() {
