@@ -9,6 +9,9 @@ playerImage.src = './images/ship_player.png';
 const exhaustImage = new Image();
 exhaustImage.src = './images/ship_player_exhaust.png'
 
+const shieldImage = new Image();
+shieldImage.src = './images/shield.png'
+
 class Player {
    constructor(game, x, y) {
       this.game = game;
@@ -185,6 +188,16 @@ class Player {
       this.game.context.save();
       this.game.context.fillStyle = '#148F77';
       this.game.context.fillRect(this.x + 25, this.y + 25, this.width - 50, this.height - 25);
+      // draw player ship
+      this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x - 5, this.y - 20, 120, 80);
+      // draw player ship exhaust
+      this.game.context.drawImage(exhaustImage, (128 * this.exhaustFrame - 128) - ((Math.ceil(this.exhaustFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.exhaustFrame - 1) / 8) * 128), 128, 128, this.x + 30.5, this.y + 50, 50, 50);
+      // draw player shield
+      this.game.context.drawImage(shieldImage, this.x - 5, this.y - 36, 120, 120);
+      this.game.context.beginPath();
+      this.game.context.stokeStyle = 'white';
+      this.game.context.arc(this.x + 55, this.y + 24, 56, 0, 2 * Math.PI);
+      this.game.context.stroke();
       this.game.context.restore();
    }
 
@@ -232,7 +245,7 @@ class Player {
       // ### Drain shieldPower ###
       if (this.shieldsUp && this.shieldPower > 0) {
          setTimeout(() => {
-            this.shieldPower -= 1;
+            // this.shieldPower -= 1;
          }, 10);
       }
       // ### Remove shield at no power ###
@@ -246,7 +259,7 @@ class Player {
       // ### Drain wingsPower ###
       if (this.wingsUp && this.wingsPower > 0) {
          setTimeout(() => {
-            // this.wingsPower -= 1;
+            this.wingsPower -= 1;
          }, 10);
       }
       // ### Remove wings at no power ###
