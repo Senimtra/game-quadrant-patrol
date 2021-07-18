@@ -161,7 +161,7 @@ class Player {
       // ### Draw player ship exhaust ###
       // this.game.context.fillStyle = 'white';
       // this.game.context.fillText(this.exhaustFrame, this.x, this.y + 50);
-      this.game.context.drawImage(exhaustImage, (128 * this.exhaustFrame - 128) - ((Math.ceil(this.exhaustFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.exhaustFrame - 1) / 8) * 128), 128, 128, this.x + 5, this.y + 25, 50, 50);
+      this.game.context.drawImage(exhaustImage, (128 * this.exhaustFrame - 128) - ((Math.ceil(this.exhaustFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.exhaustFrame - 1) / 8) * 128), 128, 128, this.x + 5.5, this.y + 25, 50, 50);
       this.game.context.restore();
    }
 
@@ -191,13 +191,23 @@ class Player {
    drawWings() {
       // ### Draw wingmen state ### //
       this.game.context.save();
-      this.game.context.fillStyle = '#AF601A';
-      this.game.context.fillRect(this.x, this.y, this.width, this.height);
-      this.game.context.globalCompositeOperation = 'destination-out';
-      this.game.context.fillRect(this.x + 21, this.y, 4, this.height);
-      this.game.context.fillRect(this.x + this.width - 25, this.y, 4, this.height);
-      this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x - 30, this.y - 45, 120, 80);
+      // this.game.context.fillStyle = '#AF601A';
+      // this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      // this.game.context.fillRect(this.x + 21, this.y, 4, this.height);
+      // this.game.context.fillRect(this.x + this.width - 25, this.y, 4, this.height);
+      // draw player ship
+      this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x - 5, this.y - 45, 120, 80);
+      // draw player ship exhaust
+      this.game.context.drawImage(exhaustImage, (128 * this.exhaustFrame - 128) - ((Math.ceil(this.exhaustFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.exhaustFrame - 1) / 8) * 128), 128, 128, this.x + 30.5, this.y + 25, 50, 50);
+      // draw left wingman
+      this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x - 26, this.y - 18, 75, 50);
+      // draw left wingman exhaust
+      this.game.context.drawImage(exhaustImage, (128 * this.exhaustFrame - 128) - ((Math.ceil(this.exhaustFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.exhaustFrame - 1) / 8) * 128), 128, 128, this.x - 3, this.y + 27, 30, 30);
+      // draw right wingman
+      this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x + 61, this.y - 18, 75, 50);
       this.game.context.restore();
+      // draw left wingman exhaust
+      this.game.context.drawImage(exhaustImage, (128 * this.exhaustFrame - 128) - ((Math.ceil(this.exhaustFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.exhaustFrame - 1) / 8) * 128), 128, 128, this.x + 84, this.y + 27, 30, 30);
    }
 
    checkBoundaries() {
