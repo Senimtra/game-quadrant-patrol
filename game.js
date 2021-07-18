@@ -28,7 +28,7 @@ class Game {
       this.lastRockSpawn = Date.now();
       this.lastEnemySpawn = Date.now();
       this.powerUpProbability = Math.random() < 1;
-      this.rockSpawnInterval = 750;
+      this.rockSpawnInterval = 75000;
       this.enemySpawnInterval = 2000;
       this.clock();
       this.enableControls();
@@ -126,7 +126,7 @@ class Game {
 
    spawnEnemy() {
       // ### Push new enemy to array ###
-      const enemy = new Enemy(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 10);
+      const enemy = new Enemy(this, (Math.floor(Math.random() * (this.canvas.width - 70)) + 1), 10);
       this.enemies.push(enemy);
    }
 
@@ -453,11 +453,11 @@ class Game {
       this.context.fillText('Wings', 455, this.canvas.height - 25);
       this.context.fillText('Shield', 455, this.canvas.height - 15);
       this.context.fillText('Health', 455, this.canvas.height - 5);
-      this.context.fillStyle = 'yellow';
+      this.context.fillStyle = 'orange';
       this.context.fillRect(445, this.canvas.height - 52, 7, 7)
       this.context.fillStyle = 'red';
       this.context.fillRect(445, this.canvas.height - 42, 7, 7)
-      this.context.fillStyle = 'orange';
+      this.context.fillStyle = 'cyan';
       this.context.fillRect(445, this.canvas.height - 32, 7, 7)
       this.context.fillStyle = 'blue';
       this.context.fillRect(445, this.canvas.height - 22, 7, 7)

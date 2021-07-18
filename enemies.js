@@ -3,15 +3,20 @@
 ## JS Canvas Game - Quadrant Patrol ##
 ###################################### */
 
+const enemyColors = ['blue', 'green', 'orange', 'cyan', 'red'];
+
+const enemyImage = new Image();
+enemyImage.src = './images/ships_enemies.png';
+
 class Enemy {
    constructor(game, x, y) {
       this.game = game;
       this.x = x;
       this.y = y;
       this.moveDir = Math.random() < 0.5 ? -1 : 1;
-      this.width = 50;
-      this.height = 50;
-      this.color = '#7B241C'
+      this.width = 70;
+      this.height = 40;
+      this.color = Math.floor(Math.random() * 5);
       this.health = 100;
       this.lastEnemyShotTimestamp = Date.now();
       this.enemyShotInterval = 500;
@@ -51,8 +56,9 @@ class Enemy {
 
    drawEnemy() {
       this.game.context.save();
-      this.game.context.fillStyle = `${this.color}`;
+      this.game.context.fillStyle = 'beige';
       this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.drawImage(enemyImage, 1372, this.color * 383, 343, 383, this.x - 4, this.y, 78, 74);
       this.game.context.restore();
    }
 }
@@ -186,7 +192,7 @@ class ShieldUp extends PowerUp {
 class WingsUp extends PowerUp {
    constructor(game, x, y, direction, bonus) {
       super(game, x, y, direction, bonus)
-      this.color = 'orange';
+      this.color = 'cyan';
    }
 }
 
@@ -237,6 +243,6 @@ class BounceUp extends PowerUp {
 class ScoreUp extends PowerUp {
    constructor(game, x, y, direction, bonus) {
       super(game, x, y, direction, bonus)
-      this.color = 'yellow'
+      this.color = 'orange'
    }
 }
