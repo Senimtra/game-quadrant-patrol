@@ -28,7 +28,7 @@ class Game {
       this.lastRockSpawn = Date.now();
       this.lastEnemySpawn = Date.now();
       this.powerUpProbability = Math.random() < 1;
-      this.rockSpawnInterval = 75000;
+      this.rockSpawnInterval = 750;
       this.enemySpawnInterval = 2000;
       this.clock();
       this.enableControls();
@@ -69,7 +69,6 @@ class Game {
       if (this.powerUpSpawned === true) {
          this.powerUp.drawPowerUp();
       }
-      this.player.drawExhaust();
       this.executeControls();
    }
 

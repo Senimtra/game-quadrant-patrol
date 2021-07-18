@@ -154,25 +154,24 @@ class Player {
    drawPlayer() {
       // ### Draw player ship ###
       this.game.context.save();
-      this.game.context.fillStyle = '#148F77';
-      this.game.context.fillRect(this.x, this.y, this.width, this.height);
-      this.game.context.fillRect(this.x + 19, this.y - 36, this.widthXT, this.heightXT);
+      // this.game.context.fillStyle = '#148F77';
+      // this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      // this.game.context.fillRect(this.x + 19, this.y - 36, this.widthXT, this.heightXT);
       this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x - 30, this.y - 45, 120, 80);
+      // ### Draw player ship exhaust ###
+      // this.game.context.fillStyle = 'white';
+      // this.game.context.fillText(this.exhaustFrame, this.x, this.y + 50);
+      this.game.context.drawImage(exhaustImage, (128 * this.exhaustFrame - 128) - ((Math.ceil(this.exhaustFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.exhaustFrame - 1) / 8) * 128), 128, 128, this.x + 5, this.y + 25, 50, 50);
       this.game.context.restore();
    }
 
-   drawExhaust() {
-      // ### Draw player ship exhaust ###
-      this.game.context.save();
-      this.game.context.fillStyle = 'white';
-      this.game.context.fillText(this.exhaustFrame, this.x, this.y + 50);
-      this.game.context.drawImage(exhaustImage, (128 * this.exhaustFrame - 128) - ((Math.ceil(this.exhaustFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.exhaustFrame - 1) / 8) * 128), 128, 128, this.x + 5, this.y + 25, 50, 50);
-      if (this.frame > 10) {
+   animateExhaust() {
+      // ### Animate player ship exhaust ###
+      if (this.frame > 5) {
          this.exhaustFrame++;
          this.frame = 0;
          if (this.exhaustFrame > 32) this.exhaustFrame = 1;
       }
-      this.game.context.restore();
    }
 
    drawShields() {
@@ -197,6 +196,7 @@ class Player {
       this.game.context.globalCompositeOperation = 'destination-out';
       this.game.context.fillRect(this.x + 21, this.y, 4, this.height);
       this.game.context.fillRect(this.x + this.width - 25, this.y, 4, this.height);
+      this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x - 30, this.y - 45, 120, 80);
       this.game.context.restore();
    }
 
@@ -236,7 +236,7 @@ class Player {
       // ### Drain wingsPower ###
       if (this.wingsUp && this.wingsPower > 0) {
          setTimeout(() => {
-            this.wingsPower -= 1;
+            // this.wingsPower -= 1;
          }, 10);
       }
       // ### Remove wings at no power ###
@@ -249,6 +249,7 @@ class Player {
       if ((game.controls['ArrowLeft'].pressed === false) && (game.controls['ArrowRight'].pressed === false) && this.animation !== 6) {
          this.rollBack();
       }
+      this.animateExhaust();
    }
 
    drawLives() {

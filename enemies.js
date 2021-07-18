@@ -89,9 +89,9 @@ class Enemy {
 
    drawEnemy() {
       this.game.context.save();
-      this.game.context.fillStyle = 'beige';
-      this.game.context.fillRect(this.x, this.y, this.width, this.height);
-      this.game.context.fillRect(this.x + 22, this.y + 36, this.widthXT, this.heightXT);
+      // this.game.context.fillStyle = 'beige';
+      // this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      // this.game.context.fillRect(this.x + 22, this.y + 36, this.widthXT, this.heightXT);
       this.game.context.drawImage(enemyImage, 343 * this.animationFrame - 343, this.color * 383, 343, 383, this.x - 2, this.y, 64, 64);
       this.game.context.restore();
    }
