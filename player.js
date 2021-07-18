@@ -169,15 +169,10 @@ class Player {
    }
 
    drawPlayer() {
-      // ### Draw player ship ###
       this.game.context.save();
-      // this.game.context.fillStyle = '#148F77';
-      // this.game.context.fillRect(this.x, this.y, this.width, this.height);
-      // this.game.context.fillRect(this.x + 19, this.y - 36, this.widthXT, this.heightXT);
+      // ### Draw player ship ###
       this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x - 30, this.y - 45, 120, 80);
       // ### Draw player ship exhaust ###
-      // this.game.context.fillStyle = 'white';
-      // this.game.context.fillText(this.exhaustFrame, this.x, this.y + 50);
       this.game.context.drawImage(exhaustImage, (128 * this.exhaustFrame - 128) - ((Math.ceil(this.exhaustFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.exhaustFrame - 1) / 8) * 128), 128, 128, this.x + 5.5, this.y + 25, 50, 50);
       this.game.context.restore();
    }
@@ -194,14 +189,6 @@ class Player {
    drawShields() {
       // ### Draw shield state ### //
       this.game.context.save();
-      this.game.context.fillStyle = '#2E86C1';
-      this.game.context.fillRect(this.x, this.y, this.width, this.height);
-      this.game.context.globalCompositeOperation = 'destination-out';
-      this.game.context.fillRect(this.x + 10, this.y + 10, this.width - 20, this.height - 10);
-      this.game.context.restore();
-      this.game.context.save();
-      this.game.context.fillStyle = '#148F77';
-      this.game.context.fillRect(this.x + 25, this.y + 25, this.width - 50, this.height - 25);
       // draw player ship
       this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x - 5, this.y - 20, 120, 80);
       // draw player ship exhaust
@@ -210,7 +197,7 @@ class Player {
       this.game.context.drawImage(shieldImage, this.x - 5, this.y - 36, 120, 120);
       this.game.context.beginPath();
       this.game.context.stokeStyle = 'white';
-      this.game.context.arc(this.x + 55, this.y + 24, 56, 0, 2 * Math.PI);
+      // this.game.context.arc(this.x + 55, this.y + 24, 56, 0, 2 * Math.PI);
       this.game.context.stroke();
       this.game.context.restore();
    }
@@ -218,10 +205,6 @@ class Player {
    drawWings() {
       // ### Draw wingmen state ### //
       this.game.context.save();
-      // this.game.context.fillStyle = '#AF601A';
-      // this.game.context.fillRect(this.x, this.y, this.width, this.height);
-      // this.game.context.fillRect(this.x + 21, this.y, 4, this.height);
-      // this.game.context.fillRect(this.x + this.width - 25, this.y, 4, this.height);
       // draw player ship
       this.game.context.drawImage(playerImage, (this.animation - 1) * 151, 0, 151, 151, this.x - 5, this.y - 45, 120, 80);
       // draw player ship exhaust

@@ -230,7 +230,7 @@ class Game {
          if (this.player.shieldsUp && this.player.checkIntersectionShield(rock)) {
             this.rocks.splice(index, 1);
             this.score += 50;
-         } else if (this.player.checkIntersection(rock)) {
+         } else if (!this.player.shieldsUp && this.player.checkIntersection(rock)) {
             this.rocks.splice(index, 1);
             this.player.health -= 10;
             this.lose();
@@ -260,10 +260,11 @@ class Game {
       });
       // ### Check for player collisions with enemies ###
       this.enemies.forEach((enemy, index) => {
-         if (this.player.shieldsUp && this.player.checkIntersection(enemy)) {
+         if (this.player.shieldsUp && this.player.checkIntersectionShield(enemy)) {
             this.enemies.splice(index, 1);
             this.score += 100;
-         } else if (this.player.checkIntersection(enemy)) {
+         } else if (!this.player.shieldsUp && this.player.checkIntersection(enemy)) {
+            this.enemies.splice(index, 1);
             this.player.health -= 10;
             this.lose();
             this.score += 100;
@@ -313,7 +314,6 @@ class Game {
             }
          });
       });
-
       // ### Check player for enemy projectile hits ###
       this.enemyProjectiles.forEach((shot, index) => {
          if (this.player.shieldsUp && this.player.checkIntersectionShield(shot)) {
@@ -321,7 +321,7 @@ class Game {
             this.enemyProjectiles[index].reflect = true;
             this.playerProjectiles.push(this.enemyProjectiles[index]);
             this.enemyProjectiles.splice(index, 1);
-         } else if (this.player.checkIntersection(shot)) {
+         } else if (!this.player.shieldsUp && this.player.checkIntersection(shot)) {
             this.player.health -= 10;
             this.lose();
             this.enemyProjectiles.splice(index, 1);
