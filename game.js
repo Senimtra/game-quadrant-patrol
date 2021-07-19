@@ -3,6 +3,10 @@
 ## JS Canvas Game - Quadrant Patrol ##
 ###################################### */
 
+const guiGameFrame = new Image();
+
+guiGameFrame.src = './images/gui_game_frame.png';
+
 class Game {
    constructor(canvas, canvasBg) {
       this.canvas = canvas;
@@ -408,20 +412,10 @@ class Game {
       backgroundCanvasElement.style.display = 'none';
    }
 
+   // ### Draw UI elements ###
    drawUI() {
-      // ### Draw UI elements ###
-
-
-
-      // this.context.save();
-      // this.context.fillStyle = '#6C3483';
-      // this.context.fillRect(0, 0, this.canvas.width, 60);
-      // this.context.fillRect(0, this.canvas.height - 60, this.canvas.width, 60);
-      // this.context.restore();
-
-
-
-
+      // draw gui game frame
+      this.context.drawImage(guiGameFrame, 0, 0);
       // draw the current fps
       this.context.save();
       this.context.textAlign = 'right';
