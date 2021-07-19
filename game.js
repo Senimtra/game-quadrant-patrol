@@ -410,22 +410,29 @@ class Game {
 
    drawUI() {
       // ### Draw UI elements ###
-      this.context.save();
-      this.context.fillStyle = '#6C3483';
-      this.context.fillRect(0, 0, this.canvas.width, 60);
-      this.context.fillRect(0, this.canvas.height - 60, this.canvas.width, 60);
-      this.context.restore();
+
+
+
+      // this.context.save();
+      // this.context.fillStyle = '#6C3483';
+      // this.context.fillRect(0, 0, this.canvas.width, 60);
+      // this.context.fillRect(0, this.canvas.height - 60, this.canvas.width, 60);
+      // this.context.restore();
+
+
+
+
       // draw the current fps
       this.context.save();
       this.context.textAlign = 'right';
-      this.context.font = '12px Arial';
+      this.context.font = '12px spaceMission';
       this.context.fillText(`FPS: ${this.fps}`, this.canvas.width - 20, 19);
       this.context.restore();
-      this.context.font = '45px Arial';
+      this.context.font = '45px spaceMission';
       // draw the game logo
       this.context.strokeText('Quadrant Patrol', 8, 44);
       // draw player health
-      this.context.font = '18px Arial';
+      this.context.font = '18px spaceMission';
       this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 12);
       // draw player score
       this.context.fillText(`S: ${Math.round(this.player.shieldPower / 60)} W: ${Math.round(this.player.wingsPower / 60)} `, 150, this.canvas.height - 12);
@@ -438,12 +445,12 @@ class Game {
       this.context.restore();
       // draw instruction
       this.context.save();
-      this.context.font = '9px Arial';
+      this.context.font = '9px spaceMission';
       this.context.fillText('MOVE => LEFT/RIGHT | FIRE => SPACE', 20, this.canvas.height - 40);
       this.context.restore();
       // draw powerups
       this.context.save();
-      this.context.font = '9px Arial';
+      this.context.font = '9px spaceMission';
       this.context.textAlign = 'left';
       this.context.fillText('Score', 455, this.canvas.height - 45);
       this.context.fillText('Bounce', 455, this.canvas.height - 35);

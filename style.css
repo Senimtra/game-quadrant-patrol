@@ -3,8 +3,14 @@
 ## JS Canvas Game - Quadrant Patrol ##
 ###################################### */
 
+@font-face {
+   font-family: spaceMission;
+   src: url('./fonts/SpaceMission-rgyw9.otf');
+}
+
 * {
    box-sizing: border-box;
+   font-family: spaceMission;
 }
 
 body {

@@ -3,27 +3,38 @@ so to the best of its knowledge and belief, using professional diligence:
 
 SEAMLESS BACKGROUND
 https://screamingbrainstudios.itch.io/seamless-space-backgrounds
+Adaption: clipped to fit canvas
 
 ASTEROIDS
 https://www.pngegg.com/en/png-nzbum
+Adaption: second (darker) set of rocks
 
 PLAYER SPACESHIP
 https://opengameart.org/content/animated-fighter-spaceship
 author's blog => http://millionthvector.blogspot.de
+Adaption: resized, made into a spritesheet
 
 PLAYER SPACESHIP EXHAUST
 https://opengameart.org/content/explosion-effects-and-more
 author: Soluna Software
+Adaption: turned 180deg to simulate exhaust
 
 ENEMY SPACESHIPS
 https://opengameart.org/content/animated-red-ship
 author's blog => http://millionthvector.blogspot.de
+Adaption: recolored, made into a spritesheet
 
 PLAYER SHIELD AURA
 https://www.pngwing.com/en/free-png-zwjru
+Adaption: nothing
 
 POWER UPS
 https://opengameart.org/content/rotating-gems-for-match3
+Adaption: recolored, made into new spritesheet
+
+USER INTERFACE
+https://opengameart.org/content/space-shooter-game-user-interface
+
 
 
 
