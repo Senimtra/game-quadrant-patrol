@@ -28,7 +28,7 @@ class Player {
       // center player x-position
       this.x = x - (this.width / 2);
       this.y = y;
-      this.health = 999200;
+      this.health = 99999;
       this.shieldPower = 0;
       this.wingsPower = 0;
       this.shieldsUp = false;
@@ -273,11 +273,9 @@ class Player {
    }
 
    drawLives() {
-      let livesUi = '';
       for (let i = 0; i < this.lives; i++) {
-         livesUi += ' #';
+         this.game.context.drawImage(playerImage, 755, 0, 151, 151, 435 - i * 34, 14, 48, 32);
       }
-      return livesUi;
    }
 }
 

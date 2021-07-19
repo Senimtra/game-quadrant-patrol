@@ -402,7 +402,6 @@ class Game {
    drawUI() {
       // draw game frame
       this.context.drawImage(uiGameFrame, 0, 0);
-
       // draw player score
       this.context.save();
       this.context.fillStyle = 'cyan';
@@ -411,13 +410,11 @@ class Game {
       this.context.fillStyle = 'black';
       this.context.lineWidth = 2;
       this.context.strokeText(`SCORE: ${this.score}`, 30, 42);
-
       // draw player lives
-      this.context.textAlign = 'right';
-      this.context.fillText(`Lives ${this.player.drawLives()}`, this.canvas.width - 20, 45);
-      this.context.restore();
-      ///////////////////////////////////////////////////////////////////////////////
+      this.player.drawLives();
 
+      ///////////////////////////////////////////////////////////////////////////////
+      this.context.restore();
       // draw player health
       this.context.font = '18px spaceMission';
       this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 12);
