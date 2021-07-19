@@ -21,7 +21,6 @@ class Game {
       // ### Create new player instance ###
       this.player = new Player(this, this.canvas.width / 2, this.canvas.height - 120);
       this.frame = 0;
-      this.fps = 0;
       this.score = 0;
       this.rocks = [];
       this.enemies = [];
@@ -38,7 +37,6 @@ class Game {
       this.enableControls();
       if (this.running === false) {
          this.displayRefresh();
-         this.drawFps();
          this.running = true;
       }
    }
@@ -396,14 +394,6 @@ class Game {
       this.frame++;
    }
 
-   drawFps() {
-      // ### Calculate the actual fps ###
-      setInterval(() => {
-         this.fps = this.frame;
-         this.frame = 0;
-      }, 1000);
-   }
-
    quitGame() {
       clearInterval(window.clockTimer);
    }
@@ -412,25 +402,28 @@ class Game {
    drawUI() {
       // draw game frame
       this.context.drawImage(uiGameFrame, 0, 0);
-      // draw the current fps
+
+      // draw player score
       this.context.save();
+      this.context.fillStyle = 'cyan';
+      this.context.font = '30px spaceMission';
+      this.context.fillText(`SCORE: ${this.score}`, 30, 42);
+      this.context.fillStyle = 'black';
+      this.context.lineWidth = 2;
+      this.context.strokeText(`SCORE: ${this.score}`, 30, 42);
+
+      // draw player lives
       this.context.textAlign = 'right';
-      this.context.font = '12px spaceMission';
-      this.context.fillText(`FPS: ${this.fps}`, this.canvas.width - 20, 19);
+      this.context.fillText(`Lives ${this.player.drawLives()}`, this.canvas.width - 20, 45);
       this.context.restore();
+      ///////////////////////////////////////////////////////////////////////////////
 
       // draw player health
       this.context.font = '18px spaceMission';
       this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 12);
-      // draw player score
       this.context.fillText(`S: ${Math.round(this.player.shieldPower / 60)} W: ${Math.round(this.player.wingsPower / 60)} `, 150, this.canvas.height - 12);
-      // draw player score
-      this.context.fillText(`SCORE: ${this.score}`, 300, this.canvas.height - 12);
-      // draw player lives
-      this.context.save();
-      this.context.textAlign = 'right';
-      this.context.fillText(`Lives ${this.player.drawLives()}`, this.canvas.width - 20, 45);
-      this.context.restore();
+
+
       // draw instruction
       this.context.save();
       this.context.font = '9px spaceMission';
