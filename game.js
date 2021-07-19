@@ -5,7 +5,7 @@
 
 const guiGameFrame = new Image();
 
-guiGameFrame.src = './images/gui_game_frame.png';
+guiGameFrame.src = './images/ui_game_frame.png';
 
 class Game {
    constructor(canvas, canvasBg) {

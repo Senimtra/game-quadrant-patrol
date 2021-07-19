@@ -28,7 +28,7 @@ class Player {
       // center player x-position
       this.x = x - (this.width / 2);
       this.y = y;
-      this.health = 99999;
+      this.health = 999;
       this.shieldPower = 0;
       this.wingsPower = 0;
       this.shieldsUp = false;

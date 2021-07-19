@@ -34,6 +34,7 @@ Adaption: recolored, made into new spritesheet
 
 USER INTERFACE
 https://opengameart.org/content/space-shooter-game-user-interface
+Adaption: resized elements
 
 
 

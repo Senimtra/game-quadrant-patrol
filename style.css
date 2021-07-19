@@ -36,9 +36,10 @@ canvas {
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   border: 1px solid black;
    width: calc(500 * 98vh / 800);
    height: 98vh;
+   background-image: url('./images/ui_main_frame.png');
+   background-size: cover;
 }
 
 #game-over {
@@ -46,7 +47,8 @@ canvas {
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   border: 1px solid black;
    width: calc(500 * 98vh / 800);
    height: 98vh;
+   background-image: url('./images/ui_main_frame.png');
+   background-size: cover;
 }
