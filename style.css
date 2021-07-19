@@ -43,7 +43,7 @@ canvas {
 
 #game-title {
    font-family: spaceMission;
-   font-size: calc(3vw + 3vh + 1.5vmin);
+   font-size: calc(6vh + 2.5vmin);
    letter-spacing: 7px;
    text-align: center;
    color: #c1fbff;
@@ -54,12 +54,12 @@ canvas {
 .menu-button {
    background-image: url('./images/ui_menu_button.png');
    background-size: cover;
-   width: 180px;
-   height: 47px;
+   width: 230px;
+   height: 62px;
    font-family: spaceMission;
-   font-size: 1em;
+   font-size: 1.5em;
    color: #c1fbff;
-   text-shadow: 0 0 5px black, 0 0 5px black, 0 0 5px black, 0 0 5px black;
+   text-shadow: 0 0 8px black, 0 0 8px black, 0 0 8px black, 0 0 8px black;
    margin-bottom: 20px;
    border: none;
    background-color: transparent;
@@ -74,4 +74,14 @@ canvas {
    height: 98vh;
    background-image: url('./images/ui_main_frame.png');
    background-size: cover;
+}
+
+#game-over h1 {
+   font-family: spaceMission;
+   font-size: calc(6vh + 2.5vmin);
+   letter-spacing: 7px;
+   text-align: center;
+   color: #c1fbff;
+   text-shadow: 0 0 10px black, 0 0 10px black, 0 0 10px black, 0 0 10px black;
+   margin-bottom: 50px;
 }
