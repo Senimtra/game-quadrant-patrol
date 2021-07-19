@@ -414,17 +414,24 @@ class Game {
 
    // ### Draw UI elements ###
    drawUI() {
-      // draw gui game frame
+      // draw game frame
       this.context.drawImage(guiGameFrame, 0, 0);
+      // draw game logo
+      this.context.save();
+      this.context.font = '45px spaceMission';
+      this.context.fillStyle = '#c1fbff';
+      this.context.fillText('Quadrant Patrol', 30, 45, 280);
+      this.context.fillStyle = 'black';
+      this.context.lineWidth = 2;
+      this.context.strokeText('Quadrant Patrol', 30, 45, 280);
+      this.context.restore();
       // draw the current fps
       this.context.save();
       this.context.textAlign = 'right';
       this.context.font = '12px spaceMission';
       this.context.fillText(`FPS: ${this.fps}`, this.canvas.width - 20, 19);
       this.context.restore();
-      this.context.font = '45px spaceMission';
-      // draw the game logo
-      this.context.strokeText('Quadrant Patrol', 8, 44);
+
       // draw player health
       this.context.font = '18px spaceMission';
       this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 12);

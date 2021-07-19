@@ -34,7 +34,7 @@ const backgroundImage = {
       game.contextBg.drawImage(this.img, 0, this.y);
       game.contextBg.drawImage(this.img, 0, this.y - backgroundCanvasElement.height + 1);
       game.contextBg.save();
-      // force canvas corners to be transparent due to gui design
+      // force canvas corners to be transparent due to UI design
       game.contextBg.globalCompositeOperation = 'destination-out';
       game.contextBg.fillRect(0, 0, 500, 60);
       game.contextBg.fillRect(0, 740, 500, 800);
