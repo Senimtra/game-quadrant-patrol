@@ -177,6 +177,9 @@ class PowerUp {
       this.vy = -3;
       this.width = 50;
       this.height = 50;
+      this.frame = 0;
+      this.frameStep = 2;
+      this.animation = 1;
       this.gravity = 0.15;
    }
 
@@ -184,7 +187,7 @@ class PowerUp {
       this.game.context.save();
       // this.game.context.fillStyle = `${this.color}`;
       // this.game.context.fillRect(this.x, this.y, this.width, this.height);
-      this.game.context.drawImage(powerUpsImage, 0, this.colorRow * 52 - 52, 52, 52, this.x, this.y, 50, 50);
+      this.game.context.drawImage(powerUpsImage, this.animation * 52 - 52, this.colorRow * 52 - 52, 52, 52, this.x, this.y, 50, 50);
       // if (this.bounced === true && (Date.now() - this.timeSpawned < 9000)) {
       //    this.game.context.globalCompositeOperation = 'source-over'
       //    this.game.context.fillStyle = 'white';
@@ -198,6 +201,20 @@ class PowerUp {
       this.x += this.vx;
       this.vy += this.gravity;
       this.y += this.vy;
+      this.frame++;
+      this.rotatePowerUp();
+   }
+
+   rotatePowerUp() {
+      // ### Power-up animation ###
+      if (this.frame > this.frameStep - 1) {
+         this.frame = 0;
+         if (this.animation < 20) {
+            this.animation++;
+         } else {
+            this.animation = 1;
+         }
+      }
    }
 
    checkIntersection(element) {
@@ -213,6 +230,7 @@ class PowerUp {
       );
    }
 }
+
 class HealthUp extends PowerUp {
    constructor(game, x, y, direction, bonus, colorRow) {
       super(game, x, y, direction, bonus, colorRow)
@@ -275,6 +293,8 @@ class BounceUp extends PowerUp {
             this.game.powerUpSpawned = false;
          }
       }
+      this.frame++;
+      this.rotatePowerUp();
    }
 }
 
