@@ -406,10 +406,6 @@ class Game {
 
    quitGame() {
       clearInterval(window.clockTimer);
-      introScreenElement.style.display = 'flex';
-      gameOverScreenElement.style.display = 'none';
-      gameCanvasElement.style.display = 'none';
-      backgroundCanvasElement.style.display = 'none';
    }
 
    // ### Draw UI elements ###

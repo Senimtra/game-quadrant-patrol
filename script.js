@@ -51,6 +51,18 @@ const backgroundImage = {
 // ### Create new game instance ###
 const game = new Game(gameCanvasElement, backgroundCanvasElement, backgroundImage);
 
+// ### Enable ESC before game start ###
+window.addEventListener('keydown', (event) => {
+   if (event.code === 'Escape') {
+      introScreenElement.style.display = 'flex';
+      instructionsScreenElement.style.display = 'none';
+      creditsScreenElement.style.display = 'none';
+      gameOverScreenElement.style.display = 'none';
+      gameCanvasElement.style.display = 'none';
+      backgroundCanvasElement.style.display = 'none';
+   }
+});
+
 // ### Start button ###
 startButtonElement.addEventListener('click', () => {
    introScreenElement.style.display = 'none';
