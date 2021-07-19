@@ -63,6 +63,15 @@ canvas {
    margin-bottom: 20px;
    border: none;
    background-color: transparent;
+   transition-duration: 75ms;
+}
+
+.menu-button:hover {
+   transition-duration: 200ms;
+   transform: scale(1.03);
+}
+.menu-button:active {
+   transform: scale(0.98);
 }
 
 #game-over {
