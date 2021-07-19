@@ -412,39 +412,16 @@ class Game {
       this.context.strokeText(`SCORE: ${this.score}`, 30, 42);
       // draw player lives
       this.player.drawLives();
-
+      // power container bar
+      this.context.drawImage(powerBar, 30, this.canvas.height - 45, 210, 30);
+      // health container bar
+      this.context.drawImage(healthBar, this.canvas.width - 240, this.canvas.height - 45, 210, 30);
       ///////////////////////////////////////////////////////////////////////////////
       this.context.restore();
       // draw player health
       this.context.font = '18px spaceMission';
-      this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 12);
-      this.context.fillText(`S: ${Math.round(this.player.shieldPower / 60)} W: ${Math.round(this.player.wingsPower / 60)} `, 150, this.canvas.height - 12);
+      this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 62);
+      this.context.fillText(`S: ${Math.round(this.player.shieldPower / 60)} W: ${Math.round(this.player.wingsPower / 60)} `, 350, this.canvas.height - 62);
 
-
-      // draw instruction
-      this.context.save();
-      this.context.font = '9px spaceMission';
-      this.context.fillText('MOVE => LEFT/RIGHT | FIRE => SPACE', 20, this.canvas.height - 40);
-      this.context.restore();
-      // draw powerups
-      this.context.save();
-      this.context.font = '9px spaceMission';
-      this.context.textAlign = 'left';
-      this.context.fillText('Score', 455, this.canvas.height - 45);
-      this.context.fillText('Bounce', 455, this.canvas.height - 35);
-      this.context.fillText('Wings', 455, this.canvas.height - 25);
-      this.context.fillText('Shield', 455, this.canvas.height - 15);
-      this.context.fillText('Health', 455, this.canvas.height - 5);
-      this.context.fillStyle = 'orange';
-      this.context.fillRect(445, this.canvas.height - 52, 7, 7)
-      this.context.fillStyle = 'red';
-      this.context.fillRect(445, this.canvas.height - 42, 7, 7)
-      this.context.fillStyle = 'cyan';
-      this.context.fillRect(445, this.canvas.height - 32, 7, 7)
-      this.context.fillStyle = 'blue';
-      this.context.fillRect(445, this.canvas.height - 22, 7, 7)
-      this.context.fillStyle = 'green';
-      this.context.fillRect(445, this.canvas.height - 12, 7, 7)
-      this.context.restore();
    }
 }

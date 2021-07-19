@@ -7,10 +7,16 @@ const playerImage = new Image();
 playerImage.src = './images/ship_player.png';
 
 const exhaustImage = new Image();
-exhaustImage.src = './images/ship_player_exhaust.png'
+exhaustImage.src = './images/ship_player_exhaust.png';
 
 const shieldImage = new Image();
-shieldImage.src = './images/shield.png'
+shieldImage.src = './images/shield.png';
+
+const powerBar = new Image();
+powerBar.src = './images/ui_power_bar.png';
+
+const healthBar = new Image();
+healthBar.src = './images/ui_health_bar.png';
 
 class Player {
    constructor(game, x, y) {
