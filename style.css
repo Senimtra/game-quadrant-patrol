@@ -41,7 +41,8 @@ canvas {
    background-size: cover;
 }
 
-#game-title {
+#game-title,
+#game-over h1 {
    font-family: spaceMission;
    font-size: calc(6vh + 2.5vmin);
    letter-spacing: 7px;
@@ -74,6 +75,8 @@ canvas {
    transform: scale(0.98);
 }
 
+#game-instructions,
+#game-credits,
 #game-over {
    display: none;
    flex-direction: column;
@@ -85,9 +88,10 @@ canvas {
    background-size: cover;
 }
 
-#game-over h1 {
+#game-instructions h1,
+#game-credits h1 {
    font-family: spaceMission;
-   font-size: calc(6vh + 2.5vmin);
+   font-size: calc(3vh + 1.5vmin);
    letter-spacing: 7px;
    text-align: center;
    color: #c1fbff;

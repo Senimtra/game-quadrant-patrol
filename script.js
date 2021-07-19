@@ -6,10 +6,16 @@
 // ### Retrieve element nodes ###
 const gameCanvasElement = document.querySelector('#game-canvas');
 const backgroundCanvasElement = document.querySelector('#background-canvas');
+
 const startButtonElement = document.querySelector('#start-game');
 const resumeButtonElement = document.querySelector('#resume-game');
+const instructionsButtonElement = document.querySelector('#instructions');
+const creditsButtonElement = document.querySelector('#credits');
 const tryAgainButtonElement = document.querySelector('#try-again');
+
 const introScreenElement = document.querySelector('#intro');
+const instructionsScreenElement = document.querySelector('#game-instructions');
+const creditsScreenElement = document.querySelector('#game-credits');
 const gameOverScreenElement = document.querySelector('#game-over');
 
 // ### Background image ###
@@ -61,6 +67,18 @@ resumeButtonElement.addEventListener('click', () => {
       backgroundCanvasElement.style.display = 'block';
       game.clock();
    }
+})
+
+// ### Instructions button ###
+instructionsButtonElement.addEventListener('click', () => {
+   introScreenElement.style.display = 'none';
+   instructionsScreenElement.style.display = 'flex';
+})
+
+// ### Credits button ###
+creditsButtonElement.addEventListener('click', () => {
+   introScreenElement.style.display = 'none';
+   creditsScreenElement.style.display = 'flex';
 })
 
 // ### Try again button ###
