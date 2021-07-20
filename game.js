@@ -234,7 +234,7 @@ class Game {
             this.score += 50;
          } else if (!this.player.shieldsUp && this.player.checkIntersection(rock)) {
             this.rocks.splice(index, 1);
-            this.player.health -= 10;
+            this.player.health -= 50;
             this.lose();
             this.score += 50;
          }
@@ -267,7 +267,7 @@ class Game {
             this.score += 100;
          } else if (!this.player.shieldsUp && this.player.checkIntersection(enemy)) {
             this.enemies.splice(index, 1);
-            this.player.health -= 10;
+            this.player.health -= 50;
             this.lose();
             this.score += 100;
          }
@@ -324,7 +324,7 @@ class Game {
             this.playerProjectiles.push(this.enemyProjectiles[index]);
             this.enemyProjectiles.splice(index, 1);
          } else if (!this.player.shieldsUp && this.player.checkIntersection(shot)) {
-            this.player.health -= 10;
+            this.player.health -= 20;
             this.lose();
             this.enemyProjectiles.splice(index, 1);
          }
@@ -334,15 +334,17 @@ class Game {
          this.powerUpSpawned = false;
          switch (this.powerUp.bonus) {
             case 'shield':
-               this.player.shieldPower += 1000;
+               this.player.shieldPower += this.player.powerGain - this.player.shieldPower;
                this.player.wingsPower = 0;
                this.player.activateShield();
                break;
             case 'health':
-               this.player.health += 50;
+               if (this.player.health < this.player.maxHealth - this.player.healthGain) {
+                  this.player.health += this.player.healthGain;
+               }
                break;
             case 'wings':
-               this.player.wingsPower += 1000;
+               this.player.wingsPower += this.player.powerGain - this.player.wingsPower;
                this.player.shieldPower = 0;
                this.player.wingsOn();
                break;
@@ -377,7 +379,7 @@ class Game {
             // player starts a new life
             clearInterval(window.clockTimer);
             setTimeout(() => this.clock(), 3000);
-            this.player.health = 200;
+            this.player.health = this.player.maxHealth;
          }
       }
    }
@@ -424,15 +426,14 @@ class Game {
       for (let i = 1; i <= this.player.healthUnits; i++) {
          this.context.drawImage(healthUnit, 0, 0, 30, 58, 266 + (i * 8 - 8), this.canvas.height - 40, 6, 20);
       }
-      ///////////////////////////////////////////////////////////////////////////////
-      for (let i = 0; i < 21; i++) {
-         this.context.drawImage(powerUnit, 0, 0, 30, 58, this.canvas.width - 272 - i * 8, this.canvas.height - 40, 6, 20);
+      // draw power bar dummy unit background
+      for (let i = 1; i <= 21; i++) {
+         this.context.drawImage(dummyUnit, 0, 0, 30, 58, this.canvas.width - 272 - i * 8 + 8, this.canvas.height - 40, 6, 20);
+      }
+      // draw power bar units
+      for (let i = 1; i <= this.player.powerUnits; i++) {
+         this.context.drawImage(powerUnit, 0, 0, 30, 58, this.canvas.width - 272 - i * 8 + 8, this.canvas.height - 40, 6, 20);
       }
       this.context.restore();
-      // draw player health
-      this.context.font = '18px spaceMission';
-      this.context.fillText(`HEALTH: ${this.player.health}`, 20, this.canvas.height - 62);
-      this.context.fillText(`S: ${Math.round(this.player.shieldPower / 60)} W: ${Math.round(this.player.wingsPower / 60)} `, 350, this.canvas.height - 62);
-
    }
 }

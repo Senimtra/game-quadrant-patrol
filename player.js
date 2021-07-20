@@ -43,9 +43,12 @@ class Player {
       // center player x-position
       this.x = x - (this.width / 2);
       this.y = y;
-      this.maxHealth = 4200
+      this.maxHealth = 1000
       this.healthUnits = 21;
-      this.health = 4200;
+      this.health = this.maxHealth;
+      this.healthGain = 100;
+      this.powerGain = 1000;
+      this.powerUnits = 0;
       this.shieldPower = 0;
       this.wingsPower = 0;
       this.shieldsUp = false;
@@ -259,8 +262,8 @@ class Player {
       // ### Drain shieldPower ###
       if (this.shieldsUp && this.shieldPower > 0) {
          setTimeout(() => {
-            // this.shieldPower -= 1;
-         }, 10);
+            this.shieldPower -= 1;
+         }, 20);
       }
       // ### Remove shield at no power ###
       if ((this.shieldPower <= 0) && (this.shieldsUp)) {
@@ -274,7 +277,7 @@ class Player {
       if (this.wingsUp && this.wingsPower > 0) {
          setTimeout(() => {
             this.wingsPower -= 1;
-         }, 10);
+         }, 20);
       }
       // ### Remove wings at no power ###
       if ((this.wingsPower <= 0) && (this.wingsUp)) {
@@ -288,8 +291,13 @@ class Player {
       }
       // ### Calculate health units treshold ###
       this.healthUnits = Math.ceil(this.health / (this.maxHealth / 21));
-      console.log(this.healthUnits);
       this.animateExhaust();
+      // ### Calculate power units treshold ###
+      if (this.shieldPower > 0) {
+         this.powerUnits = Math.floor(this.shieldPower / (this.powerGain / 21));
+      } else if (this.wingsPower > 0) {
+         this.powerUnits = Math.floor(this.wingsPower / (this.powerGain / 21))
+      }
    }
 
    drawLives() {
