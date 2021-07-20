@@ -105,10 +105,10 @@ class Game {
          rock.runLogic();
       }
       // ### Run rock explosion logic ###
-      for (const rockExplode of this.rockExplosions) {
-         rockExplode.frame++;
+      this.rockExplosions.forEach((rockExplode, index) => {
+         if (rockExplode.animationFrame === 64) this.rockExplosions.splice(index, 1);
          rockExplode.runLogic();
-      }
+      });
       // ### Run player projectiles logic ###
       for (const playerShot of this.playerProjectiles) {
          playerShot.runLogic();
@@ -130,11 +130,9 @@ class Game {
    }
 
    spawnRock() {
-      if (this.rocks.length < 1) {
-         // ### Push new rocks to array ###
-         const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 10);
-         this.rocks.push(rock);
-      }
+      // ### Push new rocks to array ###
+      const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 10);
+      this.rocks.push(rock);
    }
 
    spawnEnemy() {
@@ -250,7 +248,7 @@ class Game {
             const rockBoom = new Explosion(this, rock.x, rock.y);
             this.rockExplosions.push(rockBoom);
             this.rocks.splice(index, 1);
-            this.player.health -= 50;
+            this.player.health -= 250;
             this.lose();
             this.score += 50;
          }

@@ -313,25 +313,17 @@ class Explosion {
       this.game = game;
       this.x = x;
       this.y = y;
-      this.frame = 0;
       this.animationFrame = 1;
-      this.animationFrameStep = 50;
    }
 
    runLogic() {
-      if (this.frame > this.animationFrameStep && this.animationFrame < 64) {
+      if (this.animationFrame < 64) {
          this.animationFrame++;
-         this.frame = 0;
-         console.log(this.x);
-         // console.log(this.animationFrame);
       }
    }
 
    drawExplosion() {
-      // console.log('draw explosion');
-      this.game.context.fillStyle = 'white';
-      this.game.context.font = '30px Arial';
-      this.game.context.fillText(`${this.animationFrame}`, this.x, this.y);
-      this.game.context.drawImage(rockExplosionImage, 512, 0, 512, 512, this.x, this.y, 100, 100)
+      this.game.context.drawImage(rockExplosionImage, (512 * this.animationFrame - 512) - ((Math.ceil(this.animationFrame / 8)) * 4096 - 4096), (0 + Math.floor((this.animationFrame - 1) / 8) * 512), 512, 512, this.x - 256 + 25, this.y - 256 + 25, 512, 512)
    }
 }
+
