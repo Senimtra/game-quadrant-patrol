@@ -11,8 +11,8 @@ enemyImage.src = './images/ships_enemies.png';
 const powerUpsImage = new Image();
 powerUpsImage.src = './images/power_ups.png';
 
-const rockExplosionImage = new Image();
-rockExplosionImage.src = './images/explosion_rock.png';
+const playerExplosionImage = new Image();
+playerExplosionImage.src = './images/explosion_player.png';
 
 class Enemy {
    constructor(game, x, y) {
@@ -323,7 +323,7 @@ class Explosion {
    }
 
    drawExplosion() {
-      this.game.context.drawImage(rockExplosionImage, (512 * this.animationFrame - 512) - ((Math.ceil(this.animationFrame / 8)) * 4096 - 4096), (0 + Math.floor((this.animationFrame - 1) / 8) * 512), 512, 512, this.x - 256 + 25, this.y - 256 + 25, 512, 512)
+      this.game.context.drawImage(playerExplosionImage, (512 * this.animationFrame - 512) - ((Math.ceil(this.animationFrame / 8)) * 4096 - 4096), (0 + Math.floor((this.animationFrame - 1) / 8) * 512), 512, 512, this.x - 256 + 25, this.y - 256 + 25, 512, 512)
    }
 }
 

@@ -24,7 +24,7 @@ class Game {
       this.score = 0;
       this.rocks = [];
       this.enemies = [];
-      this.rockExplosions = [];
+      this.playerExplosions = [];
       // this.paused = false;
       this.powerUpSpawned = false;
       this.playerProjectiles = [];
@@ -58,7 +58,7 @@ class Game {
          rock.drawRock();
       }
       // ### Draw rock explosions ###
-      for (const rockExplode of this.rockExplosions) {
+      for (const rockExplode of this.playerExplosions) {
          rockExplode.drawExplosion();
       }
       // ### Draw player projectiles ###
@@ -105,8 +105,8 @@ class Game {
          rock.runLogic();
       }
       // ### Run rock explosion logic ###
-      this.rockExplosions.forEach((rockExplode, index) => {
-         if (rockExplode.animationFrame === 64) this.rockExplosions.splice(index, 1);
+      this.playerExplosions.forEach((rockExplode, index) => {
+         if (rockExplode.animationFrame === 64) this.playerExplosions.splice(index, 1);
          rockExplode.runLogic();
       });
       // ### Run player projectiles logic ###
@@ -240,13 +240,15 @@ class Game {
       // ### Check for player collisions with rocks ###
       this.rocks.forEach((rock, index) => {
          if (this.player.shieldsUp && this.player.checkIntersectionShield(rock)) {
+            // Spawn player/rock explosion
             const rockBoom = new Explosion(this, rock.x, rock.y);
-            this.rockExplosions.push(rockBoom);
+            this.playerExplosions.push(rockBoom);
             this.rocks.splice(index, 1);
             this.score += 50;
          } else if (!this.player.shieldsUp && this.player.checkIntersection(rock)) {
+            // Spawn player/rock explosion
             const rockBoom = new Explosion(this, rock.x, rock.y);
-            this.rockExplosions.push(rockBoom);
+            this.playerExplosions.push(rockBoom);
             this.rocks.splice(index, 1);
             this.player.health -= 250;
             this.lose();
@@ -277,9 +279,15 @@ class Game {
       // ### Check for player collisions with enemies ###
       this.enemies.forEach((enemy, index) => {
          if (this.player.shieldsUp && this.player.checkIntersectionShield(enemy)) {
+            // Spawn player/enemy explosion
+            const enemyBoom = new Explosion(this, enemy.x, enemy.y);
+            this.playerExplosions.push(enemyBoom);
             this.enemies.splice(index, 1);
             this.score += 100;
          } else if (!this.player.shieldsUp && this.player.checkIntersection(enemy)) {
+            // Spawn player/enemy explosion
+            const enemyBoom = new Explosion(this, enemy.x, enemy.y);
+            this.playerExplosions.push(enemyBoom);
             this.enemies.splice(index, 1);
             this.player.health -= 50;
             this.lose();

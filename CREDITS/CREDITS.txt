@@ -46,5 +46,10 @@ https://www.fontspace.com/space-mission-font-f56190
 author: Maknastudio
 Adaption: none
 
+EXPLOSIONS
+https://opengameart.org/content/2d-explosion-animations-frame-by-frame
+https://opengameart.org/content/2d-explosion-animations-2-frame-by-frame
+author: Sinestesia
+Adaption: none
 
 
