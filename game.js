@@ -25,6 +25,7 @@ class Game {
       this.rocks = [];
       this.enemies = [];
       this.playerExplosions = [];
+      this.enemyExplosions = [];
       // this.paused = false;
       this.powerUpSpawned = false;
       this.playerProjectiles = [];
@@ -57,9 +58,9 @@ class Game {
       for (const rock of this.rocks) {
          rock.drawRock();
       }
-      // ### Draw rock explosions ###
-      for (const rockExplode of this.playerExplosions) {
-         rockExplode.drawExplosion();
+      // ### Draw Player enemy/rock explosions ###
+      for (const playerExplosion of this.playerExplosions) {
+         playerExplosion.drawPlayerExplosion();
       }
       // ### Draw player projectiles ###
       for (const playerShot of this.playerProjectiles) {
@@ -68,6 +69,10 @@ class Game {
       // ### Draw enemies ###
       for (const enemy of this.enemies) {
          enemy.drawEnemy();
+      }
+      // ### Draw rock/enemy explosions ###
+      for (const enemyExplosion of this.enemyExplosions) {
+         enemyExplosion.drawEnemyExplosion();
       }
       // ### Draw enemy projectiles ###
       for (const enemyShot of this.enemyProjectiles) {
@@ -104,10 +109,15 @@ class Game {
          rock.frame++;
          rock.runLogic();
       }
-      // ### Run rock explosion logic ###
-      this.playerExplosions.forEach((rockExplode, index) => {
-         if (rockExplode.animationFrame === 64) this.playerExplosions.splice(index, 1);
-         rockExplode.runLogic();
+      // ### Run player rock/enemy explosion logic ###
+      this.playerExplosions.forEach((playerExplosion, index) => {
+         if (playerExplosion.animationFrame === 64) this.playerExplosions.splice(index, 1);
+         playerExplosion.runLogic();
+      });
+      // ### Run rock/enemy explosion logic ###
+      this.enemyExplosions.forEach((enemyExplosion, index) => {
+         if (enemyExplosion.animationFrame === 64) this.enemyExplosions.splice(index, 1);
+         enemyExplosion.runLogic();
       });
       // ### Run player projectiles logic ###
       for (const playerShot of this.playerProjectiles) {
@@ -269,8 +279,12 @@ class Game {
                // ### Check rock health ###
                this.rocks[index].health -= 50;
                if (this.rocks[index].health <= 0) {
+                  // Spawn rock explosion
+                  const rockShot = new Explosion(this, rock.x, rock.y);
+                  this.enemyExplosions.push(rockShot);
                   // remove rock from array
                   this.rocks.splice(index, 1);
+                  console.log(this.enemyExplosions);
                }
                this.score += 50;
             }
