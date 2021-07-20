@@ -15,8 +15,14 @@ shieldImage.src = './images/shield.png';
 const powerBar = new Image();
 powerBar.src = './images/ui_power_bar.png';
 
+const powerUnit = new Image();
+powerUnit.src = './images/ui_power_bar_unit.png';
+
 const healthBar = new Image();
 healthBar.src = './images/ui_health_bar.png';
+
+const healthUnit = new Image();
+healthUnit.src = './images/ui_health_bar_unit.png';
 
 class Player {
    constructor(game, x, y) {
@@ -34,7 +40,8 @@ class Player {
       // center player x-position
       this.x = x - (this.width / 2);
       this.y = y;
-      this.health = 99999;
+      this.maxHealth = 10000
+      this.health = 10000;
       this.shieldPower = 0;
       this.wingsPower = 0;
       this.shieldsUp = false;

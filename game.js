@@ -413,9 +413,16 @@ class Game {
       // draw player lives
       this.player.drawLives();
       // power container bar
-      this.context.drawImage(powerBar, 30, this.canvas.height - 45, 210, 30);
+      this.context.drawImage(powerBar, 32, this.canvas.height - 45, 208, 30);
       // health container bar
-      this.context.drawImage(healthBar, this.canvas.width - 240, this.canvas.height - 45, 210, 30);
+      this.context.drawImage(healthBar, this.canvas.width - 240, this.canvas.height - 45, 208, 30);
+      ///////////////////////////////////////////////////////////////////////////////
+      for (let i = 0; i < 21; i++) {
+         this.context.drawImage(healthUnit, 0, 0, 30, 58, this.canvas.width - 74 - i * 8, this.canvas.height - 40, 6, 20);
+      }
+      for (let i = 0; i < 21; i++) {
+         this.context.drawImage(powerUnit, 0, 0, 30, 58, this.canvas.width - 272 - i * 8, this.canvas.height - 40, 6, 20);
+      }
       ///////////////////////////////////////////////////////////////////////////////
       this.context.restore();
       // draw player health

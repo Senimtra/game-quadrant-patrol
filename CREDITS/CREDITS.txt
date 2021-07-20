@@ -3,10 +3,12 @@ so to the best of its knowledge and belief, using professional diligence:
 
 SEAMLESS BACKGROUND
 https://screamingbrainstudios.itch.io/seamless-space-backgrounds
+author: Screaming Brain Studios
 Adaption: clipped to fit canvas
 
 ASTEROIDS
 https://www.pngegg.com/en/png-nzbum
+author: unknown
 Adaption: second (darker) set of rocks
 
 PLAYER SPACESHIP
@@ -26,16 +28,23 @@ Adaption: recolored, made into a spritesheet
 
 PLAYER SHIELD AURA
 https://www.pngwing.com/en/free-png-zwjru
-Adaption: nothing
+author: unknown
+Adaption: none
 
 POWER UPS
 https://opengameart.org/content/rotating-gems-for-match3
+author: Bondoki
 Adaption: recolored, made into new spritesheet
 
 USER INTERFACE
 https://opengameart.org/content/space-shooter-game-user-interface
+author: CraftPix.net
 Adaption: resized elements
 
+FONT
+https://www.fontspace.com/space-mission-font-f56190
+author: Maknastudio
+Adaption: none
 
 
 
