@@ -24,6 +24,9 @@ healthBar.src = './images/ui_health_bar.png';
 const healthUnit = new Image();
 healthUnit.src = './images/ui_health_bar_unit.png';
 
+const dummyUnit = new Image();
+dummyUnit.src = './images/ui_dummy_bar_unit.png';
+
 class Player {
    constructor(game, x, y) {
       this.game = game;
@@ -40,8 +43,9 @@ class Player {
       // center player x-position
       this.x = x - (this.width / 2);
       this.y = y;
-      this.maxHealth = 10000
-      this.health = 10000;
+      this.maxHealth = 4200
+      this.healthUnits = 21;
+      this.health = 4200;
       this.shieldPower = 0;
       this.wingsPower = 0;
       this.shieldsUp = false;
@@ -282,6 +286,9 @@ class Player {
       if ((game.controls['ArrowLeft'].pressed === false) && (game.controls['ArrowRight'].pressed === false) && this.animation !== 6) {
          this.rollBack();
       }
+      // ### Calculate health units treshold ###
+      this.healthUnits = Math.ceil(this.health / (this.maxHealth / 21));
+      console.log(this.healthUnits);
       this.animateExhaust();
    }
 

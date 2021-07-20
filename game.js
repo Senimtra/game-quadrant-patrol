@@ -416,14 +416,18 @@ class Game {
       this.context.drawImage(powerBar, 32, this.canvas.height - 45, 208, 30);
       // health container bar
       this.context.drawImage(healthBar, this.canvas.width - 240, this.canvas.height - 45, 208, 30);
-      ///////////////////////////////////////////////////////////////////////////////
-      for (let i = 0; i < 21; i++) {
-         this.context.drawImage(healthUnit, 0, 0, 30, 58, this.canvas.width - 74 - i * 8, this.canvas.height - 40, 6, 20);
+      // draw health bar dummy unit background
+      for (let j = 1; j <= 21; j++) {
+         this.context.drawImage(dummyUnit, 0, 0, 30, 58, 266 + (j * 8 - 8), this.canvas.height - 40, 6, 20);
       }
+      // draw health bar units
+      for (let i = 1; i <= this.player.healthUnits; i++) {
+         this.context.drawImage(healthUnit, 0, 0, 30, 58, 266 + (i * 8 - 8), this.canvas.height - 40, 6, 20);
+      }
+      ///////////////////////////////////////////////////////////////////////////////
       for (let i = 0; i < 21; i++) {
          this.context.drawImage(powerUnit, 0, 0, 30, 58, this.canvas.width - 272 - i * 8, this.canvas.height - 40, 6, 20);
       }
-      ///////////////////////////////////////////////////////////////////////////////
       this.context.restore();
       // draw player health
       this.context.font = '18px spaceMission';
