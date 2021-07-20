@@ -284,7 +284,6 @@ class Game {
                   this.enemyExplosions.push(rockShot);
                   // remove rock from array
                   this.rocks.splice(index, 1);
-                  console.log(this.enemyExplosions);
                }
                this.score += 50;
             }
