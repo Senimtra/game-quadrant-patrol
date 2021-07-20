@@ -24,6 +24,7 @@ class Game {
       this.score = 0;
       this.rocks = [];
       this.enemies = [];
+      this.rockExplosions = [];
       // this.paused = false;
       this.powerUpSpawned = false;
       this.playerProjectiles = [];
@@ -55,6 +56,10 @@ class Game {
       // ### Draw rocks ###
       for (const rock of this.rocks) {
          rock.drawRock();
+      }
+      // ### Draw rock explosions ###
+      for (const rockExplode of this.rockExplosions) {
+         rockExplode.drawExplosion();
       }
       // ### Draw player projectiles ###
       for (const playerShot of this.playerProjectiles) {
@@ -99,6 +104,11 @@ class Game {
          rock.frame++;
          rock.runLogic();
       }
+      // ### Run rock explosion logic ###
+      for (const rockExplode of this.rockExplosions) {
+         rockExplode.frame++;
+         rockExplode.runLogic();
+      }
       // ### Run player projectiles logic ###
       for (const playerShot of this.playerProjectiles) {
          playerShot.runLogic();
@@ -120,9 +130,11 @@ class Game {
    }
 
    spawnRock() {
-      // ### Push new rocks to array ###
-      const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 10);
-      this.rocks.push(rock);
+      if (this.rocks.length < 1) {
+         // ### Push new rocks to array ###
+         const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 10);
+         this.rocks.push(rock);
+      }
    }
 
    spawnEnemy() {
@@ -230,9 +242,13 @@ class Game {
       // ### Check for player collisions with rocks ###
       this.rocks.forEach((rock, index) => {
          if (this.player.shieldsUp && this.player.checkIntersectionShield(rock)) {
+            const rockBoom = new Explosion(this, rock.x, rock.y);
+            this.rockExplosions.push(rockBoom);
             this.rocks.splice(index, 1);
             this.score += 50;
          } else if (!this.player.shieldsUp && this.player.checkIntersection(rock)) {
+            const rockBoom = new Explosion(this, rock.x, rock.y);
+            this.rockExplosions.push(rockBoom);
             this.rocks.splice(index, 1);
             this.player.health -= 50;
             this.lose();

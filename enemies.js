@@ -11,6 +11,9 @@ enemyImage.src = './images/ships_enemies.png';
 const powerUpsImage = new Image();
 powerUpsImage.src = './images/power_ups.png';
 
+const rockExplosionImage = new Image();
+rockExplosionImage.src = './images/explosion_rock.png';
+
 class Enemy {
    constructor(game, x, y) {
       this.game = game;
@@ -302,5 +305,33 @@ class ScoreUp extends PowerUp {
    constructor(game, x, y, direction, bonus, colorRow) {
       super(game, x, y, direction, bonus, colorRow)
       this.colorRow = colorRow;
+   }
+}
+
+class Explosion {
+   constructor(game, x, y) {
+      this.game = game;
+      this.x = x;
+      this.y = y;
+      this.frame = 0;
+      this.animationFrame = 1;
+      this.animationFrameStep = 50;
+   }
+
+   runLogic() {
+      if (this.frame > this.animationFrameStep && this.animationFrame < 64) {
+         this.animationFrame++;
+         this.frame = 0;
+         console.log(this.x);
+         // console.log(this.animationFrame);
+      }
+   }
+
+   drawExplosion() {
+      // console.log('draw explosion');
+      this.game.context.fillStyle = 'white';
+      this.game.context.font = '30px Arial';
+      this.game.context.fillText(`${this.animationFrame}`, this.x, this.y);
+      this.game.context.drawImage(rockExplosionImage, 512, 0, 512, 512, this.x, this.y, 100, 100)
    }
 }
