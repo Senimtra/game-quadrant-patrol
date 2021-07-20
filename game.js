@@ -251,13 +251,13 @@ class Game {
       this.rocks.forEach((rock, index) => {
          if (this.player.shieldsUp && this.player.checkIntersectionShield(rock)) {
             // Spawn player/rock explosion
-            const rockBoom = new Explosion(this, rock.x, rock.y);
+            const rockBoom = new Explosion(this, rock.x, rock.y, rock.width);
             this.playerExplosions.push(rockBoom);
             this.rocks.splice(index, 1);
             this.score += 50;
          } else if (!this.player.shieldsUp && this.player.checkIntersection(rock)) {
             // Spawn player/rock explosion
-            const rockBoom = new Explosion(this, rock.x, rock.y);
+            const rockBoom = new Explosion(this, rock.x, rock.y, rock.width);
             this.playerExplosions.push(rockBoom);
             this.rocks.splice(index, 1);
             this.player.health -= 250;
@@ -280,7 +280,7 @@ class Game {
                this.rocks[index].health -= 50;
                if (this.rocks[index].health <= 0) {
                   // Spawn rock explosion
-                  const rockShot = new Explosion(this, rock.x, rock.y);
+                  const rockShot = new Explosion(this, rock.x, rock.y, rock.width);
                   this.enemyExplosions.push(rockShot);
                   // remove rock from array
                   this.rocks.splice(index, 1);
@@ -294,13 +294,13 @@ class Game {
       this.enemies.forEach((enemy, index) => {
          if (this.player.shieldsUp && this.player.checkIntersectionShield(enemy)) {
             // Spawn player/enemy explosion
-            const enemyBoom = new Explosion(this, enemy.x, enemy.y);
+            const enemyBoom = new Explosion(this, enemy.x, enemy.y, enemy.width);
             this.playerExplosions.push(enemyBoom);
             this.enemies.splice(index, 1);
             this.score += 100;
          } else if (!this.player.shieldsUp && this.player.checkIntersection(enemy)) {
             // Spawn player/enemy explosion
-            const enemyBoom = new Explosion(this, enemy.x, enemy.y);
+            const enemyBoom = new Explosion(this, enemy.x, enemy.y, enemy.width);
             this.playerExplosions.push(enemyBoom);
             this.enemies.splice(index, 1);
             this.player.health -= 50;
@@ -345,6 +345,9 @@ class Game {
                      }
                      this.powerUpSpawned = true;
                   }
+                  // Spawn rock explosion
+                  const enemyShot = new Explosion(this, enemy.x, enemy.y, enemy.width);
+                  this.enemyExplosions.push(enemyShot);
                   // remove enemy from array
                   this.enemies.splice(index, 1);
                }

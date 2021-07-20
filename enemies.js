@@ -14,6 +14,9 @@ powerUpsImage.src = './images/power_ups.png';
 const playerExplosionImage = new Image();
 playerExplosionImage.src = './images/explosion_player.png';
 
+const enemyExplosionImage = new Image();
+enemyExplosionImage.src = './images/explosion_enemies.png';
+
 class Enemy {
    constructor(game, x, y) {
       this.game = game;
@@ -309,11 +312,12 @@ class ScoreUp extends PowerUp {
 }
 
 class Explosion {
-   constructor(game, x, y) {
+   constructor(game, x, y, width) {
       this.game = game;
       this.x = x;
       this.y = y;
       this.animationFrame = 1;
+      this.xOffset = width / 2;
    }
 
    runLogic() {
@@ -323,11 +327,11 @@ class Explosion {
    }
 
    drawPlayerExplosion() {
-      this.game.context.drawImage(playerExplosionImage, (512 * this.animationFrame - 512) - ((Math.ceil(this.animationFrame / 8)) * 4096 - 4096), (0 + Math.floor((this.animationFrame - 1) / 8) * 512), 512, 512, this.x - 256 + 25, this.y - 256 + 25, 512, 512)
+      this.game.context.drawImage(playerExplosionImage, (512 * this.animationFrame - 512) - ((Math.ceil(this.animationFrame / 8)) * 4096 - 4096), (0 + Math.floor((this.animationFrame - 1) / 8) * 512), 512, 512, this.x - 256 + this.xOffset, this.y - 256 + this.xOffset, 512, 512)
    }
 
    drawEnemyExplosion() {
-      console.log('Enemy exploded');
+      this.game.context.drawImage(enemyExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, this.x - 128 + this.xOffset, this.y - 128 + this.xOffset, 256, 256)
    }
 }
 
