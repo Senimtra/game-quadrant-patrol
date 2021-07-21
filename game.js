@@ -157,6 +157,7 @@ class Game {
    spawnRock() {
       // ### Push new rocks to array ###
       const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 10);
+      console.log(this.rocks);
       this.rocks.push(rock);
    }
 

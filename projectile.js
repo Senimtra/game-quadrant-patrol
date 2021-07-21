@@ -36,7 +36,7 @@ class Projectile {
       }
       // let projectiles start beneath player
       this.game.context.globalCompositeOperation = 'destination-over';
-      this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.fillRect(Math.floor(this.x), Math.floor(this.y), this.width, this.height);
       this.game.context.restore();
    }
 }
@@ -74,7 +74,7 @@ class EnemyProjectile extends Projectile {
       this.game.context.fillStyle = '#85C1E9';
       // let projectiles start beneath enemy
       this.game.context.globalCompositeOperation = 'destination-over';
-      this.game.context.fillRect(this.x, this.y, this.width, this.height);
+      this.game.context.fillRect(Math.floor(this.x), Math.floor(this.y), this.width, this.height);
       this.game.context.restore();
    }
 }

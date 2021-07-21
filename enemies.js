@@ -107,7 +107,7 @@ class Enemy {
       // this.game.context.fillStyle = 'beige';
       // this.game.context.fillRect(this.x, this.y, this.width, this.height);
       // this.game.context.fillRect(this.x + 22, this.y + 36, this.widthXT, this.heightXT);
-      this.game.context.drawImage(enemyImage, 343 * this.animationFrame - 343, this.color * 383, 343, 383, this.x - 2, this.y, 64, 64);
+      this.game.context.drawImage(enemyImage, 343 * this.animationFrame - 343, this.color * 383, 343, 383, Math.floor(this.x - 2), Math.floor(this.y), 64, 64);
       this.game.context.restore();
    }
 }
@@ -156,7 +156,7 @@ class Rock extends Enemy {
          if (this.animationFrame > this.animations) {
             this.animationFrame = 1;
          }
-         this.game.context.drawImage(rockImage_light, (128 * this.animationFrame - 128) - ((Math.ceil(this.animationFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.animationFrame - 1) / 8) * 128) + this.rotationDirection * 512, 128, 128, this.x - 15, this.y - 15, 80, 80);
+         this.game.context.drawImage(rockImage_light, (128 * this.animationFrame - 128) - ((Math.ceil(this.animationFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.animationFrame - 1) / 8) * 128) + this.rotationDirection * 512, 128, 128, Math.floor(this.x - 15), Math.floor(this.y - 15), 80, 80);
       }
       else {
          // ### Dark rock animation logic
@@ -167,7 +167,7 @@ class Rock extends Enemy {
          if (this.animationFrame > this.animations) {
             this.animationFrame = 1;
          }
-         this.game.context.drawImage(rockImage_dark, (384 - Math.floor((this.animationFrame - 1) / 8) * 128) + this.rotationDirection * 512, (this.animationFrame * 128 - 128) - ((Math.ceil(this.animationFrame / 8)) * 1024 - 1024), 128, 128, this.x - 15, this.y - 15, 80, 80);
+         this.game.context.drawImage(rockImage_dark, (384 - Math.floor((this.animationFrame - 1) / 8) * 128) + this.rotationDirection * 512, (this.animationFrame * 128 - 128) - ((Math.ceil(this.animationFrame / 8)) * 1024 - 1024), 128, 128, Math.floor(this.x - 15), Math.floor(this.y) - 15, 80, 80);
       }
       this.game.context.restore();
    }
@@ -199,7 +199,7 @@ class PowerUp {
       this.game.context.save();
       // this.game.context.fillStyle = `${this.color}`;
       // this.game.context.fillRect(this.x, this.y, this.width, this.height);
-      this.game.context.drawImage(powerUpsImage, this.animation * 52 - 52, this.colorRow * 52 - 52, 52, 52, this.x, this.y, 50, 50);
+      this.game.context.drawImage(powerUpsImage, this.animation * 52 - 52, this.colorRow * 52 - 52, 52, 52, Math.floor(this.x), Math.floor(this.y), 50, 50);
       // if (this.bounced === true && (Date.now() - this.timeSpawned < 9000)) {
       //    this.game.context.globalCompositeOperation = 'source-over'
       //    this.game.context.fillStyle = 'white';
@@ -218,7 +218,7 @@ class PowerUp {
          this.razorFrame = 0;
          this.game.context.restore();
       }
-      this.game.context.drawImage(razorImage, (128 * this.razorFrame - 128) - ((Math.ceil(this.razorFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.razorFrame - 1) / 8) * 128), 128, 128, this.x, this.y, 50, 50);
+      this.game.context.drawImage(razorImage, (128 * this.razorFrame - 128) - ((Math.ceil(this.razorFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.razorFrame - 1) / 8) * 128), 128, 128, Math.floor(this.x), Math.floor(this.y), 50, 50);
    }
 
    runLogic() {
@@ -353,15 +353,15 @@ class Explosion {
    }
 
    drawPlayerExplosion() {
-      this.game.context.drawImage(playerExplosionImage, (512 * this.animationFrame - 512) - ((Math.ceil(this.animationFrame / 8)) * 4096 - 4096), (0 + Math.floor((this.animationFrame - 1) / 8) * 512), 512, 512, this.x - 256 + this.xOffset, this.y - 256 + this.xOffset, 512, 512)
+      this.game.context.drawImage(playerExplosionImage, (512 * this.animationFrame - 512) - ((Math.ceil(this.animationFrame / 8)) * 4096 - 4096), (0 + Math.floor((this.animationFrame - 1) / 8) * 512), 512, 512, Math.floor(this.x - 256 + this.xOffset), Math.floor(this.y - 256 + this.xOffset), 512, 512)
    }
 
    drawEnemyExplosion() {
-      this.game.context.drawImage(enemyExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256) + this.explosionType * 2048, 256, 256, this.x - 170 + this.xOffset, this.y - 170 + this.xOffset, 340, 340)
+      this.game.context.drawImage(enemyExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256) + this.explosionType * 2048, 256, 256, Math.floor(this.x - 170 + this.xOffset), Math.floor(this.y - 170 + this.xOffset), 340, 340)
    }
 
    drawRazorExplosion() {
-      game.context.drawImage(razorExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, this.x - 175 + this.xOffset, this.y - 175 + this.xOffset, 350, 350)
+      game.context.drawImage(razorExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, Math.floor(this.x - 175 + this.xOffset), Math.floor(this.y - 175 + this.xOffset), 350, 350)
    }
 }
 
