@@ -171,7 +171,7 @@ canvas {
 }
 
 #game-credits h2 {
-   margin-bottom: calc(2vh + 1vmax);
+   margin-bottom: calc(1vh + 1vmax);
    text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
    letter-spacing: 1.5px;
    color: #c1fbff;
@@ -190,7 +190,7 @@ canvas {
 
 .credit {
    color: #c1fbff;
-   font-size: calc(1.25vh + 0.5vmax);
+   font-size: calc(1.15vh + 0.5vmax);
    font-weight: bold;
    letter-spacing: 1px;
    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;

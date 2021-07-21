@@ -57,4 +57,9 @@ https://opengameart.org/content/2d-explosion-animations-2-frame-by-frame
 author: Sinestesia
 Adaption: none
 
+RAZOR ANIMATION
+https://opengameart.org/content/razor
+author: Modanung
+Adaption: recolored
+
 
