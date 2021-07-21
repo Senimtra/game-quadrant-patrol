@@ -8,6 +8,11 @@
    src: url('./fonts/SpaceMission-rgyw9.otf');
 }
 
+@font-face {
+   font-family: superNintendo;
+   src: url('./fonts/SnesItalic-1G9Be.ttf');
+}
+
 * {
    box-sizing: border-box;
    padding: 0;
@@ -88,6 +93,16 @@ canvas {
    background-size: cover;
 }
 
+#game-actions {
+   color: #c1fbff;
+   font-family: superNintendo;
+   font-weight: lighter;
+   font-size: calc(2vh + 0.75vmin);
+   text-shadow: 0 0 10px black, 0 0 10px black, 0 0 10px black, 0 0 10px black;
+   line-height: calc(4vh + 2vmin);
+   margin-top: calc(4vh + 1vmax);
+}
+
 #game-instructions h1,
 #game-credits h1 {
    font-family: spaceMission;
@@ -96,5 +111,4 @@ canvas {
    text-align: center;
    color: #c1fbff;
    text-shadow: 0 0 10px black, 0 0 10px black, 0 0 10px black, 0 0 10px black;
-   margin-bottom: 50px;
 }

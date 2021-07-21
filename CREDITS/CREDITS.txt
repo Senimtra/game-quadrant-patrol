@@ -41,9 +41,14 @@ https://opengameart.org/content/space-shooter-game-user-interface
 author: CraftPix.net
 Adaption: resized elements
 
-FONT
+FONT #1
 https://www.fontspace.com/space-mission-font-f56190
 author: Maknastudio
+Adaption: none
+
+FONT #2
+link: https://www.fontspace.com/snes-font-f26537
+author: Lyric Type
 Adaption: none
 
 EXPLOSIONS

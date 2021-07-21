@@ -332,7 +332,7 @@ class Explosion {
    }
 
    drawEnemyExplosion() {
-      this.game.context.drawImage(enemyExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256) + this.explosionType * 2048, 256, 256, this.x - 150 + this.xOffset, this.y - 150 + this.xOffset, 300, 300)
+      this.game.context.drawImage(enemyExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256) + this.explosionType * 2048, 256, 256, this.x - 170 + this.xOffset, this.y - 170 + this.xOffset, 340, 340)
    }
 }
 
