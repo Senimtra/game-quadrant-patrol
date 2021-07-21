@@ -165,3 +165,33 @@ canvas {
    color: #c1fbff;
    text-shadow: 0 0 10px black, 0 0 10px black, 0 0 10px black, 0 0 10px black;
 }
+
+#game-credits h1 {
+   margin-bottom: calc(1vh + 1vmax);
+}
+
+#game-credits h2 {
+   margin-bottom: calc(2vh + 1vmax);
+   text-shadow: 0 0 4px black, 0 0 4px black, 0 0 4px black, 0 0 4px black;
+   letter-spacing: 1.5px;
+   color: #c1fbff;
+   text-align: center;
+}
+
+#game-credits {
+   color: whitesmoke;
+   font-family: superNintendo;
+}
+
+#credit-container {
+   padding: 0 10% 0 10%;
+   font-size: calc(1vh + 0.5vmax);
+}
+
+.credit {
+   color: #c1fbff;
+   font-size: calc(1.25vh + 0.5vmax);
+   font-weight: bold;
+   letter-spacing: 1px;
+   text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
+}
