@@ -78,8 +78,13 @@ class Game {
       for (const enemyShot of this.enemyProjectiles) {
          enemyShot.drawEnemyProjectile(this);
       }
+      // ### Draw power ups ###
       if (this.powerUpSpawned === true) {
-         this.powerUp.drawPowerUp();
+         if (this.powerUp.bounced === true) {
+            this.powerUp.drawRazor();
+         } else {
+            this.powerUp.drawPowerUp();
+         }
       }
       this.executeControls();
    }

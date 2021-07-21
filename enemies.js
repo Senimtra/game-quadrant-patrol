@@ -17,6 +17,9 @@ playerExplosionImage.src = './images/explosion_player.png';
 const enemyExplosionImage = new Image();
 enemyExplosionImage.src = './images/explosion_enemies.png';
 
+const razorImage = new Image();
+razorImage.src = './images/bouncing_razor.png';
+
 class Enemy {
    constructor(game, x, y) {
       this.game = game;
@@ -203,6 +206,19 @@ class PowerUp {
       this.game.context.restore();
    }
 
+   drawRazor() {
+      // ### Bouncing razor animation ###
+      this.game.context.save();
+      if (this.razorFrame < 63) {
+         this.razorFrame++;
+      } else {
+         this.razorFrame = 0;
+         this.game.context.restore();
+      }
+      this.game.context.drawImage(razorImage, (128 * this.razorFrame - 128) - ((Math.ceil(this.razorFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.razorFrame - 1) / 8) * 128), 128, 128, this.x, this.y, 60, 60);
+      console.log(this.razorFrame);
+   }
+
    runLogic() {
       this.x += this.vx;
       this.vy += this.gravity;
@@ -264,6 +280,7 @@ class BounceUp extends PowerUp {
       this.colorRow = colorRow;
       this.bounced = false;
       this.timeSpawned = Date.now();
+      this.razorFrame = 0;
    }
 
    runLogic() {
