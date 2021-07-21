@@ -103,6 +103,36 @@ canvas {
    margin-top: calc(4vh + 1vmax);
 }
 
+#game-actions > div {
+   display: flex;
+   align-items: center;
+}
+
+#game-actions > div > div {
+   background-size: contain;
+   background-repeat: no-repeat;
+   background-position: center;
+   width: calc(2.5vh + 1vmax);
+   height: calc(2.5vh + 1vmax);
+   margin-right: 30px;
+}
+
+#icon-left {
+   background-image: url('./images/instructions_left.png');
+}
+
+#icon-right {
+   background-image: url('./images/instructions_right.png');
+}
+
+#icon-fire {
+   background-image: url('./images/instructions_fire.png');
+}
+
+#icon-dummy {
+   background-image: url('./images/instructions_dummy.png');
+}
+
 #game-instructions h1,
 #game-credits h1 {
    font-family: spaceMission;
