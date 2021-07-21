@@ -126,11 +126,34 @@ canvas {
 }
 
 #icon-fire {
-   background-image: url('./images/instructions_fire.png');
+   color: #dcfffd !important;
+   font-size: calc(1.2vh + 0.6vmin);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   padding-right: 2px;
+   background-image: url('./images/instructions_dummy.png');
+   text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;
 }
 
-#icon-dummy {
-   background-image: url('./images/instructions_dummy.png');
+#icon-bounce {
+   background-image: url('./images/instructions_bounce.png');
+}
+
+#icon-score {
+   background-image: url('./images/instructions_score.png');
+}
+
+#icon-health {
+   background-image: url('./images/instructions_health.png');
+}
+
+#icon-shield {
+   background-image: url('./images/instructions_shield.png');
+}
+
+#icon-wings {
+   background-image: url('./images/instructions_wings.png');
 }
 
 #game-instructions h1,

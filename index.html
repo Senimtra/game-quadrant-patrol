@@ -12,6 +12,10 @@
 
       <!-- ### Link own css stylesheet ### -->
       <link rel="stylesheet" href="./style.css" />
+
+      <!-- ### Pre-load SNES font ### -->
+      <link rel="preload" href="./fonts/SnesItalic-1G9Be.ttf" as="font" type="font/ttf" crossorigin />
+
       <title>Quadrant Patrol</title>
    </head>
    <body>
@@ -31,34 +35,34 @@
             <div id="game-actions">
                <div>
                   <div id="icon-left"></div>
-                  Move player to the left
+                  Move to the left
                </div>
                <div>
                   <div id="icon-right"></div>
-                  Move player to the right
+                  Move right
                </div>
                <div>
-                  <div id="icon-fire"></div>
+                  <div id="icon-fire">SPACE</div>
                   Fire projectiles
                </div>
                <div>
-                  <div id="icon-dummy"></div>
+                  <div id="icon-bounce"></div>
                   Bouncing Bomb
                </div>
                <div>
-                  <div id="icon-dummy"></div>
+                  <div id="icon-score"></div>
                   Bonus score
                </div>
                <div>
-                  <div id="icon-dummy"></div>
+                  <div id="icon-health"></div>
                   Bonus health
                </div>
                <div>
-                  <div id="icon-dummy"></div>
+                  <div id="icon-shield"></div>
                   Reflective shield
                </div>
                <div>
-                  <div id="icon-dummy"></div>
+                  <div id="icon-wings"></div>
                   Call your wingmates
                </div>
             </div>
