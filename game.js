@@ -26,6 +26,7 @@ class Game {
       this.enemies = [];
       this.playerExplosions = [];
       this.enemyExplosions = [];
+      this.razorExplosions = [];
       // this.paused = false;
       this.powerUpSpawned = false;
       this.playerProjectiles = [];
@@ -73,6 +74,10 @@ class Game {
       // ### Draw rock/enemy explosions ###
       for (const enemyExplosion of this.enemyExplosions) {
          enemyExplosion.drawEnemyExplosion();
+      }
+      // ### Draw razor rock/enemy explosions ###
+      for (const razorExplosion of this.razorExplosions) {
+         razorExplosion.drawRazorExplosion();
       }
       // ### Draw enemy projectiles ###
       for (const enemyShot of this.enemyProjectiles) {
@@ -123,6 +128,11 @@ class Game {
       this.enemyExplosions.forEach((enemyExplosion, index) => {
          if (enemyExplosion.animationFrame === 64) this.enemyExplosions.splice(index, 1);
          enemyExplosion.runLogic();
+      });
+      // ### Run razor explosion logic ###
+      this.razorExplosions.forEach((razorExplosion, index) => {
+         if (razorExplosion.animationFrame === 64) this.razorExplosions.splice(index, 1);
+         razorExplosion.runLogic();
       });
       // ### Run player projectiles logic ###
       for (const playerShot of this.playerProjectiles) {

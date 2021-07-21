@@ -20,6 +20,9 @@ enemyExplosionImage.src = './images/explosion_enemies.png';
 const razorImage = new Image();
 razorImage.src = './images/bouncing_razor.png';
 
+const razorExplosionImage = new Image();
+razorExplosionImage.src = './images/explosion_razor.png'
+
 class Enemy {
    constructor(game, x, y) {
       this.game = game;
@@ -215,8 +218,7 @@ class PowerUp {
          this.razorFrame = 0;
          this.game.context.restore();
       }
-      this.game.context.drawImage(razorImage, (128 * this.razorFrame - 128) - ((Math.ceil(this.razorFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.razorFrame - 1) / 8) * 128), 128, 128, this.x, this.y, 60, 60);
-      console.log(this.razorFrame);
+      this.game.context.drawImage(razorImage, (128 * this.razorFrame - 128) - ((Math.ceil(this.razorFrame / 8)) * 1024 - 1024), (0 + Math.floor((this.razorFrame - 1) / 8) * 128), 128, 128, this.x, this.y, 50, 50);
    }
 
    runLogic() {
@@ -304,11 +306,17 @@ class BounceUp extends PowerUp {
          }
          this.game.enemies.forEach((enemy, index) => {
             if (this.checkIntersection(enemy)) {
+               // Spawn razor/enemy explosion
+               const enemyBoom = new Explosion(this, enemy.x, enemy.y, enemy.width);
+               this.game.razorExplosions.push(enemyBoom);
                this.game.enemies.splice(index, 1);
             }
          });
          this.game.rocks.forEach((rock, index) => {
             if (this.checkIntersection(rock)) {
+               // Spawn razor/rock explosion
+               const rockBoom = new Explosion(this, rock.x, rock.y, rock.width);
+               this.game.razorExplosions.push(rockBoom);
                this.game.rocks.splice(index, 1);
             }
          });
@@ -350,6 +358,10 @@ class Explosion {
 
    drawEnemyExplosion() {
       this.game.context.drawImage(enemyExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256) + this.explosionType * 2048, 256, 256, this.x - 170 + this.xOffset, this.y - 170 + this.xOffset, 340, 340)
+   }
+
+   drawRazorExplosion() {
+      game.context.drawImage(razorExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, this.x - 175 + this.xOffset, this.y - 175 + this.xOffset, 350, 350)
    }
 }
 
