@@ -11,17 +11,14 @@ enemyImage.src = './images/ships_enemies.png';
 const powerUpsImage = new Image();
 powerUpsImage.src = './images/power_ups.png';
 
-const playerExplosionImage = new Image();
-playerExplosionImage.src = './images/explosion_player.png';
+const specialExplosionImage = new Image();
+specialExplosionImage.src = './images/explosion_special.png';
 
 const enemyExplosionImage = new Image();
 enemyExplosionImage.src = './images/explosion_enemies.png';
 
 const razorImage = new Image();
 razorImage.src = './images/bouncing_razor.png';
-
-const razorExplosionImage = new Image();
-razorExplosionImage.src = './images/explosion_razor.png'
 
 class Enemy {
    constructor(game, x, y) {
@@ -353,7 +350,7 @@ class Explosion {
    }
 
    drawPlayerExplosion() {
-      this.game.context.drawImage(playerExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, Math.floor(this.x - 200 + this.xOffset), Math.floor(this.y - 200 + this.xOffset), 400, 400)
+      this.game.context.drawImage(specialExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, Math.floor(this.x - 200 + this.xOffset), Math.floor(this.y - 200 + this.xOffset), 400, 400)
    }
 
    drawEnemyExplosion() {
@@ -361,7 +358,7 @@ class Explosion {
    }
 
    drawRazorExplosion() {
-      game.context.drawImage(razorExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, Math.floor(this.x - 175 + this.xOffset), Math.floor(this.y - 175 + this.xOffset), 300, 300)
+      game.context.drawImage(specialExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256) + 2048, 256, 256, Math.floor(this.x - 175 + this.xOffset), Math.floor(this.y - 175 + this.xOffset), 300, 300)
    }
 
    drawPlayerProjectileHits() {
