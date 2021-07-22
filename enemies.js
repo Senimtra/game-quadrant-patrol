@@ -20,6 +20,9 @@ enemyExplosionImage.src = './images/explosion_enemies.png';
 const razorImage = new Image();
 razorImage.src = './images/bouncing_razor.png';
 
+const projectileExplosionImage = new Image();
+projectileExplosionImage.src = './images/explosion_projectiles.png'
+
 class Enemy {
    constructor(game, x, y) {
       this.game = game;
@@ -362,7 +365,7 @@ class Explosion {
    }
 
    drawPlayerProjectileHits() {
-      this.game.context.drawImage(enemyExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256) + this.explosionType * 2048, 256, 256, Math.floor(this.x - 50 + this.xOffset), Math.floor(this.y - 50 + this.xOffset), 100, 100)
+      this.game.context.drawImage(projectileExplosionImage, (96 * this.animationFrame - 96) - ((Math.ceil(this.animationFrame / 8)) * 768 - 768), (0 + Math.floor((this.animationFrame - 1) / 8) * 96) + this.explosionType * 768, 96, 96, Math.floor(this.x - 48 + this.xOffset), Math.floor(this.y - 48 + this.xOffset), 96, 96)
    }
 }
 
