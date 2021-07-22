@@ -353,7 +353,7 @@ class Explosion {
    }
 
    drawPlayerExplosion() {
-      this.game.context.drawImage(playerExplosionImage, (512 * this.animationFrame - 512) - ((Math.ceil(this.animationFrame / 8)) * 4096 - 4096), (0 + Math.floor((this.animationFrame - 1) / 8) * 512), 512, 512, Math.floor(this.x - 256 + this.xOffset), Math.floor(this.y - 256 + this.xOffset), 512, 512)
+      this.game.context.drawImage(playerExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, Math.floor(this.x - 200 + this.xOffset), Math.floor(this.y - 200 + this.xOffset), 400, 400)
    }
 
    drawEnemyExplosion() {
@@ -361,7 +361,7 @@ class Explosion {
    }
 
    drawRazorExplosion() {
-      game.context.drawImage(razorExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, Math.floor(this.x - 175 + this.xOffset), Math.floor(this.y - 175 + this.xOffset), 350, 350)
+      game.context.drawImage(razorExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, Math.floor(this.x - 175 + this.xOffset), Math.floor(this.y - 175 + this.xOffset), 300, 300)
    }
 
    drawPlayerProjectileHits() {
