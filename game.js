@@ -13,7 +13,7 @@ class Game {
       this.canvasBg = canvasBg;
       // ### Access the drawing context ###
       this.context = canvas.getContext('2d');
-      this.contextBg = canvasBg.getContext('2d');
+      this.contextBg = canvasBg.getContext('2d', { alpha: false });
       this.running = false;
    }
 
@@ -21,6 +21,7 @@ class Game {
       // ### Create new player instance ###
       this.player = new Player(this, this.canvas.width / 2, this.canvas.height - 120);
       this.frame = 0;
+      this.updatesPerSecond = 0;
       this.score = 0;
       this.rocks = [];
       this.enemies = [];
@@ -43,6 +44,7 @@ class Game {
          this.displayRefresh();
          this.running = true;
       }
+      this.upsCounter();
    }
 
    drawEverything() {
@@ -162,6 +164,7 @@ class Game {
       }
       this.checkCollisions();
       this.collectGarbage();
+      this.frame++;
    }
 
    spawnRock() {
@@ -468,7 +471,14 @@ class Game {
       window.requestAnimationFrame(() => {
          this.displayRefresh();
       })
-      this.frame++;
+   }
+
+   upsCounter() {
+      setInterval(() => {
+         this.updatesPerSecond = this.frame;
+         console.log(this.updatesPerSecond);
+         this.frame = 0;
+      }, 1000);
    }
 
    quitGame() {

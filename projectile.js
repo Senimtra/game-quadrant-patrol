@@ -40,7 +40,7 @@ class Projectile {
       // let projectiles start beneath player
       this.game.context.globalCompositeOperation = 'destination-over';
       // this.game.context.fillRect(Math.floor(this.x), Math.floor(this.y), this.width, this.height);
-      this.game.context.drawImage(projectilesImage, 0, 0, 142, 246, Math.floor(this.x) - 9, Math.floor(this.y) - 6, 24, 36);
+      this.game.context.drawImage(projectilesImage, 0, 0, 24, 42, Math.floor(this.x) - 9, Math.floor(this.y) - 6, 24, 42);
       this.game.context.restore();
    }
 }
@@ -75,11 +75,11 @@ class EnemyProjectile extends Projectile {
 
    drawEnemyProjectile() {
       this.game.context.save();
-      this.game.context.fillStyle = 'yellow';
+      // this.game.context.fillStyle = 'yellow';
       // let projectiles start beneath enemy
       this.game.context.globalCompositeOperation = 'destination-over';
       // this.game.context.fillRect(Math.floor(this.x), Math.floor(this.y), this.width, this.height);
-      this.game.context.drawImage(projectilesImage, 142, 0, 142, 246, Math.floor(this.x) - 9, Math.floor(this.y) - 9, 24, 36);
+      this.game.context.drawImage(projectilesImage, 24, 0, 24, 36, Math.floor(this.x) - 9, Math.floor(this.y) - 14, 24, 36);
       this.game.context.restore();
    }
 }
