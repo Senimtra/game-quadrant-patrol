@@ -301,7 +301,7 @@ class Game {
                   // check if the second shot also hit
                   if (shot2.checkDoubleShot(rock.x, rock.y, rock.width, rock.height)) {
                      // spawn player projectile hit animation
-                     const playerHits = new Explosion(this, shot.x, shot.y, shot.width);
+                     const playerHits = new Explosion(this, shot2.x, shot2.y, shot2.width);
                      this.playerProjectileHits.push(playerHits);
                      this.playerProjectiles.splice(shotIndex2, 1);
                      this.rocks[index].health -= 50;
@@ -339,12 +339,18 @@ class Game {
          }
          // ### Check for player projectiles ###
          this.playerProjectiles.forEach((shot, shotIndex) => {
+            // check if any shot hit the enemy
             if (enemy.checkIntersection(shot)) {
-               // check if any shot hit the enemy
+               // spawn player projectile hit animation
+               const playerHits = new Explosion(this, shot.x, shot.y, shot.width);
+               this.playerProjectileHits.push(playerHits);
                this.playerProjectiles.splice(shotIndex, 1);
                this.playerProjectiles.forEach((shot2, shotIndex2) => {
                   // check if the second shot also hit
                   if (shot2.checkDoubleShot(enemy.x, enemy.y, enemy.width, enemy.height)) {
+                     // spawn player projectile hit animation
+                     const playerHits = new Explosion(this, shot2.x, shot2.y, shot2.width);
+                     this.playerProjectileHits.push(playerHits);
                      this.playerProjectiles.splice(shotIndex2, 1);
                      this.enemies[index].health -= 50;
                   }
