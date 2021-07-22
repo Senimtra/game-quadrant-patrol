@@ -39,7 +39,7 @@ class Enemy {
       this.color = Math.floor(Math.random() * 5);
       this.health = 500;
       this.lastEnemyShotTimestamp = Date.now();
-      this.enemyShotInterval = 1500;
+      this.enemyShotInterval = 1000;
    }
 
    runLogic() {

@@ -185,12 +185,12 @@ canvas {
 
 #credit-container {
    padding: 0 10% 0 10%;
-   font-size: calc(1vh + 0.5vmax);
+   font-size: calc(0.9vh + 0.5vmax);
 }
 
 .credit {
    color: #c1fbff;
-   font-size: calc(1.15vh + 0.5vmax);
+   font-size: calc(1.1vh + 0.5vmax);
    font-weight: bold;
    letter-spacing: 1px;
    text-shadow: 0 0 2px black, 0 0 2px black, 0 0 2px black, 0 0 2px black;

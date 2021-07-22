@@ -48,7 +48,7 @@ class Player {
       this.healthUnits = 21;
       this.health = this.maxHealth;
       this.healthGain = 100;
-      this.powerGain = 1000;
+      this.powerGain = 1500;
       this.powerUnits = 0;
       this.shieldPower = 0;
       this.wingsPower = 0;

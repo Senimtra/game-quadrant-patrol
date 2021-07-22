@@ -37,7 +37,7 @@ class Game {
       this.lastEnemySpawn = Date.now();
       this.powerUpProbability = Math.random() < 1;
       this.rockSpawnInterval = 750;
-      this.enemySpawnInterval = 2000;
+      this.enemySpawnInterval = 2000; // 2000
       this.clock();
       this.enableControls();
       if (this.running === false) {

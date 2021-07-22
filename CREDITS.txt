@@ -62,4 +62,10 @@ https://opengameart.org/content/razor
 author: Modanung
 Adaption: recolored
 
+PROJECTILES
+https://opengameart.org/content/assets-free-laser-bullets-pack-2020
+author: Wenrexa
+Adaption: nothing
+
+
 
