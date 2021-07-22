@@ -35,6 +35,7 @@ class Player {
       // top player shape
       this.widthXT = 22;
       this.heightXT = 36;
+      this.xOffsetWings = 0;
       this.animation = 6;
       this.frame = 0;
       this.exhaustFrame = 1;
@@ -69,9 +70,9 @@ class Player {
          element.y + element.height >= this.y
       ) || (
             // turns true if right side of element is beyond left side of player's cockpit shape
-            element.x + element.width >= this.x + 19 &&
+            element.x + element.width >= this.x + 19 + this.xOffsetWings &&
             // turns true if left side of element is beyond right side of player's cockpit shape
-            element.x <= this.x + 19 + this.widthXT &&
+            element.x <= this.x + 19 + this.xOffsetWings + this.widthXT &&
             // turns true if top edge of element is above bottom edge of player's cockpit shape
             element.y <= this.y - 36 + this.heightXT &&
             // turns true if bottom side of element is beyond top side of player's cockpit shape
@@ -87,9 +88,9 @@ class Player {
             element.y + 36 + element.heightXT >= this.y
          ) || (
             // turns true if right side of enemy cockpit is beyond left side of player's cockpit shape
-            element.x + 22 + element.widthXT >= this.x + 19 &&
+            element.x + 22 + element.widthXT >= this.x + 19 + this.xOffsetWings &&
             // turns true if left side of enemy cockpit is beyond right side of player's cockpit shape
-            element.x + 22 <= this.x + 19 + this.widthXT &&
+            element.x + 22 <= this.x + 19 + this.xOffsetWings + this.widthXT &&
             // turns true if top edge of enemy cockpit is above bottom edge of player's cockpit shape
             element.y + 36 <= this.y - 36 + this.heightXT &&
             // turns true if bottom side of enemy cockpit is beyond top side of player's cockpit shape
@@ -165,6 +166,7 @@ class Player {
       // ### Activate wings ###
       if ((this.wingsPower > 0) && (this.wingsUp === false)) {
          this.x -= 25;
+         this.xOffsetWings = 25;
          this.width += 50;
          this.wingsUp = true;
       }
@@ -184,6 +186,7 @@ class Player {
    wingsOff() {
       // ### Disable wings ###
       this.x += 25;
+      this.xOffsetWings = 0;
       this.width -= 50;
       this.wingsUp = false;
    }
