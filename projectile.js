@@ -3,6 +3,9 @@
 ## JS Canvas Game - Quadrant Patrol ##
 ###################################### */
 
+const projectilesImage = new Image();
+projectilesImage.src = './images/projectiles.png';
+
 class Projectile {
    constructor(game, x, y) {
       this.game = game;
@@ -32,11 +35,12 @@ class Projectile {
       if (this.reflect === true) {
          this.game.context.fillStyle = '#85C1E9';
       } else {
-         this.game.context.fillStyle = 'yellow';
+         this.game.context.fillStyle = 'blue';
       }
       // let projectiles start beneath player
       this.game.context.globalCompositeOperation = 'destination-over';
-      this.game.context.fillRect(Math.floor(this.x), Math.floor(this.y), this.width, this.height);
+      // this.game.context.fillRect(Math.floor(this.x), Math.floor(this.y), this.width, this.height);
+      this.game.context.drawImage(projectilesImage, 0, 0, 142, 246, Math.floor(this.x) - 9, Math.floor(this.y) - 6, 24, 36);
       this.game.context.restore();
    }
 }
