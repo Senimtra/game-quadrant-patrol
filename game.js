@@ -27,6 +27,7 @@ class Game {
       this.playerExplosions = [];
       this.enemyExplosions = [];
       this.razorExplosions = [];
+      this.playerProjectileHits = [];
       // this.paused = false;
       this.powerUpSpawned = false;
       this.playerProjectiles = [];
@@ -83,6 +84,10 @@ class Game {
       for (const enemyShot of this.enemyProjectiles) {
          enemyShot.drawEnemyProjectile(this);
       }
+      // ### Draw player projectile hits explosions ###
+      for (const playerHit of this.playerProjectileHits) {
+         playerHit.drawPlayerProjectileHits();
+      }
       // ### Draw power ups ###
       if (this.powerUpSpawned === true) {
          if (this.powerUp.bounced === true) {
@@ -134,6 +139,11 @@ class Game {
          if (razorExplosion.animationFrame === 64) this.razorExplosions.splice(index, 1);
          razorExplosion.runLogic();
       });
+      // ### Run player projectile hit logic ###
+      this.playerProjectileHits.forEach((playerHit, index) => {
+         if (playerHit.animationFrame === 64) this.playerProjectileHits.splice(index, 1);
+         playerHit.runLogic();
+      });
       // ### Run player projectiles logic ###
       for (const playerShot of this.playerProjectiles) {
          playerShot.runLogic();
@@ -157,7 +167,6 @@ class Game {
    spawnRock() {
       // ### Push new rocks to array ###
       const rock = new Rock(this, (Math.floor(Math.random() * (this.canvas.width - 50)) + 1), 10);
-      console.log(this.rocks);
       this.rocks.push(rock);
    }
 
@@ -282,12 +291,18 @@ class Game {
          }
          // ### Check for player projectiles ###
          this.playerProjectiles.forEach((shot, shotIndex) => {
+            // check if any shot hit the rock
             if (rock.checkIntersection(shot)) {
-               // check if any shot hit the rock
+               // spawn player projectile hit animation
+               const playerHits = new Explosion(this, shot.x, shot.y, shot.width);
+               this.playerProjectileHits.push(playerHits);
                this.playerProjectiles.splice(shotIndex, 1);
                this.playerProjectiles.forEach((shot2, shotIndex2) => {
                   // check if the second shot also hit
                   if (shot2.checkDoubleShot(rock.x, rock.y, rock.width, rock.height)) {
+                     // spawn player projectile hit animation
+                     const playerHits = new Explosion(this, shot.x, shot.y, shot.width);
+                     this.playerProjectileHits.push(playerHits);
                      this.playerProjectiles.splice(shotIndex2, 1);
                      this.rocks[index].health -= 50;
                   }

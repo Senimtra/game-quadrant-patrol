@@ -23,6 +23,9 @@ razorImage.src = './images/bouncing_razor.png';
 const razorExplosionImage = new Image();
 razorExplosionImage.src = './images/explosion_razor.png'
 
+const playerProjectileHitImage = new Image();
+playerProjectileHitImage.src = './images/projectile_hits.png'
+
 class Enemy {
    constructor(game, x, y) {
       this.game = game;
@@ -37,7 +40,7 @@ class Enemy {
       this.frameStep = 7;
       this.animationFrame = this.moveDir < 0 ? 9 : 1;
       this.color = Math.floor(Math.random() * 5);
-      this.health = 100;
+      this.health = 500;
       this.lastEnemyShotTimestamp = Date.now();
       this.enemyShotInterval = 500;
    }
@@ -124,7 +127,7 @@ class Rock extends Enemy {
       this.color = '#1C2833'
       this.width = 50;
       this.height = 50;
-      this.health = 100;
+      this.health = 150;
       this.frame = 0;
       this.animations = 31;
       this.animationFrame = 1;
@@ -362,6 +365,10 @@ class Explosion {
 
    drawRazorExplosion() {
       game.context.drawImage(razorExplosionImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, Math.floor(this.x - 175 + this.xOffset), Math.floor(this.y - 175 + this.xOffset), 350, 350)
+   }
+
+   drawPlayerProjectileHits() {
+      this.game.context.drawImage(playerProjectileHitImage, (256 * this.animationFrame - 256) - ((Math.ceil(this.animationFrame / 8)) * 2048 - 2048), (0 + Math.floor((this.animationFrame - 1) / 8) * 256), 256, 256, Math.floor(this.x - 75 + this.xOffset), Math.floor(this.y - 75 + this.xOffset), 150, 150)
    }
 }
 
