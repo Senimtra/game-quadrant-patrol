@@ -184,8 +184,8 @@ canvas {
 }
 
 #credit-container {
-   padding: 0 10% 0 10%;
-   font-size: calc(0.9vh + 0.5vmax);
+   padding: 0 11% 0 11%;
+   font-size: calc(1.8vh);
 }
 
 .credit {

@@ -13,7 +13,7 @@ class Game {
       this.canvasBg = canvasBg;
       // ### Access the drawing context ###
       this.context = canvas.getContext('2d');
-      this.contextBg = canvasBg.getContext('2d', { alpha: false });
+      this.contextBg = canvasBg.getContext('2d');
       this.running = false;
    }
 
@@ -38,6 +38,7 @@ class Game {
       this.powerUpProbability = Math.random() < 1;
       this.rockSpawnInterval = 750;
       this.enemySpawnInterval = 2000; // 2000
+      this.shotStamp = Date.now();
       this.clock();
       this.enableControls();
       if (this.running === false) {
@@ -225,11 +226,6 @@ class Game {
          if (this.controls[event.code]) {
             this.controls[event.code].pressed = true
          }
-         switch (event.code) {
-            case 'Space':
-               this.player.fireProjectile();
-               break;
-         }
          this.player.checkBoundaries();
       });
       window.addEventListener('keyup', (event) => {
@@ -265,7 +261,7 @@ class Game {
             this.player.animationStart = Date.now();
          }
       }
-      // if (this.controls['Space'].pressed === true) this.player.fireProjectile();
+      if (this.controls['Space'].pressed === true) this.player.fireProjectile();
       this.player.checkBoundaries();
    }
 

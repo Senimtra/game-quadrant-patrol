@@ -130,17 +130,21 @@ class Player {
    }
 
    fireProjectile() {
-      // ### Fire double projectiles ###
-      const projectile1 = new Projectile(this, this.x + this.width / 2 - 15 - 3, this.y);
-      const projectile2 = new Projectile(this, this.x + (this.width / 2) + 15 - 3, this.y);
-      this.game.playerProjectiles.push(projectile1, projectile2);
-      // ### Fire powershots ###
-      if (this.wingsUp) {
-         const projectile3 = new Projectile(this, this.x + this.width / 2 - 44 - 3, this.y);
-         const projectile4 = new Projectile(this, this.x + (this.width / 2) + 44 - 3, this.y);
-         this.game.playerProjectiles.push(projectile3, projectile4);
+      if (Date.now() - this.game.shotStamp > 183) {
+         // ### Fire double projectiles ###
+         const projectile1 = new Projectile(this, this.x + this.width / 2 - 15 - 3, this.y);
+         const projectile2 = new Projectile(this, this.x + (this.width / 2) + 15 - 3, this.y);
+         this.game.playerProjectiles.push(projectile1, projectile2);
+         // ### Fire powershots ###
+         if (this.wingsUp) {
+            const projectile3 = new Projectile(this, this.x + this.width / 2 - 44 - 3, this.y);
+            const projectile4 = new Projectile(this, this.x + (this.width / 2) + 44 - 3, this.y);
+            this.game.playerProjectiles.push(projectile3, projectile4);
+         }
+         this.game.shotStamp = Date.now();
       }
    }
+
 
    activateShield() {
       // ### Put shield up ###
