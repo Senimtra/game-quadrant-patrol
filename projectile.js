@@ -33,10 +33,12 @@ class Projectile {
       this.game.context.save();
       // keep enemy color for reflected shots
       if (this.reflect === true) {
-         this.game.context.fillStyle = 'yellow';
+         // this.game.context.fillStyle = 'yellow';
+
          this.game.context.drawImage(projectilesImage, 48, 0, 24, 36, Math.floor(this.x) - 9, Math.floor(this.y) - 8, 24, 36);
       } else {
-         this.game.context.fillStyle = 'blue';
+         // this.game.context.fillStyle = 'blue';
+         this.game.context.globalCompositeOperation = 'destination-over';
          this.game.context.drawImage(projectilesImage, 0, 0, 24, 42, Math.floor(this.x) - 9, Math.floor(this.y) - 6, 24, 42);
       }
       // let projectiles start beneath player
@@ -77,9 +79,9 @@ class EnemyProjectile extends Projectile {
 
    drawEnemyProjectile() {
       this.game.context.save();
-      // this.game.context.fillStyle = 'yellow';
+      this.game.context.fillStyle = 'yellow';
       // let projectiles start beneath enemy
-      // this.game.context.globalCompositeOperation = 'destination-under';
+      this.game.context.globalCompositeOperation = 'destination-over';
       // this.game.context.fillRect(Math.floor(this.x), Math.floor(this.y), this.width, this.height);
       this.game.context.drawImage(projectilesImage, 24, 0, 24, 36, Math.floor(this.x) - 9, Math.floor(this.y) - 14, 24, 36);
       this.game.context.restore();

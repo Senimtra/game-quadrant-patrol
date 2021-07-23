@@ -76,7 +76,7 @@ class Enemy {
    }
 
    shoot() {
-      const enemyShot = new EnemyProjectile(this.game, this.x + this.width / 2 + 3, this.y + 32);
+      const enemyShot = new EnemyProjectile(this.game, this.x + this.width / 2 - 3, this.y + 32);
       this.game.enemyProjectiles.push(enemyShot);
    }
 
