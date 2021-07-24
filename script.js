@@ -60,6 +60,8 @@ window.addEventListener('keydown', (event) => {
       gameOverScreenElement.style.display = 'none';
       gameCanvasElement.style.display = 'none';
       backgroundCanvasElement.style.display = 'none';
+      musicLevel.pause();
+      menuSound.play();
    }
 });
 
@@ -69,6 +71,7 @@ startButtonElement.addEventListener('click', () => {
    gameCanvasElement.style.display = 'block';
    backgroundCanvasElement.style.display = 'block';
    game.start();
+   menuSound.play();
 });
 
 // ### Resume button ###
@@ -78,6 +81,8 @@ resumeButtonElement.addEventListener('click', () => {
       gameCanvasElement.style.display = 'block';
       backgroundCanvasElement.style.display = 'block';
       game.clock();
+      menuSound.play();
+      musicLevel.play();
    }
 })
 
@@ -85,12 +90,15 @@ resumeButtonElement.addEventListener('click', () => {
 instructionsButtonElement.addEventListener('click', () => {
    introScreenElement.style.display = 'none';
    instructionsScreenElement.style.display = 'flex';
+   menuSound.play();
 })
 
 // ### Credits button ###
 creditsButtonElement.addEventListener('click', () => {
    introScreenElement.style.display = 'none';
    creditsScreenElement.style.display = 'flex';
+   menuSound.play();
+
 })
 
 // ### Try again button ###
@@ -99,4 +107,5 @@ tryAgainButtonElement.addEventListener('click', () => {
    gameCanvasElement.style.display = 'block';
    backgroundCanvasElement.style.display = 'block';
    game.start();
+   menuSound.play();
 })

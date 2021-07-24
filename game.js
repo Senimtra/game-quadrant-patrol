@@ -7,6 +7,8 @@ const uiGameFrame = new Image();
 
 const musicLevel = new Audio('./sounds/music_level.wav');
 
+const menuSound = new Audio('./sounds/sound_menu.wav');
+
 uiGameFrame.src = './images/ui_game_frame.png';
 
 class Game {
