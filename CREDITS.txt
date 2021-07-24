@@ -65,9 +65,14 @@ Adaption: recolored
 PROJECTILES
 https://opengameart.org/content/assets-free-laser-bullets-pack-2020
 author: Wenrexa
-Adaption: nothing
+Adaption: none
 
 MUSIC
 https://opengameart.org/content/5-chiptunes-action
 author: SubspaceAudio
-Adaption: nothing
+Adaption: none
+
+MENU SOUND
+https://opengameart.org/content/menu-selection-click
+author: NenadSimic
+Adaption: none
