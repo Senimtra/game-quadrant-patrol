@@ -310,6 +310,7 @@ class BounceUp extends PowerUp {
                const enemyBoom = new Explosion(this, enemy.x, enemy.y, enemy.width);
                this.game.razorExplosions.push(enemyBoom);
                this.game.enemies.splice(index, 1);
+               this.game.score += 100;
             }
          });
          this.game.rocks.forEach((rock, index) => {
@@ -318,6 +319,7 @@ class BounceUp extends PowerUp {
                const rockBoom = new Explosion(this, rock.x, rock.y, rock.width);
                this.game.razorExplosions.push(rockBoom);
                this.game.rocks.splice(index, 1);
+               this.game.score += 50;
             }
          });
          if (this.x + this.width < 0 || this.x > this.game.canvas.width || this.y + this.height < 60) {
