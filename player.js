@@ -44,7 +44,7 @@ class Player {
       // center player x-position
       this.x = x - (this.width / 2);
       this.y = y;
-      this.maxHealth = 10000;
+      this.maxHealth = 5000;
       this.healthUnits = 21;
       this.health = this.maxHealth;
       this.healthGain = 100;

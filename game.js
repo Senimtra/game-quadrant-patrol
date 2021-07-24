@@ -5,6 +5,8 @@
 
 const uiGameFrame = new Image();
 
+const musicLevel = new Audio('./sounds/music_level.wav');
+
 uiGameFrame.src = './images/ui_game_frame.png';
 
 class Game {
@@ -46,6 +48,16 @@ class Game {
          this.running = true;
       }
       this.upsCounter();
+      this.levelMusic();
+   }
+
+   levelMusic() {
+      // ### Play level music theme ###
+      musicLevel.addEventListener('ended', function () {
+         this.currentTime = 0;
+         this.play();
+      }, false);
+      musicLevel.play();
    }
 
    drawEverything() {
@@ -449,6 +461,7 @@ class Game {
             backgroundCanvasElement.style.display = 'none';
             gameOverScreenElement.style.display = 'flex';
             clearInterval(window.clockTimer);
+            musicLevel.pause();
          } else {
             // player starts a new life
             clearInterval(window.clockTimer);
