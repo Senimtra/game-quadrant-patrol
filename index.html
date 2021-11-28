@@ -5,110 +5,147 @@
 
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <!-- ### Link own css stylesheet ### -->
-      <link rel="stylesheet" href="./style.css" />
+<head>
+   <meta charset="UTF-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      <!-- ### Pre-load SNES font ### -->
-      <link rel="stylesheet preload" href="./fonts/SnesItalic-1G9Be.ttf" as="style" />
+   <!-- ### Open graph meta tags ### -->
+   <meta name="title" property="og:title" content="Quadrant Patrol" />
+   <meta name="description" content="JavaScript game rendered on HTML5" />
+   <meta property="og:type" content="game" />
+   <meta name="image" property="og:image" content="https://senimtra.dev/linkedIn/Quadrant_Patrol.png" />
+   <meta name="description" property="og:description" content="JavaScript game rendered on HTML5 👾🔫🕹" />
+   <meta name="author" content="Gregor aka Senimtra" />
 
-      <title>Quadrant Patrol</title>
-   </head>
-   <body>
-      <div id="container">
-         <!-- ### Start screen begins here ### -->
-         <div id="intro">
-            <h1 id="game-title">Quadrant<br />Patrol</h1>
-            <button id="start-game" class="menu-button">Start Game!</button>
-            <button id="resume-game" class="menu-button">Resume Game!</button>
-            <button id="instructions" class="menu-button">Instructions</button>
-            <button id="credits" class="menu-button">Credits</button>
-         </div>
+   <!-- ### Link own css stylesheet ### -->
+   <link rel="stylesheet" href="./style.css" />
 
-         <!-- ### Instructions screen begins here ### -->
-         <div id="game-instructions">
-            <h1>Instructions</h1>
-            <div id="game-actions">
-               <div>
-                  <div id="icon-left"></div>
-                  Move to the left
-               </div>
-               <div>
-                  <div id="icon-right"></div>
-                  Move right
-               </div>
-               <div>
-                  <div id="icon-fire">SPACE</div>
-                  Fire projectiles
-               </div>
-               <div>
-                  <div id="icon-bounce"></div>
-                  Bouncing Razor
-               </div>
-               <div>
-                  <div id="icon-score"></div>
-                  Bonus score
-               </div>
-               <div>
-                  <div id="icon-health"></div>
-                  Bonus health
-               </div>
-               <div>
-                  <div id="icon-shield"></div>
-                  Reflective shield
-               </div>
-               <div>
-                  <div id="icon-wings"></div>
-                  Call your wingmates
-               </div>
-            </div>
-         </div>
+   <!-- ### Pre-load SNES font ### -->
+   <link rel="stylesheet preload" href="./fonts/SnesItalic-1G9Be.ttf" as="style" />
 
-         <!-- ### Credits screen begins here ### -->
-         <div id="game-credits">
-            <h1>Credits</h1>
-            <h2>ALL USED ASSETS WERE FREE TO DOWNLOAD AND FREE TO USE ...<br />so to the best of its knowledge and belief ...</h2>
-            <div id="credit-container">
-               <div><span class="credit">SEAMLESS BACKGROUND </span>https://screamingbrainstudios.itch.io/seamless-space-backgrounds&nbsp;&nbsp;* author: Screaming Brain Studios&nbsp;&nbsp;* Adaption: clipped to fit canvas</div>
-               <div><span class="credit">ASTEROIDS </span>https://www.pngegg.com/en/png-nzbum&nbsp;&nbsp;* author: unknown&nbsp;&nbsp;* Adaption: second (darker) set of rocks</div>
-               <div><span class="credit">PLAYER SPACESHIP </span> https://opengameart.org/content/animated-fighter-spaceship&nbsp;&nbsp;* author's blog&nbsp;&nbsp;=> http://millionthvector.blogspot.de&nbsp;&nbsp;* Adaption: resized, made into a spritesheet</div>
-               <div><span class="credit">PLAYER SPACESHIP EXHAUST </span>https://opengameart.org/content/explosion-effects-and-more&nbsp;&nbsp;* author: Soluna Software&nbsp;&nbsp;* Adaption: turned 180deg to simulate exhaust</div>
-               <div><span class="credit">ENEMY SPACESHIPS </span>https://opengameart.org/content/animated-red-ship&nbsp;&nbsp;* author's blog&nbsp;&nbsp;=> http://millionthvector.blogspot.de&nbsp;&nbsp;* Adaption: recolored, made into a spritesheet</div>
-               <div><span class="credit">PLAYER SHIELD AURA </span>https://www.pngwing.com/en/free-png-zwjru&nbsp;&nbsp;* author: unknown&nbsp;&nbsp;* Adaption: none</div>
-               <div><span class="credit">POWER UPS </span>https://opengameart.org/content/rotating-gems-for-match3&nbsp;&nbsp;* author: Bondoki&nbsp;&nbsp;* Adaption: recolored, made into new spritesheet</div>
-               <div><span class="credit">USER INTERFACE </span>https://opengameart.org/content/space-shooter-game-user-interface&nbsp;&nbsp;* author: CraftPix.net&nbsp;&nbsp;* Adaption: resized elements</div>
-               <div><span class="credit">FONT #1 </span>https://www.fontspace.com/space-mission-font-f56190&nbsp;&nbsp;* author: Maknastudio&nbsp;&nbsp;* Adaption: none</div>
-               <div><span class="credit">FONT #2 </span>link: https://www.fontspace.com/snes-font-f26537&nbsp;&nbsp;* author: Lyric Type&nbsp;&nbsp;* Adaption: none</div>
-               <div><span class="credit">EXPLOSIONS </span>https://opengameart.org/content/2d-explosion-animations-frame-by-frame&nbsp;&nbsp;* https://opengameart.org/content/2d-explosion-animations-2-frame-by-frame&nbsp;&nbsp;* author: Sinestesia&nbsp;&nbsp;* Adaption: none</div>
-               <div><span class="credit">RAZOR ANIMATION </span>https://opengameart.org/content/razor&nbsp;&nbsp;* author: Modanung&nbsp;&nbsp;* Adaption: recolored</div>
-               <div><span class="credit">PROJECTILES </span>https://opengameart.org/content/assets-free-laser-bullets-pack-2020&nbsp;&nbsp;* author: Wenrexa&nbsp;&nbsp;* Adaption: nothing</div>
-               <div><span class="credit">MUSIC </span>https://opengameart.org/content/5-chiptunes-action&nbsp;&nbsp;* author: SubspaceAudio&nbsp;&nbsp;* Adaption: nothing</div>
-               <div><span class="credit">MENU SOUND </span>https://opengameart.org/content/menu-selection-click&nbsp;&nbsp;* author: NenadSimic&nbsp;&nbsp;* Adaption: none</div>
-            </div>
-         </div>
+   <title>Quadrant Patrol</title>
+</head>
 
-         <!-- ### Game over screen begins here ### -->
-         <div id="game-over">
-            <h1>GAME<br />OVER!</h1>
-            <button id="try-again" class="menu-button">Try again!</button>
-         </div>
-
-         <!-- ### Set background canvas ### -->
-         <canvas id="background-canvas" width="500" height="800"></canvas>
-
-         <!-- ### Set game canvas ### -->
-         <canvas id="game-canvas" width="500" height="800"></canvas>
+<body>
+   <div id="container">
+      <!-- ### Start screen begins here ### -->
+      <div id="intro">
+         <h1 id="game-title">Quadrant<br />Patrol</h1>
+         <button id="start-game" class="menu-button">Start Game!</button>
+         <button id="resume-game" class="menu-button">Resume Game!</button>
+         <button id="instructions" class="menu-button">Instructions</button>
+         <button id="credits" class="menu-button">Credits</button>
       </div>
 
-      <!-- ### Load JavaScript files ### -->
-      <script src="enemies.js"></script>
-      <script src="projectile.js"></script>
-      <script src="player.js"></script>
-      <script src="game.js"></script>
-      <script src="script.js"></script>
-   </body>
+      <!-- ### Instructions screen begins here ### -->
+      <div id="game-instructions">
+         <h1>Instructions</h1>
+         <div id="game-actions">
+            <div>
+               <div id="icon-left"></div>
+               Move to the left
+            </div>
+            <div>
+               <div id="icon-right"></div>
+               Move right
+            </div>
+            <div>
+               <div id="icon-fire">SPACE</div>
+               Fire projectiles
+            </div>
+            <div>
+               <div id="icon-bounce"></div>
+               Bouncing Razor
+            </div>
+            <div>
+               <div id="icon-score"></div>
+               Bonus score
+            </div>
+            <div>
+               <div id="icon-health"></div>
+               Bonus health
+            </div>
+            <div>
+               <div id="icon-shield"></div>
+               Reflective shield
+            </div>
+            <div>
+               <div id="icon-wings"></div>
+               Call your wingmates
+            </div>
+         </div>
+      </div>
+
+      <!-- ### Credits screen begins here ### -->
+      <div id="game-credits">
+         <h1>Credits</h1>
+         <h2>ALL USED ASSETS WERE FREE TO DOWNLOAD AND FREE TO USE ...<br />so to the best of its knowledge and belief
+            ...</h2>
+         <div id="credit-container">
+            <div><span class="credit">SEAMLESS BACKGROUND
+               </span>https://screamingbrainstudios.itch.io/seamless-space-backgrounds&nbsp;&nbsp;* author: Screaming
+               Brain Studios&nbsp;&nbsp;* Adaption: clipped to fit canvas</div>
+            <div><span class="credit">ASTEROIDS </span>https://www.pngegg.com/en/png-nzbum&nbsp;&nbsp;* author:
+               unknown&nbsp;&nbsp;* Adaption: second (darker) set of rocks</div>
+            <div><span class="credit">PLAYER SPACESHIP </span>
+               https://opengameart.org/content/animated-fighter-spaceship&nbsp;&nbsp;* author's blog&nbsp;&nbsp;=>
+               http://millionthvector.blogspot.de&nbsp;&nbsp;* Adaption: resized, made into a spritesheet</div>
+            <div><span class="credit">PLAYER SPACESHIP EXHAUST
+               </span>https://opengameart.org/content/explosion-effects-and-more&nbsp;&nbsp;* author: Soluna
+               Software&nbsp;&nbsp;* Adaption: turned 180deg to simulate exhaust</div>
+            <div><span class="credit">ENEMY SPACESHIPS
+               </span>https://opengameart.org/content/animated-red-ship&nbsp;&nbsp;* author's blog&nbsp;&nbsp;=>
+               http://millionthvector.blogspot.de&nbsp;&nbsp;* Adaption: recolored, made into a spritesheet</div>
+            <div><span class="credit">PLAYER SHIELD AURA </span>https://www.pngwing.com/en/free-png-zwjru&nbsp;&nbsp;*
+               author: unknown&nbsp;&nbsp;* Adaption: none</div>
+            <div><span class="credit">POWER UPS
+               </span>https://opengameart.org/content/rotating-gems-for-match3&nbsp;&nbsp;* author: Bondoki&nbsp;&nbsp;*
+               Adaption: recolored, made into new spritesheet</div>
+            <div><span class="credit">USER INTERFACE
+               </span>https://opengameart.org/content/space-shooter-game-user-interface&nbsp;&nbsp;* author:
+               CraftPix.net&nbsp;&nbsp;* Adaption: resized elements</div>
+            <div><span class="credit">FONT #1 </span>https://www.fontspace.com/space-mission-font-f56190&nbsp;&nbsp;*
+               author: Maknastudio&nbsp;&nbsp;* Adaption: none</div>
+            <div><span class="credit">FONT #2 </span>link: https://www.fontspace.com/snes-font-f26537&nbsp;&nbsp;*
+               author: Lyric Type&nbsp;&nbsp;* Adaption: none</div>
+            <div><span class="credit">EXPLOSIONS
+               </span>https://opengameart.org/content/2d-explosion-animations-frame-by-frame&nbsp;&nbsp;*
+               https://opengameart.org/content/2d-explosion-animations-2-frame-by-frame&nbsp;&nbsp;* author:
+               Sinestesia&nbsp;&nbsp;* Adaption: none</div>
+            <div><span class="credit">RAZOR ANIMATION </span>https://opengameart.org/content/razor&nbsp;&nbsp;* author:
+               Modanung&nbsp;&nbsp;* Adaption: recolored</div>
+            <div><span class="credit">PROJECTILES
+               </span>https://opengameart.org/content/assets-free-laser-bullets-pack-2020&nbsp;&nbsp;* author:
+               Wenrexa&nbsp;&nbsp;* Adaption: nothing</div>
+            <div><span class="credit">MUSIC </span>https://opengameart.org/content/5-chiptunes-action&nbsp;&nbsp;*
+               author: SubspaceAudio&nbsp;&nbsp;* Adaption: nothing</div>
+            <div><span class="credit">MENU SOUND
+               </span>https://opengameart.org/content/menu-selection-click&nbsp;&nbsp;* author: NenadSimic&nbsp;&nbsp;*
+               Adaption: none</div>
+         </div>
+      </div>
+
+      <!-- ### Game over screen begins here ### -->
+      <div id="game-over">
+         <h1>GAME<br />OVER!</h1>
+         <button id="try-again" class="menu-button">Try again!</button>
+      </div>
+
+      <!-- ### Set background canvas ### -->
+      <canvas id="background-canvas" width="500" height="800"></canvas>
+
+      <!-- ### Set game canvas ### -->
+      <canvas id="game-canvas" width="500" height="800"></canvas>
+   </div>
+
+   <!-- ### Load JavaScript files ### -->
+   <script src="enemies.js"></script>
+   <script src="projectile.js"></script>
+   <script src="player.js"></script>
+   <script src="game.js"></script>
+   <script src="script.js"></script>
+</body>
+
 </html>
